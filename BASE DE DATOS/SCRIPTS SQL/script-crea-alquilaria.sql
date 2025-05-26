@@ -19,8 +19,8 @@ CREATE TABLE propietario (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     dni VARCHAR(10) NOT NULL,
     nombre VARCHAR(20) NOT NULL,
-    apellidos VARCHAR(50),
-    correo VARCHAR(100),
+    apellidos VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
     telefono VARCHAR(15),
     
     CONSTRAINT uk_dni_propietario
@@ -29,17 +29,17 @@ CREATE TABLE propietario (
 
 CREATE TABLE tipo_vivienda (
 	numero INT PRIMARY KEY,
-    nombre VARCHAR(50)
+    nombre VARCHAR(50) NOT NULL
 	);
 
 CREATE TABLE vivienda (
 	cod VARCHAR(10) PRIMARY KEY,
     id_propietario INT UNSIGNED,
-    direccion VARCHAR(150),
-    precio FLOAT,
-    superficie FLOAT,
+    direccion VARCHAR(150) NOT NULL,
+    precio FLOAT DEFAULT 0,
+    superficie FLOAT DEFAULT 0,
     descripcion VARCHAR(300),
-    mascotas BOOL,
+    mascotas BOOL DEFAULT 1,
     tipo INT,
     
     CONSTRAINT fk_id_propietario_vivienda 
@@ -51,11 +51,11 @@ CREATE TABLE vivienda (
 CREATE TABLE inquilino (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     dni VARCHAR(10),
-    nombre VARCHAR(20),
-    apellidos VARCHAR(50),
-    correo VARCHAR(100),
+    nombre VARCHAR(20) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
     telefono VARCHAR(15),
-    mascota BOOL,
+    mascota BOOL DEFAULT 0,
     
     CONSTRAINT uk_dni_inquilino
 		UNIQUE KEY(dni)
@@ -64,12 +64,12 @@ CREATE TABLE inquilino (
 CREATE TABLE contrato (
 	id_inquilino INT UNSIGNED,
     cod_vivienda VARCHAR(10),
-    fecha_inicio DATE,
-    fecha_fin DATE,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
     precio FLOAT DEFAULT 0,
     estado ENUM('PENDIENTE', 'ACTIVO', 'VENCIDO') DEFAULT 'PENDIENTE',
     
-    PRIMARY KEY(id_inquilino, cod_vivienda, fecha_inicio),
+    PRIMARY KEY(id_inquilino, cod_vivienda),
 	CONSTRAINT fk_id_inquilino_contrato
 		FOREIGN KEY(id_inquilino) REFERENCES inquilino(id),
 	CONSTRAINT fk_cod_vivienda_contrato 
