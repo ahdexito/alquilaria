@@ -17,8 +17,8 @@ USE alquilaria;
 
 CREATE TABLE propietario (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    dni VARCHAR(10),
-    nombre VARCHAR(20),
+    dni VARCHAR(10) NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
     apellidos VARCHAR(50),
     correo VARCHAR(100),
     telefono VARCHAR(15),
@@ -26,7 +26,28 @@ CREATE TABLE propietario (
     CONSTRAINT uk_dni_propietario
 		UNIQUE KEY(dni)
     );
-   
+
+CREATE TABLE tipo_vivienda (
+	numero INT PRIMARY KEY,
+    nombre VARCHAR(50)
+	);
+
+CREATE TABLE vivienda (
+	cod VARCHAR(10) PRIMARY KEY,
+    id_propietario INT UNSIGNED,
+    direccion VARCHAR(150),
+    precio FLOAT,
+    superficie FLOAT,
+    descripcion VARCHAR(300),
+    mascotas BOOL,
+    tipo INT,
+    
+    CONSTRAINT fk_id_propietario_vivienda 
+		FOREIGN KEY(id_propietario) REFERENCES propietario(id),
+    CONSTRAINT fk_tipo_vivienda
+		FOREIGN KEY(tipo) REFERENCES tipo_vivienda(numero)
+    );
+
 CREATE TABLE inquilino (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     dni VARCHAR(10),
@@ -40,29 +61,6 @@ CREATE TABLE inquilino (
 		UNIQUE KEY(dni)
     );
    
-CREATE TABLE vivienda (
-	cod VARCHAR(10) PRIMARY KEY,
-    id_inquilino INT UNSIGNED,
-    direccion VARCHAR(150),
-    precio FLOAT,
-    superficie FLOAT,
-    descripcion VARCHAR(300),
-    mascotas BOOL,
-    tipo INT,
-    
-    CONSTRAINT fk_id_inquilino_vivienda 
-		FOREIGN KEY(id_inquilino) REFERENCES inquilino(id)
-    );
-    
-CREATE TABLE tipo_vivienda (
-	numero INT PRIMARY KEY,
-    cod_vivienda VARCHAR(10),
-    nombre VARCHAR(50),
-    
-    CONSTRAINT fk_cod_vivienda_tipo_vivienda
-		FOREIGN KEY(cod_vivienda) REFERENCES vivienda(cod)
-	);
-    
 CREATE TABLE contrato (
 	id_inquilino INT UNSIGNED,
     cod_vivienda VARCHAR(10),
