@@ -43,9 +43,11 @@ CREATE TABLE vivienda (
     tipo INT,
     
     CONSTRAINT fk_id_propietario_vivienda 
-		FOREIGN KEY(id_propietario) REFERENCES propietario(id),
+		FOREIGN KEY(id_propietario) REFERENCES propietario(id)
+    ON DELETE CASCADE,
     CONSTRAINT fk_tipo_vivienda
 		FOREIGN KEY(tipo) REFERENCES tipo_vivienda(numero)
+    ON DELETE CASCADE
     );
 
 CREATE TABLE inquilino (
@@ -71,7 +73,9 @@ CREATE TABLE contrato (
     
     PRIMARY KEY(id_inquilino, cod_vivienda),
 	CONSTRAINT fk_id_inquilino_contrato
-		FOREIGN KEY(id_inquilino) REFERENCES inquilino(id),
+		FOREIGN KEY(id_inquilino) REFERENCES inquilino(id)
+    ON DELETE CASCADE,
 	CONSTRAINT fk_cod_vivienda_contrato 
 		FOREIGN KEY(cod_vivienda) REFERENCES vivienda(cod)
+    ON DELETE CASCADE
     );
