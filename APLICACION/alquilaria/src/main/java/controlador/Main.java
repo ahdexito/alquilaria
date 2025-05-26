@@ -14,38 +14,26 @@ public class Main {
 	
 		int opcion;
 
-		do {
-			opcion = -1;
+		try {
+			// CONEXIÓN A BASE DE DATOS
+			Database db = Database.getConex("alquilaria");
+			Connection conex = db.getConex();
 			
-			try {
-				// CONEXIÓN A BASE DE DATOS
-				Database db = Database.getConex("pi_asignacion_proyectos");
-				Connection conex = db.getConex();
+			do {
+				// IMPRIMIR MENÚ PRINCIPAL Y SOLICITAR OPCIÓN MENÚ //
+				opcion = Interfaz.menuPrincipal();
 				
 				/* CREAR UN RESULTSET PARA LLAMAR A LAS FUNCIONES 
 				QUE REALIZAN SELECT Y PODER CERRARLOS POSTERIORMENTE */
 				ResultSet rs = null;
-				
-				// IMPRIMIR EL MENÚ PRINCIPAL //
-				Imprimir.menuPrincipal();
-				
-				// RECOGER ERROR DE ENTRADA POR VALOR NO NUMÉRICO //
-				if (sc.hasNextInt()) opcion = sc.nextInt();
-				sc.nextLine();
 
 				int subopcion;
 
 				switch (opcion) {
 					case 1:
 						do {
-							subopcion = -1;
-							
-							// IMPRIMIR EL MENÚ MANTENIMIENTO DE CLIENTE //
-							Imprimir.menuCliente();
-
-							// RECOGER ERROR DE ENTRADA POR VALOR NO NUMÉRICO //
-							if (sc.hasNextInt()) subopcion = sc.nextInt();
-							sc.nextLine();
+							// IMPRIMIR MENÚ MANTENIMIENTO DE PROPIETARIO Y SOLICITAR OPCIÓN MENÚ //
+							subopcion = Interfaz.menuPropietario();
 							
 							System.out.println("");
 							
@@ -54,34 +42,13 @@ public class Main {
 							
 							switch (subopcion) {
 								case 1:
-									// OPCIÓN AÑADIR NUEVO CLIENTE DADOS SUS DATOS //
-									System.out.println(MORADO 
-										+ "-------------- " + AMARILLO + "[ AÑADIR NUEVO CLIENTE ]" + MORADO + " ------------" + RESET + "\n");
 									
-									// SOLICITAR LOS DATOS DEL NUEVO CLIENTE Y GUARDARLOS EN VARIABLES //
-									System.out.print(AMARILLO + "  - DNI: " + RESET); 
-									dni = sc.nextLine();
-
-									System.out.print(AMARILLO + "  - NOMBRE: " + RESET); 
-									nombre = sc.nextLine();
-
-									System.out.print(AMARILLO + "  - PRIMER APELLIDO: " + RESET); 
-									apellido1 = sc.nextLine();
-
-									System.out.print(AMARILLO + "  - SEGUNDO APELLIDO: " + RESET); 
-									apellido2 = sc.nextLine();
-
-									System.out.print(AMARILLO + "  - EMAIL: " + RESET); 
-									email = sc.nextLine();
-
-									System.out.print(AMARILLO + "  - TELÉFONO: " + RESET); 
-									telefono = sc.nextLine();
 									
 									// LLAMADA AL MÉTODO DE CREACIÓN ENVIANDO LAS VARIABLES //
 									Propietario.crear(conex, dni, nombre, apellido1, apellido2, email, telefono);
 									
 									// DETENCIÓN DEL PROGRAMA PARA QUE EL USUARIO CONFIRME //
-									System.out.print("\n" + AMARILLO + "--> CONTINUAR [ENTER] <--" + RESET);
+									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
 									break;
 
@@ -89,11 +56,10 @@ public class Main {
 
 								case 2: 
 									// OPCIÓN CONSULTAR UN CLIENTE DADO SU ID //
-									System.out.println(MORADO 
-										+ "--------------- " + AMARILLO + "[ CONSULTAR CLIENTE ]" + MORADO + " --------------" + RESET + "\n");
+									System.out.println("--------------- [ CONSULTAR CLIENTE ] --------------\n");
 									
 									// SOLICIAR ID DEL CLIENTE A BUSCAR //
-									System.out.print(AMARILLO + "  - ID: " + RESET);
+									System.out.print("  - ID: ");
 									
 									id = -1;
 									
@@ -110,7 +76,7 @@ public class Main {
 									Imprimir.consultaCliente(rs);
 									
 									// DETENCIÓN DEL PROGRAMA PARA QUE EL USUARIO CONFIRME //
-									System.out.print("\n" + AMARILLO + "--> CONTINUAR [ENTER] <--" + RESET);
+									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
 									break;
 
@@ -118,12 +84,12 @@ public class Main {
 
 								case 3:
 									// OPCIÓN MODIFICAR LOS DATOS DE UN CLIENTE ADAPTATIVAMENTE //
-									System.out.println(MORADO 
-										+ "---------- " + AMARILLO + "[ MODIFICAR DATOS DE CLIENTE ]" + MORADO + " ----------\n" + MORADO
-										+ "(Si no se desea modificar un campo, pulsar [ENTER])\n" + RESET);
+									System.out.println(""
+										+ "---------- [ MODIFICAR DATOS DE CLIENTE ] ----------\n"
+										+ "(Si no se desea modificar un campo, pulsar [ENTER])\n");
 									
 									// SOLICITAR EL ID OBLIGATORIAMENTE //
-									System.out.print(AMARILLO + "  - ID (obligatorio): " + RESET);
+									System.out.print("  - ID (obligatorio): ");
 									
 									id = -1;
 									
@@ -135,32 +101,32 @@ public class Main {
 									if (Propietario.consultar(conex, id).next()) {
 										
 										// SOLICITAR EL RESTO DE DATOS SI SE DESEAN APORTAR //
-										System.out.print(AMARILLO + "  - DNI: " + RESET); 
+										System.out.print("  - DNI: "); 
 										dni = sc.nextLine();
 
-										System.out.print(AMARILLO + "  - NOMBRE: " + RESET); 
+										System.out.print("  - NOMBRE: "); 
 										nombre = sc.nextLine();
 
-										System.out.print(AMARILLO + "  - PRIMER APELLIDO: " + RESET); 
+										System.out.print("  - PRIMER APELLIDO: "); 
 										apellido1 = sc.nextLine();
 
-										System.out.print(AMARILLO + "  - SEGUNDO APELLIDO: " + RESET); 
+										System.out.print("  - SEGUNDO APELLIDO: "); 
 										apellido2 = sc.nextLine();
 
-										System.out.print(AMARILLO + "  - EMAIL: " + RESET); 
+										System.out.print("  - EMAIL: "); 
 										email = sc.nextLine();
 
-										System.out.print(AMARILLO + "  - TELÉFONO: " + RESET); 
+										System.out.print("  - TELÉFONO: "); 
 										telefono = sc.nextLine();
 									
 										// LLAMADA AL MÉTODO DE MODIFICAR CLIENTE ENVIANDO LAS VARIABLES //
 										Propietario.modificar(conex, id, dni, nombre, apellido1, apellido2, email, telefono);
 									}
 									// SI NO EXISTE SE CANCELA LA OPERACIÓN //
-									else System.out.println("\n" + CIAN + "  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **" + RESET);
+									else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 						
 									// DETENCIÓN DEL PROGRAMA PARA QUE EL USUARIO CONFIRME //
-									System.out.print("\n" + AMARILLO + "--> CONTINUAR [ENTER] <--" + RESET);
+									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
 									break;
 
@@ -168,11 +134,10 @@ public class Main {
 
 								case 4:
 									// OPCIÓN ELIMINAR UN CLIENTE DADO SU ID //
-									System.out.println(MORADO 
-										+ "--------------- " + AMARILLO + "[ ELIMINAR CLIENTE ]" + MORADO + " ---------------" + RESET + "\n");
+									System.out.println("--------------- [ ELIMINAR CLIENTE ] ---------------\n");
 									
 									// SOLICITAR EL ID DEL CLIENTE A BORRAR //
-									System.out.print(AMARILLO + "  - ID: " + RESET);
+									System.out.print("  - ID: ");
 									
 									id = -1;
 									
@@ -184,7 +149,7 @@ public class Main {
 									Propietario.eliminar(conex, id);
 									
 									// DETENCIÓN DEL PROGRAMA PARA QUE EL USUARIO CONFIRME //
-									System.out.print("\n" + AMARILLO + "--> CONTINUAR [ENTER] <--" + RESET);
+									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
 									break;
 
@@ -192,13 +157,13 @@ public class Main {
 
 								case 0:
 									// SALIR DEL MENÚ MANTENIMIENTO DE CLIENTE //
-									System.out.println(CIAN + "  ** REGRESANDO... **" + RESET);
+									System.out.println("  ** REGRESANDO... **");
 									Thread.sleep(700);
 									break;
 
 								default:
 									// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-									System.out.println(ROJO + "ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4" + RESET);
+									System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 									Thread.sleep(700);
 									break;
 							}
@@ -224,18 +189,18 @@ public class Main {
 
 							switch (subopcion) {
 								case 1: case 2: case 3: case 4:
-									System.out.println(CIAN + "  ** OPCIÓN EN DESARROLLO... **" + RESET);
+									System.out.println("  ** OPCIÓN EN DESARROLLO... **");
 									Thread.sleep(700);
 									break;
 
 								case 0:
-									System.out.println(CIAN + "  ** REGRESANDO... **" + RESET);
+									System.out.println("  ** REGRESANDO... **");
 									Thread.sleep(700);
 									break;
 
 								default:
 									// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-									System.out.println(ROJO + "ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4" + RESET);
+									System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 									Thread.sleep(700);
 									break;
 							}
@@ -261,18 +226,18 @@ public class Main {
 
 							switch (subopcion) {
 								case 1: case 2: case 3: case 4:
-									System.out.println(CIAN + "  ** OPCIÓN EN DESARROLLO... **" + RESET);
+									System.out.println("  ** OPCIÓN EN DESARROLLO... **");
 									Thread.sleep(700);
 									break;
 
 								case 0:
-									System.out.println(CIAN + "  ** REGRESANDO... **" + RESET);
+									System.out.println("  ** REGRESANDO... **");
 									Thread.sleep(700);
 									break;
 
 								default:
 									// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-									System.out.println(ROJO + "ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4" + RESET);
+									System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 									Thread.sleep(700);
 									break;
 							}
@@ -298,18 +263,18 @@ public class Main {
 
 							switch (subopcion) {
 								case 1: case 2: case 3: case 4:
-									System.out.println(CIAN + "  ** OPCIÓN EN DESARROLLO... **" + RESET);
+									System.out.println("  ** OPCIÓN EN DESARROLLO... **");
 									Thread.sleep(700);
 									break;
 
 								case 0:
-									System.out.println(CIAN + "  ** REGRESANDO... **" + RESET);
+									System.out.println("  ** REGRESANDO... **");
 									Thread.sleep(700);
 									break;
 
 								default:
 									// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-									System.out.println(ROJO + "ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4" + RESET);
+									System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 									Thread.sleep(700);
 									break;
 							}
@@ -322,7 +287,7 @@ public class Main {
 					
 					case 0:
 						// OPCIÓN SALIR DEL PROGRAMA Y CERRAR CONEXIÓN //
-						System.out.println("\n" + CIAN + "  ** SALIENDO... ¡HASTA PRONTO! **" + RESET);
+						System.out.println("\n  ** SALIENDO... ¡HASTA PRONTO! **");
 						Thread.sleep(700);
 						
 						db.cerrarConex();
@@ -330,7 +295,7 @@ public class Main {
 
 					default:
 						// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-						System.out.println("\n" + ROJO + "ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4" + RESET);
+						System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 						Thread.sleep(700);
 						break;
 				}
@@ -340,19 +305,13 @@ public class Main {
 					rs.getStatement().close();
 					rs.close();
 				}
-			}
-			
-			// RECOGER ERRORES DE SQL //
-			catch (SQLException e) {
-				System.out.println("\n" + ROJO + "ERROR: " + e.getMessage() + RESET);
-				Thread.sleep(700);
-			}
-		} while (opcion != 0);
-    }
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// VARIABLES PARA DAR COLOR A LA SALIDA POR CONSOLA //
-	public static final String RESET = "\u001B[0m", MORADO = "\u001B[35m", ROJO = "\u001B[31m",
-			AZUL = "\u001B[34m", CIAN = "\u001B[36m", VERDE = "\u001B[32m", AMARILLO = "\u001B[33m";
+			} while (opcion != 0);
+		} 
+		
+		// RECOGER ERRORES DE SQL //
+		catch (SQLException e) {
+			System.out.println("\n" + e.getMessage());
+			Thread.sleep(700);
+		}
+    }	
 }
