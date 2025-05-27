@@ -47,7 +47,7 @@ public class Imprimir {
 				MORADO + "|  " + AMARILLO + "ID", 
 				MORADO + "|  " + AMARILLO + "DNI", 
 				MORADO + "|  " + AMARILLO + "NOMBRE", 
-				MORADO + "|  " + AMARILLO + "EMAIL", 
+				MORADO + "|  " + AMARILLO + "CORREO", 
 				MORADO + "|  " + AMARILLO + "TELÉFONO");
 			System.out.println((MORADO + "-").repeat(130));
 			
@@ -61,7 +61,7 @@ public class Imprimir {
 				MORADO + "|  " + CIAN + rs.getInt("id"),
 				MORADO + "|  " + CIAN + rs.getString("DNI"),
 				MORADO + "|  " + CIAN + rs.getString("apellido1") + apellido2 + ", " + rs.getString("nombre"),
-				MORADO + "|  " + CIAN + rs.getString("email"),
+				MORADO + "|  " + CIAN + rs.getString("correo"),
 				MORADO + "|  " + CIAN + telefono);
 			
 			System.out.println("\n" + (MORADO + "-" + RESET).repeat(130));

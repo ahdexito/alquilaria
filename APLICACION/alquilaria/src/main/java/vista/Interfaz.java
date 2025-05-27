@@ -60,42 +60,58 @@ public class Interfaz {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static Propietario crearPropietario() {
-		
-		Propietario propietario = new Propietario();
-		
-		// OPCIÓN AÑADIR NUEVO CLIENTE DADOS SUS DATOS //
+	// OPCIÓN AÑADIR NUEVO PROPIETARIO DADOS SUS DATOS //
+	public static Propietario crearPropietario(Propietario propietario) {
+				
 		System.out.println("-------------- [ AÑADIR NUEVO PROPIETARIO ] ------------\n");
-
+		sc.nextLine();
+		
 		// SOLICITAR LOS DATOS DEL NUEVO CLIENTE Y GUARDARLOS EN VARIABLES //
 		System.out.print("  - DNI: "); 
-		Propietario.
-
+		propietario.setDni(sc.nextLine());
+			
 		System.out.print("  - NOMBRE: "); 
-		nombre = sc.nextLine();
+		propietario.setNombre(sc.nextLine());
 
-		System.out.print("  - PRIMER APELLIDO: "); 
-		apellido1 = sc.nextLine();
+		System.out.print("  - APELLIDOS: "); 
+		propietario.setApellidos(sc.nextLine());
 
-		System.out.print("  - SEGUNDO APELLIDO: "); 
-		apellido2 = sc.nextLine();
-
-		System.out.print("  - EMAIL: "); 
-		email = sc.nextLine();
+		System.out.print("  - CORREO: "); 
+		propietario.setCorreo(sc.nextLine());
 
 		System.out.print("  - TELÉFONO: "); 
-		telefono = sc.nextLine();
+		propietario.setTelefono(sc.nextLine());
+		
+		return propietario;
+	}
+	
+	// OPCIÓN CONSULTAR UN CLIENTE DADO SU ID //
+	public static int consultarPropietario() {
+		
+		System.out.println("--------------- [ CONSULTAR PROPIETARIO ] --------------\n");
+		
+		int id = -1;
+		
+		// SOLICIAR ID DEL CLIENTE A BUSCAR //
+		System.out.print("  - ID: ");		
+
+		// RECOGER ERROR DE ENTRADA POR VALOR NO NUMÉRICO //
+		if (sc.hasNextInt()) id = sc.nextInt();
+		
+		sc.nextLine();
+		
+		return id;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE CLIENTE CON FORMATO TIPO TABLA //
-	public static void consultaCliente(ResultSet rs) throws SQLException {
+	public static void imprimirPropietario(ResultSet rs) throws SQLException {
 		
 		if (rs.next()) {
 			System.out.println(("-").repeat(130));
 			System.out.printf("%-20s %-25s %-50s %-45s %-25s\n", 
-				"|  ID", "|  DNI", "|  NOMBRE", "|  EMAIL", "|  TELÉFONO");
+				"|  ID", "|  DNI", "|  NOMBRE", "|  CORREO", "|  TELÉFONO");
 			System.out.println(("-").repeat(130));
 			
 			// SI LOS CAMPOS SON NULOS, SE IMPRIMEN COMO CADENAS VACÍAS Y NO COMO 'NULL' //
@@ -108,7 +124,7 @@ public class Interfaz {
 				"|  " + rs.getInt("id"),
 				"|  " + rs.getString("DNI"),
 				"|  " + rs.getString("apellido1") + apellido2 + ", " + rs.getString("nombre"),
-				"|  " + rs.getString("email"),
+				"|  " + rs.getString("correo"),
 				"|  " + telefono);
 			
 			System.out.println("\n" + ("-").repeat(130));

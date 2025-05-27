@@ -12,7 +12,7 @@ public class Main {
         
 		Scanner sc = new Scanner(System.in);
 	
-		int opcion;
+		int opcion, subopcion;
 
 		try {
 			// CONEXIÓN A BASE DE DATOS
@@ -20,66 +20,65 @@ public class Main {
 			Connection conex = db.getConex();
 			
 			do {
-				// IMPRIMIR MENÚ PRINCIPAL Y SOLICITAR OPCIÓN MENÚ //
-				opcion = Interfaz.menuPrincipal();
-				
-				/* CREAR UN RESULTSET PARA LLAMAR A LAS FUNCIONES 
-				QUE REALIZAN SELECT Y PODER CERRARLOS POSTERIORMENTE */
+				/* Crear un ResultSet para llamar a las funciones 
+				que realizan select y poder cerrarlos posteriormente */
 				ResultSet rs = null;
-
-				int subopcion;
-
+				
+				/* Imprimir menú principal y solicitar opción menú */
+				opcion = Interfaz.menuPrincipal();
+								
+				// MENÚ PRINCIPAL //
 				switch (opcion) {
+					
+					// OPCIÓN PROPIETARIO //
 					case 1:
 						do {
-							// IMPRIMIR MENÚ MANTENIMIENTO DE PROPIETARIO Y SOLICITAR OPCIÓN MENÚ //
+							/* Imprimir menú mantenimiento de propietario y solicitar opción menú */
 							subopcion = Interfaz.menuPropietario();
-							
 							System.out.println("");
 							
-							int id;
-							String dni, nombre, apellido1, apellido2, email, telefono;
+							/* Instancia de objeto propietario */
+							Propietario propietario = new Propietario();
 							
+							// SUBMENÚ PROPIETARIO //
 							switch (subopcion) {
+								
+								// OPCIÓN CREAR PROPIETARIO //
 								case 1:
+									/* Solicitar datos para crear propietario */
+									Interfaz.crearPropietario(propietario);
 									
+									/* Enviar propietario a la base de datos */
+									propietario.crear(conex);
 									
-									// LLAMADA AL MÉTODO DE CREACIÓN ENVIANDO LAS VARIABLES //
-									Propietario.crear(conex, dni, nombre, apellido1, apellido2, email, telefono);
-									
-									// DETENCIÓN DEL PROGRAMA PARA QUE EL USUARIO CONFIRME //
+									/* Detención del programa */
 									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
+									
 									break;
 
 								//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-								case 2: 
-									// OPCIÓN CONSULTAR UN CLIENTE DADO SU ID //
-									System.out.println("--------------- [ CONSULTAR CLIENTE ] --------------\n");
-									
-									// SOLICIAR ID DEL CLIENTE A BUSCAR //
-									System.out.print("  - ID: ");
-									
-									id = -1;
-									
-									// RECOGER ERROR DE ENTRADA POR VALOR NO NUMÉRICO //
-									if (sc.hasNextInt()) id = sc.nextInt();
-									sc.nextLine();
+								
+								// OPCIÓN CONSULTAR PROPIETARIO //
+								case 2:
+									/* Solicitar ID a buscar */
+									int id = Interfaz.consultarPropietario();
 
 									System.out.println("");
 									
-									// LLAMADA AL MÉTODO DE CONSULTA CLIENTE PARA RECIBIR UN RESULTSET //
+									/* Llamada al método de consultar propietario para recibir un ResultSet */
 									rs = Propietario.consultar(conex, id);
 									
-									// ENVIAR EL RESULTSER AL MÉTODO DE IMPRIMIR //
+									/* Enviar el ResultSet al método para imprimir */
 									Imprimir.consultaCliente(rs);
 									
-									// DETENCIÓN DEL PROGRAMA PARA QUE EL USUARIO CONFIRME //
+									/* Detención del programa */
 									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
 									break;
-
+									
+									/*
+									
 								//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 								case 3:
@@ -113,14 +112,14 @@ public class Main {
 										System.out.print("  - SEGUNDO APELLIDO: "); 
 										apellido2 = sc.nextLine();
 
-										System.out.print("  - EMAIL: "); 
-										email = sc.nextLine();
+										System.out.print("  - CORREO: "); 
+										correo = sc.nextLine();
 
 										System.out.print("  - TELÉFONO: "); 
 										telefono = sc.nextLine();
 									
 										// LLAMADA AL MÉTODO DE MODIFICAR CLIENTE ENVIANDO LAS VARIABLES //
-										Propietario.modificar(conex, id, dni, nombre, apellido1, apellido2, email, telefono);
+										Propietario.modificar(conex, id, dni, nombre, apellido1, apellido2, correo, telefono);
 									}
 									// SI NO EXISTE SE CANCELA LA OPERACIÓN //
 									else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
@@ -152,7 +151,9 @@ public class Main {
 									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
 									break;
-
+									
+									*/
+									
 								//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 								case 0:

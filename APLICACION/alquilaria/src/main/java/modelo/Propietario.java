@@ -5,47 +5,45 @@ import java.sql.*;
 public class Propietario {
     
 	private int id;
-	private String dni, nombre, apellidos, email, telefono;
+	private String dni, nombre, apellidos, correo, telefono;
 
 	public Propietario() {
 	}
 	
-	public Propietario(int id, String dni, String nombre, String apellidos, String email, String telefono) {
+	public Propietario(int id, String dni, String nombre, String apellidos, String correo, String telefono) {
 		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.email = email;
+		this.correo = correo;
 		this.telefono = telefono;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MÉTODO PARA CREAR UN CLIENTE //
-    public static void crear
-			(Connection conex, String dni, String nombre, String apellido1, String apellido2, String email, String telefono) 
-				throws SQLException {
+    public void crear(Connection conex) throws SQLException {
 		
 		try {
 			/* ASEGURAR QUE LA VARIABLE QUE SE ENVÍA SEA NULL SI NO SE INSERTÓ NINGÚN VALOR 
 			PARA QUE SE RECOJA EL ERROR EN CAMPOS CON RESTRICCIÓN NOTNULL */
 			dni = dni.isEmpty() ? null : dni;
 			nombre = nombre.isEmpty() ? null : nombre;
-			apellido1 = apellido1.isEmpty() ? null : apellido1;
-			apellido2 = apellido2.isEmpty() ? null : apellido2;
-			email = email.isEmpty() ? null : email;
+			apellidos = apellidos.isEmpty() ? null : apellidos;
+			correo = correo.isEmpty() ? null : correo;
 			telefono = telefono.isEmpty() ? null : telefono;
+			
+			String query = "INSERT INTO propietario(dni, nombre, apellidos, correo, telefono) VALUES (?, ?, ?, ?, ?)";
+			
+			PreparedStatement ps = conex.prepareStatement(query);
 
-			CallableStatement cs = conex.prepareCall("{call sp_insertCliente(?, ?, ?, ?, ?, ?)}");
+			ps.setString(1, dni);
+			ps.setString(2, nombre);
+			ps.setString(3, apellidos);
+			ps.setString(4, correo);
+			ps.setString(5, telefono);
 
-			cs.setString(1, dni);
-			cs.setString(2, nombre);
-			cs.setString(3, apellido1);
-			cs.setString(4, apellido2);
-			cs.setString(5, email);
-			cs.setString(6, telefono);
-
-			int filas = cs.executeUpdate();
+			int filas = ps.executeUpdate();
 
 			System.out.println("\n  ** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
 		}
@@ -70,7 +68,7 @@ public class Propietario {
 	
 	// MÉTODO PARA MODIFICAR UN CLIENTE //
 	public static void modificar
-			(Connection conex, int id, String dni, String nombre, String apellido1, String apellido2, String email, String telefono) 
+			(Connection conex, int id, String dni, String nombre, String apellido1, String apellido2, String correo, String telefono) 
 				throws SQLException {
 		
 		try {	
@@ -81,7 +79,7 @@ public class Propietario {
 			cs.setString(3, nombre);
 			cs.setString(4, apellido1);
 			cs.setString(5, apellido2);
-			cs.setString(6, email);
+			cs.setString(6, correo);
 			cs.setString(7, telefono);
 
 			int filas = cs.executeUpdate();
@@ -141,12 +139,12 @@ public class Propietario {
 		this.apellidos = apellidos;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	public String getTelefono() {
