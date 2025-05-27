@@ -70,9 +70,7 @@ public class Propietario {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MÉTODO PARA MODIFICAR UN CLIENTE //
-	public static void modificar
-			(Connection conex, int id, String dni, String nombre, String apellido1, String apellido2, String correo, String telefono) 
-				throws SQLException {
+	public void modificar(Connection conex) throws SQLException {
 		
 		try {	
 			CallableStatement cs = conex.prepareCall("{call sp_modifyCliente(?, ?, ?, ?, ?, ?, ?)}");
@@ -80,10 +78,9 @@ public class Propietario {
 			cs.setInt(1, id);
 			cs.setString(2, dni);
 			cs.setString(3, nombre);
-			cs.setString(4, apellido1);
-			cs.setString(5, apellido2);
-			cs.setString(6, correo);
-			cs.setString(7, telefono);
+			cs.setString(4, apellidos);
+			cs.setString(5, correo);
+			cs.setString(6, telefono);
 
 			int filas = cs.executeUpdate();
 
