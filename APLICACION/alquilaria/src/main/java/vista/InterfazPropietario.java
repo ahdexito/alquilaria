@@ -4,17 +4,16 @@ import java.util.Scanner;
 import java.sql.*;
 import modelo.*;
 
-public class OpcionPropietario {
+public class InterfazPropietario {
 	
 	private static Scanner sc = new Scanner(System.in);
     
     // OPCIÓN AÑADIR NUEVO PROPIETARIO DADOS SUS DATOS //
-	public static Propietario crearPropietario(Propietario propietario) {
+	public static Propietario crear(Propietario propietario) {
 				
 		System.out.println("-------------- [ AÑADIR NUEVO PROPIETARIO ] ------------\n");
-		sc.nextLine();
 		
-		// SOLICITAR LOS DATOS DEL NUEVO CLIENTE Y GUARDARLOS EN VARIABLES //
+		// Solicitar los datosdel nuevo cliente y guardarlos en variables //
 		System.out.print("  - DNI: "); 
 		propietario.setDni(sc.nextLine());
 			
@@ -34,16 +33,16 @@ public class OpcionPropietario {
 	}
 	
 	// OPCIÓN CONSULTAR UN CLIENTE DADO SU ID //
-	public static int consultarPropietario() {
+	public static int solicitarID() {
 		
-		System.out.println("--------------- [ CONSULTAR PROPIETARIO ] --------------\n");
+		System.out.println("--------------- [ SOLICITUD DE ID ] --------------\n");
 		
 		int id = -1;
 		
-		// SOLICIAR ID DEL CLIENTE A BUSCAR //
+		// Solicitar ID del cliente a buscar //
 		System.out.print("  - ID: ");		
 
-		// RECOGER ERROR DE ENTRADA POR VALOR NO NUMÉRICO //
+		// Recoger error de entrada por valor no numérico //
 		if (sc.hasNextInt()) id = sc.nextInt();
 		
 		sc.nextLine();
@@ -54,7 +53,7 @@ public class OpcionPropietario {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE CLIENTE CON FORMATO TIPO TABLA //
-	public static void imprimirPropietario(ResultSet rs) throws SQLException {
+	public static void imprimir(ResultSet rs) throws SQLException {
 		
 		if (rs.next()) {
 			System.out.println(("-").repeat(150));
@@ -79,5 +78,39 @@ public class OpcionPropietario {
 		}
 		
 		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+	}
+	
+	// OPCIÓN MODIFICAR LOS DATOS (DINÁMICAMENTE) DE UN PROPIETARIO DADO SU ID //
+	public static int modificar(ResultSet rs) throws SQLException {
+		
+		Propietario propietario = new Propietario();
+		
+		System.out.println(""
+			+ "---------- [ MODIFICAR DATOS DE CLIENTE ] ----------\n"
+			+ "(Si no se desea modificar un campo, pulsar [ENTER])\n");
+
+		/* Comprobar si el ID introducido existe */
+		if (rs.next()) {
+
+			/* Solicitar el resto de datos si se desean aportar */
+			System.out.print("  - DNI: "); 
+			propietario.setDni(sc.nextLine());
+
+			System.out.print("  - NOMBRE: "); 
+			propietario.setNombre(sc.nextLine());
+
+			System.out.print("  - APELLIDOS: "); 
+			propietario.setApellidos(sc.nextLine());
+
+			System.out.print("  - CORREO: "); 
+			propietario.setCorreo(sc.nextLine());
+
+			System.out.print("  - TELÉFONO: "); 
+			propietario.setTelefono(sc.nextLine());
+
+			
+		}
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 }
