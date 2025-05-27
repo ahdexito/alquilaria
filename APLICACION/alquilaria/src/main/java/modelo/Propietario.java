@@ -58,10 +58,13 @@ public class Propietario {
 	// MÉTODO PARA CONSULTAR UN CLIENTE //
 	public static ResultSet consultar(Connection conex, int id) throws SQLException {
 		
-		CallableStatement cs = conex.prepareCall("{call sp_getCliente(?)}");
-		cs.setInt(1, id);
-		ResultSet rs = cs.executeQuery();
-		return rs;
+		String query = "SELECT * FROM propietario WHERE id = ?";
+		
+		PreparedStatement ps = conex.prepareStatement(query);
+		
+		ps.setInt(1, id);
+		
+		return ps.executeQuery();
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

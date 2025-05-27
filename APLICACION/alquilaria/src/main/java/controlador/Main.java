@@ -25,7 +25,7 @@ public class Main {
 				ResultSet rs = null;
 				
 				/* Imprimir menú principal y solicitar opción menú */
-				opcion = Interfaz.menuPrincipal();
+				opcion = Menu.menuPrincipal();
 								
 				// MENÚ PRINCIPAL //
 				switch (opcion) {
@@ -34,19 +34,19 @@ public class Main {
 					case 1:
 						do {
 							/* Imprimir menú mantenimiento de propietario y solicitar opción menú */
-							subopcion = Interfaz.menuPropietario();
+							subopcion = Menu.menuPropietario();
 							System.out.println("");
 							
 							/* Instancia de objeto propietario */
 							Propietario propietario = new Propietario();
 							
-							// SUBMENÚ PROPIETARIO //
+							// PROPIETARIO - MENÚ PRINCIPAL //
 							switch (subopcion) {
 								
-								// OPCIÓN CREAR PROPIETARIO //
+								// PROPIETARIO - CREAR //
 								case 1:
 									/* Solicitar datos para crear propietario */
-									Interfaz.crearPropietario(propietario);
+									Menu.crearPropietario(propietario);
 									
 									/* Enviar propietario a la base de datos */
 									propietario.crear(conex);
@@ -59,22 +59,23 @@ public class Main {
 
 								//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								
-								// OPCIÓN CONSULTAR PROPIETARIO //
+								// PROPIETARIO - CONSULTAR //
 								case 2:
 									/* Solicitar ID a buscar */
-									int id = Interfaz.consultarPropietario();
+									int id = Menu.consultarPropietario();
 
 									System.out.println("");
 									
-									/* Llamada al método de consultar propietario para recibir un ResultSet */
+									/* Llamada al método consultar-propietario para recibir un ResultSet */
 									rs = Propietario.consultar(conex, id);
 									
 									/* Enviar el ResultSet al método para imprimir */
-									Imprimir.consultaCliente(rs);
+									Menu.imprimirPropietario(rs);
 									
 									/* Detención del programa */
 									System.out.print("\n--> CONTINUAR [ENTER] <--");
 									sc.nextLine();
+									
 									break;
 									
 									/*
