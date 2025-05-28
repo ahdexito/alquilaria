@@ -29,12 +29,10 @@ public class InterfazInquilino {
 		System.out.print("  - TELÉFONO: "); 
 		inquilino.setTelefono(sc.nextLine());
 		
-		System.out.print("  - MASCOTA(S)\n" +
-				"(1 -> SÍ)\n" + 
-				"(OTRO -> NO)\n" +
-				"OPCIÓN: ");
+		System.out.print("  - MASCOTA(S) -> (S | N): ");
 		String mascotaString = sc.nextLine();
-		if (mascotaString.trim().equals("1")) inquilino.setMascota(1);
+		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(true);
+		else inquilino.setMascota(false);
 		
 		return inquilino;
 	}
@@ -120,6 +118,11 @@ public class InterfazInquilino {
 
 		System.out.print("  - TELÉFONO: "); 
 		inquilino.setTelefono(sc.nextLine());
+		
+		System.out.print("  - MASCOTA(S) -> (S | N): ");
+		String mascotaString = sc.nextLine();
+		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(true);
+		else inquilino.setMascota(false);
 		
 		return inquilino;
 	}

@@ -5,14 +5,15 @@ import java.sql.*;
 public class Inquilino {
     
     // ATRIBUTOS DE INQUILINO //
-	private int id, mascota;
+	private int id;
 	private String dni, nombre, apellidos, correo, telefono;
+	private boolean mascota;
 
 	// CONSTRUCTORES //
 	public Inquilino() {
 	}
 	
-	public Inquilino(int id, String dni, String nombre, String apellidos, String correo, String telefono, int mascota) {
+	public Inquilino(int id, String dni, String nombre, String apellidos, String correo, String telefono, boolean mascota) {
 		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
@@ -34,8 +35,7 @@ public class Inquilino {
 			nombre = nombre.isEmpty() ? null : nombre;
 			apellidos = apellidos.isEmpty() ? null : apellidos;
 			correo = correo.isEmpty() ? null : correo;
-			telefono = telefono.isEmpty() ? null : telefono;
-			/////////// mascota = mascota.isEmpty() ? null : mascota;
+			telefono = telefono.isEmpty() ? "(VACÍO)" : telefono;
 			
 			String query = "INSERT INTO inquilino(dni, nombre, apellidos, correo, telefono, mascota) VALUES (?, ?, ?, ?, ?, ?)";
 			
@@ -46,7 +46,8 @@ public class Inquilino {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
-			ps.setInt(6, mascota);
+			if (mascota) ps.setInt(6, 1);
+			else ps.setInt(6, 0);
 
 			int filas = ps.executeUpdate();
 
@@ -84,7 +85,6 @@ public class Inquilino {
 		apellidos = apellidos.trim().isEmpty() ? inquiSinModificar.getApellidos() : apellidos;
 		correo = correo.trim().isEmpty() ? inquiSinModificar.getCorreo() : correo;
 		telefono = telefono.trim().isEmpty() ? inquiSinModificar.getTelefono() : telefono;
-		///////////// mascota = mascota.trim().isEmpty() ? inquiSinModificar.getMascota() : mascota;
 		
 		try {
 			String query = "UPDATE inquilino SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, mascota = ? WHERE id = ?";
@@ -96,7 +96,8 @@ public class Inquilino {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
-			ps.setInt(6, mascota);
+			if (mascota) ps.setInt(6, 1);
+			else ps.setInt(6, 0);
 			ps.setInt(7, id);
 
 			int filas = ps.executeUpdate();
@@ -176,11 +177,11 @@ public class Inquilino {
 		this.telefono = telefono;
 	}
 	
-	public int getMascota() {
+	public boolean getMascota() {
 		return mascota;
 	}
 	
-	public void setMascota(int mascota) {
+	public void setMascota(boolean mascota) {
 		this.mascota = mascota;
 	}
 }

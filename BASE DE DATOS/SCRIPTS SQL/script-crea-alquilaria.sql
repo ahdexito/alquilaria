@@ -52,7 +52,7 @@ CREATE TABLE vivienda (
 
 CREATE TABLE inquilino (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    dni VARCHAR(10),
+    dni VARCHAR(10) NOT NULL,
     nombre VARCHAR(20) NOT NULL,
     apellidos VARCHAR(50) NOT NULL,
     correo VARCHAR(100) NOT NULL,
