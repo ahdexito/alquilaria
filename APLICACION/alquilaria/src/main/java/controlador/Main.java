@@ -100,22 +100,16 @@ public class Main {
 								break;
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+								
+							// PROPIETARIO - ELIMINAR //
+							case 4:								
+								/* Solicitar ID a eliminar */
+								id = InterfazPropietario.solicitarID();
 
-							case 4:
-								// OPCIÓN ELIMINAR UN CLIENTE DADO SU ID //
-								System.out.println("--------------- [ ELIMINAR CLIENTE ] ---------------\n");
-
-								// SOLICITAR EL ID DEL CLIENTE A BORRAR //
-								System.out.print("  - ID: ");
-
-								id = -1;
-
-								// RECOGER ERROR DE ENTRADA POR VALOR NO NUMÉRICO //
-								if (sc.hasNextInt()) id = sc.nextInt();
-								sc.nextLine();
-
-								// LLAMADA AL MÉTODO ELIMINAR CLIENTE ENVIANDO SU ID //
+								// Llamada al método eliminar //
 								Propietario.eliminar(conex, id);
+								
+								break;
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -131,10 +125,12 @@ public class Main {
 								Thread.sleep(700);
 								break;
 						}
-
-						/* Detención del programa */
-						System.out.print("\n--> CONTINUAR [ENTER] <--");
-						sc.nextLine();
+						
+						if (subopcion > 0 && subopcion < 5) {
+							/* Detención del programa */
+							System.out.print("\n--> CONTINUAR [ENTER] <--");
+							sc.nextLine();
+						}
 					}
 					while (subopcion != 0);
 

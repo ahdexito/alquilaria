@@ -23,7 +23,7 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA CREAR UN PROPIETARIO //
+	// CREAR UN PROPIETARIO //
     public void crear(Connection conex) throws SQLException {
 		
 		try {
@@ -57,7 +57,7 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA CONSULTAR UN PROPIETARIO //
+	// CONSULTAR UN PROPIETARIO //
 	public static ResultSet consultar(Connection conex, int id) throws SQLException {
 		
 		String query = "SELECT * FROM propietario WHERE id = ?";
@@ -71,7 +71,7 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA MODIFICAR UN PROPIETARIO //
+	// MODIFICAR UN PROPIETARIO //
 	public void modificar(Connection conex, Propietario propiSinModificar) throws SQLException {
 		
 		/* Comprobar los campos vacíos. Si lo están se les asigna el valor previo */
@@ -107,13 +107,16 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA ELIMINAR UN PROPIETARIO //
+	// ELIMINAR UN PROPIETARIO //
 	public static void eliminar(Connection conex, int id) throws SQLException {
 		
-		CallableStatement cs = conex.prepareCall("{call sp_deleteCliente(?)}");
-		cs.setInt(1, id);
+		String query = "DELETE FROM propietario WHERE id = ?";
 		
-		int filas = cs.executeUpdate();
+		PreparedStatement ps = conex.prepareStatement(query);
+		
+		ps.setInt(1, id);
+		
+		int filas = ps.executeUpdate();
 		
 		System.out.println("\n  ** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
 	}
