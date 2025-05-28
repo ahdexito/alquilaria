@@ -17,7 +17,7 @@ public class Main {
 		// CONEXIÓN A BASE DE DATOS
 		Database db = Database.getConex("alquilaria");
 		Connection conex = db.getConex();
-
+		
 		do {
 			/* Crear un ResultSet para llamar a las funciones 
 			que realizan select y poder cerrarlos posteriormente */
@@ -193,7 +193,7 @@ public class Main {
 								if (rs.next()) {
 									/* Guardar los datos de esa consulta en un objeto */
 									Inquilino inquiSinModificar = new Inquilino
-										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascota"));
+										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getBoolean("mascota")); // MODIFICAR !!!!!!!!
 									
 									/* Solicitar los nuevos datos y guardarlos en otro objeto */
 									inquilino = InterfazInquilino.modificar(id);
