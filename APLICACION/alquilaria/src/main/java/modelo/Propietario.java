@@ -4,9 +4,11 @@ import java.sql.*;
 
 public class Propietario {
     
+	// ATRIBUTOS DE PROPIETARIO //
 	private int id;
 	private String dni, nombre, apellidos, correo, telefono;
 
+	// CONSTRUCTORES //
 	public Propietario() {
 	}
 	
@@ -21,7 +23,7 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA CREAR UN CLIENTE //
+	// MÉTODO PARA CREAR UN PROPIETARIO //
     public void crear(Connection conex) throws SQLException {
 		
 		try {
@@ -55,7 +57,7 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA CONSULTAR UN CLIENTE //
+	// MÉTODO PARA CONSULTAR UN PROPIETARIO //
 	public static ResultSet consultar(Connection conex, int id) throws SQLException {
 		
 		String query = "SELECT * FROM propietario WHERE id = ?";
@@ -69,20 +71,31 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA MODIFICAR UN CLIENTE //
-	public void modificar(Connection conex) throws SQLException {
+	// MÉTODO PARA MODIFICAR UN PROPIETARIO //
+	public void modificar(Connection conex, Propietario propiSinModificar) throws SQLException {
 		
-		try {	
-			CallableStatement cs = conex.prepareCall("{call sp_modifyCliente(?, ?, ?, ?, ?, ?, ?)}");
+		/* Comprobar los campos vacíos. Si lo están se les asigna el valor previo */
+		
+		// CUANDO HAY ESPACIOS SOLO FUNCIONA CON DNI //
+		dni = dni.trim().isEmpty() ? propiSinModificar.getDni() : dni;
+		nombre = nombre.trim().isEmpty() ? propiSinModificar.getNombre() : nombre;
+		apellidos = apellidos.trim().isEmpty() ? propiSinModificar.getApellidos() : apellidos;
+		correo = correo.trim().isEmpty() ? propiSinModificar.getCorreo() : correo;
+		telefono = telefono.trim().isEmpty() ? propiSinModificar.getTelefono() : telefono;
+		
+		try {
+			String query = "UPDATE propietario SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ? WHERE id = ?";
+			
+			PreparedStatement ps = conex.prepareStatement(query);
+			
+			ps.setString(1, dni);
+			ps.setString(2, nombre);
+			ps.setString(3, apellidos);
+			ps.setString(4, correo);
+			ps.setString(5, telefono);
+			ps.setInt(6, id);
 
-			cs.setInt(1, id);
-			cs.setString(2, dni);
-			cs.setString(3, nombre);
-			cs.setString(4, apellidos);
-			cs.setString(5, correo);
-			cs.setString(6, telefono);
-
-			int filas = cs.executeUpdate();
+			int filas = ps.executeUpdate();
 
 			System.out.println("\n  ** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
 		}
@@ -94,7 +107,7 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA ELIMINAR UN CLIENTE //
+	// MÉTODO PARA ELIMINAR UN PROPIETARIO //
 	public static void eliminar(Connection conex, int id) throws SQLException {
 		
 		CallableStatement cs = conex.prepareCall("{call sp_deleteCliente(?)}");
@@ -107,6 +120,7 @@ public class Propietario {
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// SETTERS Y GETTERS //
 	public int getId() {
 		return id;
 	}

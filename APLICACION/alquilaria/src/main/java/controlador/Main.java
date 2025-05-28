@@ -75,16 +75,28 @@ public class Main {
 
 							// PROPIETARIO - MODIFICAR //
 							case 3:
-								/* Solicitar ID a buscar */
+								/* Solicitar ID a modificar */
 								id = InterfazPropietario.solicitarID();
-
-								System.out.println("");
-
-								/* Llamada al método consultar-propietario para recibir un ResultSet */
+								
+								/* Realizar consulta con el ID */
 								rs = Propietario.consultar(conex, id);
-
-								InterfazPropietario.modificar(rs);
-
+								
+								/* Comprobar si existe algún campo con ese ID */
+								if (rs.next()) {
+									/* Guardar los datos de esa consulta en un objeto */
+									Propietario propiSinModificar = new Propietario
+										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"));
+									
+									/* Solicitar los nuevos datos y guardarlos en otro objeto */
+									propietario = InterfazPropietario.modificar(id);
+									
+									/* Modificar el objeto recibido con los datos solicitados */
+									propietario.modificar(conex, propiSinModificar);
+								}
+								
+								/* Si no existe se cancela la operación */
+								else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+								
 								break;
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

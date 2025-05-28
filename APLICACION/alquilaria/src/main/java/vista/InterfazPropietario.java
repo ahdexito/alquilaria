@@ -11,9 +11,9 @@ public class InterfazPropietario {
     // OPCIÓN AÑADIR NUEVO PROPIETARIO DADOS SUS DATOS //
 	public static Propietario crear(Propietario propietario) {
 				
-		System.out.println("-------------- [ AÑADIR NUEVO PROPIETARIO ] ------------\n");
+		System.out.println("-------------- [ AÑADIR PROPIETARIO ] ------------\n");
 		
-		// Solicitar los datosdel nuevo cliente y guardarlos en variables //
+		// Solicitar los datos del nuevo cliente y guardarlos en variables //
 		System.out.print("  - DNI: "); 
 		propietario.setDni(sc.nextLine());
 			
@@ -31,6 +31,8 @@ public class InterfazPropietario {
 		
 		return propietario;
 	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// OPCIÓN CONSULTAR UN CLIENTE DADO SU ID //
 	public static int solicitarID() {
@@ -80,16 +82,17 @@ public class InterfazPropietario {
 		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	// OPCIÓN MODIFICAR LOS DATOS (DINÁMICAMENTE) DE UN PROPIETARIO DADO SU ID //
-	public static Propietario modificar(ResultSet rs) throws SQLException {
+	public static Propietario modificar(int id) throws SQLException {
 		
 		Propietario propietario = new Propietario();
+		propietario.setId(id);
 		
 		System.out.println(""
-			+ "---------- [ MODIFICAR DATOS DE CLIENTE ] ----------\n"
+			+ "---------- [ MODIFICAR DATOS DE PROPIETARIO ] ----------\n"
 			+ "(Si no se desea modificar un campo, pulsar [ENTER])\n");
-
-		/* Comprobar si el ID introducido existe */
 
 		/* Solicitar el resto de datos si se desean aportar */
 		System.out.print("  - DNI: "); 
