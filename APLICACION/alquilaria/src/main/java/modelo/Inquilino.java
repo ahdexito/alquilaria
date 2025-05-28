@@ -2,28 +2,29 @@ package modelo;
 
 import java.sql.*;
 
-public class Propietario {
+public class Inquilino {
     
-	// ATRIBUTOS DE PROPIETARIO //
-	private int id;
+    // ATRIBUTOS DE INQUILINO //
+	private int id, mascota;
 	private String dni, nombre, apellidos, correo, telefono;
 
 	// CONSTRUCTORES //
-	public Propietario() {
+	public Inquilino() {
 	}
 	
-	public Propietario(int id, String dni, String nombre, String apellidos, String correo, String telefono) {
+	public Inquilino(int id, String dni, String nombre, String apellidos, String correo, String telefono, int mascota) {
 		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.telefono = telefono;
+		this.mascota = mascota;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// CREAR UN PROPIETARIO //
+	// CREAR UN INQUILINO //
     public void crear(Connection conex) throws SQLException {
 		
 		try {
@@ -34,8 +35,9 @@ public class Propietario {
 			apellidos = apellidos.isEmpty() ? null : apellidos;
 			correo = correo.isEmpty() ? null : correo;
 			telefono = telefono.isEmpty() ? null : telefono;
+			/////////// mascota = mascota.isEmpty() ? null : mascota;
 			
-			String query = "INSERT INTO propietario(dni, nombre, apellidos, correo, telefono) VALUES (?, ?, ?, ?, ?)";
+			String query = "INSERT INTO inquilino(dni, nombre, apellidos, correo, telefono, mascota) VALUES (?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement ps = conex.prepareStatement(query);
 
@@ -44,6 +46,7 @@ public class Propietario {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
+			ps.setInt(6, mascota);
 
 			int filas = ps.executeUpdate();
 
@@ -57,10 +60,10 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// CONSULTAR UN PROPIETARIO //
+	// CONSULTAR UN INQUILINO //
 	public static ResultSet consultar(Connection conex, int id) throws SQLException {
 		
-		String query = "SELECT * FROM propietario WHERE id = ?";
+		String query = "SELECT * FROM inquilino WHERE id = ?";
 		
 		PreparedStatement ps = conex.prepareStatement(query);
 		
@@ -71,19 +74,20 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MODIFICAR UN PROPIETARIO //
-	public void modificar(Connection conex, Propietario propiSinModificar) throws SQLException {
+	// MODIFICAR UN INQUILINO //
+	public void modificar(Connection conex, Inquilino inquiSinModificar) throws SQLException {
 		
 		/* Comprobar los campos vacíos. Si lo están se les asigna el valor previo */
 		
-		dni = dni.trim().isEmpty() ? propiSinModificar.getDni() : dni;
-		nombre = nombre.trim().isEmpty() ? propiSinModificar.getNombre() : nombre;
-		apellidos = apellidos.trim().isEmpty() ? propiSinModificar.getApellidos() : apellidos;
-		correo = correo.trim().isEmpty() ? propiSinModificar.getCorreo() : correo;
-		telefono = telefono.trim().isEmpty() ? propiSinModificar.getTelefono() : telefono;
+		dni = dni.trim().isEmpty() ? inquiSinModificar.getDni() : dni;
+		nombre = nombre.trim().isEmpty() ? inquiSinModificar.getNombre() : nombre;
+		apellidos = apellidos.trim().isEmpty() ? inquiSinModificar.getApellidos() : apellidos;
+		correo = correo.trim().isEmpty() ? inquiSinModificar.getCorreo() : correo;
+		telefono = telefono.trim().isEmpty() ? inquiSinModificar.getTelefono() : telefono;
+		///////////// mascota = mascota.trim().isEmpty() ? inquiSinModificar.getMascota() : mascota;
 		
 		try {
-			String query = "UPDATE propietario SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ? WHERE id = ?";
+			String query = "UPDATE inquilino SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, mascota = ? WHERE id = ?";
 			
 			PreparedStatement ps = conex.prepareStatement(query);
 			
@@ -92,7 +96,8 @@ public class Propietario {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
-			ps.setInt(6, id);
+			ps.setInt(6, mascota);
+			ps.setInt(7, id);
 
 			int filas = ps.executeUpdate();
 
@@ -106,10 +111,10 @@ public class Propietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// ELIMINAR UN PROPIETARIO //
+	// ELIMINAR UN INQUILINO //
 	public static void eliminar(Connection conex, int id) throws SQLException {
 		
-		String query = "DELETE FROM propietario WHERE id = ?";
+		String query = "DELETE FROM inquilino WHERE id = ?";
 		
 		PreparedStatement ps = conex.prepareStatement(query);
 		
@@ -169,5 +174,13 @@ public class Propietario {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	
+	public int getMascota() {
+		return mascota;
+	}
+	
+	public void setMascota(int mascota) {
+		this.mascota = mascota;
 	}
 }

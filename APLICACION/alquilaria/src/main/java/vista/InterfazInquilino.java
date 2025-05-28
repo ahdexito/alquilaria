@@ -4,44 +4,51 @@ import java.util.Scanner;
 import java.sql.*;
 import modelo.*;
 
-public class InterfazPropietario {
+public class InterfazInquilino {
 	
 	private static Scanner sc = new Scanner(System.in);
     
-    // OPCIÓN AÑADIR NUEVO PROPIETARIO DADOS SUS DATOS //
-	public static Propietario crear(Propietario propietario) {
+    // OPCIÓN AÑADIR NUEVO INQUILINO DADOS SUS DATOS //
+	public static Inquilino crear(Inquilino inquilino) {
 				
-		System.out.println("-------------- [ AÑADIR PROPIETARIO ] ------------\n");
+		System.out.println("-------------- [ AÑADIR INQUILINO ] ------------\n");
 		
-		// Solicitar los datos del nuevo propietario y guardarlos en variables //
+		// Solicitar los datos del nuevo inquilino y guardarlos en variables //
 		System.out.print("  - DNI: "); 
-		propietario.setDni(sc.nextLine());
+		inquilino.setDni(sc.nextLine());
 			
 		System.out.print("  - NOMBRE: "); 
-		propietario.setNombre(sc.nextLine());
+		inquilino.setNombre(sc.nextLine());
 
 		System.out.print("  - APELLIDOS: "); 
-		propietario.setApellidos(sc.nextLine());
+		inquilino.setApellidos(sc.nextLine());
 
 		System.out.print("  - CORREO: "); 
-		propietario.setCorreo(sc.nextLine());
+		inquilino.setCorreo(sc.nextLine());
 
 		System.out.print("  - TELÉFONO: "); 
-		propietario.setTelefono(sc.nextLine());
+		inquilino.setTelefono(sc.nextLine());
 		
-		return propietario;
+		System.out.print("  - MASCOTA(S)\n" +
+				"(1 -> SÍ)\n" + 
+				"(OTRO -> NO)\n" +
+				"OPCIÓN: ");
+		String mascotaString = sc.nextLine();
+		if (mascotaString.trim().equals("1")) inquilino.setMascota(1);
+		
+		return inquilino;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// OPCIÓN CONSULTAR UN PROPIETARIO DADO SU ID //
+	// OPCIÓN CONSULTAR UN INQUILINO DADO SU ID //
 	public static int solicitarID() {
 		
 		System.out.println("--------------- [ SOLICITUD DE ID ] --------------\n");
 		
 		int id = -1;
 		
-		// Solicitar ID del propietario a buscar //
+		// Solicitar ID del inquilino a buscar //
 		System.out.print("  - ID: ");		
 
 		// Recoger error de entrada por valor no numérico //
@@ -58,10 +65,10 @@ public class InterfazPropietario {
 	public static void imprimir(ResultSet rs) throws SQLException {
 		
 		if (rs.next()) {
-			System.out.println(("-").repeat(150));
-			System.out.printf("%-10s %-20s %-40s %-40s %-20s\n", 
-				"|  ID", "|  DNI", "|  NOMBRE", "|  CORREO", "|  TELÉFONO");
-			System.out.println(("-").repeat(150));
+			System.out.println(("-").repeat(170));
+			System.out.printf("%-10s %-20s %-40s %-40s %-30s %-10s\n", 
+				"|  ID", "|  DNI", "|  NOMBRE", "|  CORREO", "|  TELÉFONO", "|  MASCOTAS");
+			System.out.println(("-").repeat(170));
 			
 			/*
 			// SI LOS CAMPOS SON NULOS, SE IMPRIMEN COMO CADENAS VACÍAS Y NO COMO 'NULL' //
@@ -69,14 +76,18 @@ public class InterfazPropietario {
 			telefono = telefono != null ? telefono : "";
 			*/
 			
-			System.out.printf("%-10s %-20s %-40s %-40s %-20s",
+			String mascotas = "NO";	
+			if (rs.getInt("mascota") == 1) mascotas = "SÍ";
+			
+			System.out.printf("%-10s %-20s %-40s %-40s %-30s %-10s",
 				"|  " + rs.getInt("id"),
 				"|  " + rs.getString("DNI"),
 				"|  " + rs.getString("apellidos") + ", " + rs.getString("nombre"),
 				"|  " + rs.getString("correo"),
-				"|  " + rs.getString("telefono"));
+				"|  " + rs.getString("telefono"),
+				"|  " + mascotas);
 			
-			System.out.println("\n" + ("-").repeat(150));
+			System.out.println("\n" + ("-").repeat(170));
 		}
 		
 		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
@@ -84,32 +95,32 @@ public class InterfazPropietario {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// OPCIÓN MODIFICAR LOS DATOS (DINÁMICAMENTE) DE UN PROPIETARIO DADO SU ID //
-	public static Propietario modificar(int id) throws SQLException {
+	// OPCIÓN MODIFICAR LOS DATOS DE UN INQUILINO DADO SU ID //
+	public static Inquilino modificar(int id) throws SQLException {
 		
-		Propietario propietario = new Propietario();
-		propietario.setId(id);
+		Inquilino inquilino = new Inquilino();
+		inquilino.setId(id);
 		
 		System.out.println(""
-			+ "---------- [ MODIFICAR DATOS DE PROPIETARIO ] ----------\n"
+			+ "---------- [ MODIFICAR DATOS DE INQUILINO ] ----------\n"
 			+ "(Si no se desea modificar un campo, pulsar [ENTER])\n");
 
 		/* Solicitar el resto de datos si se desean aportar */
 		System.out.print("  - DNI: "); 
-		propietario.setDni(sc.nextLine());
+		inquilino.setDni(sc.nextLine());
 
 		System.out.print("  - NOMBRE: "); 
-		propietario.setNombre(sc.nextLine());
+		inquilino.setNombre(sc.nextLine());
 
 		System.out.print("  - APELLIDOS: "); 
-		propietario.setApellidos(sc.nextLine());
+		inquilino.setApellidos(sc.nextLine());
 
 		System.out.print("  - CORREO: "); 
-		propietario.setCorreo(sc.nextLine());
+		inquilino.setCorreo(sc.nextLine());
 
 		System.out.print("  - TELÉFONO: "); 
-		propietario.setTelefono(sc.nextLine());
+		inquilino.setTelefono(sc.nextLine());
 		
-		return propietario;
+		return inquilino;
 	}
 }
