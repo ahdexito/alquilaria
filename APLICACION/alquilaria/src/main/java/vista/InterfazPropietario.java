@@ -81,7 +81,7 @@ public class InterfazPropietario {
 	}
 	
 	// OPCIÓN MODIFICAR LOS DATOS (DINÁMICAMENTE) DE UN PROPIETARIO DADO SU ID //
-	public static int modificar(ResultSet rs) throws SQLException {
+	public static Propietario modificar(ResultSet rs) throws SQLException {
 		
 		Propietario propietario = new Propietario();
 		
@@ -90,27 +90,23 @@ public class InterfazPropietario {
 			+ "(Si no se desea modificar un campo, pulsar [ENTER])\n");
 
 		/* Comprobar si el ID introducido existe */
-		if (rs.next()) {
 
-			/* Solicitar el resto de datos si se desean aportar */
-			System.out.print("  - DNI: "); 
-			propietario.setDni(sc.nextLine());
+		/* Solicitar el resto de datos si se desean aportar */
+		System.out.print("  - DNI: "); 
+		propietario.setDni(sc.nextLine());
 
-			System.out.print("  - NOMBRE: "); 
-			propietario.setNombre(sc.nextLine());
+		System.out.print("  - NOMBRE: "); 
+		propietario.setNombre(sc.nextLine());
 
-			System.out.print("  - APELLIDOS: "); 
-			propietario.setApellidos(sc.nextLine());
+		System.out.print("  - APELLIDOS: "); 
+		propietario.setApellidos(sc.nextLine());
 
-			System.out.print("  - CORREO: "); 
-			propietario.setCorreo(sc.nextLine());
+		System.out.print("  - CORREO: "); 
+		propietario.setCorreo(sc.nextLine());
 
-			System.out.print("  - TELÉFONO: "); 
-			propietario.setTelefono(sc.nextLine());
-
-			
-		}
-		/* Si no existe se cancela la operación */
-		else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+		System.out.print("  - TELÉFONO: "); 
+		propietario.setTelefono(sc.nextLine());
+		
+		return propietario;
 	}
 }

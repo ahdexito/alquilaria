@@ -22,9 +22,8 @@ public class Imprimir {
 			+ "INTRODUCE OPCIÓN: ");
 		
 		// Recoger error de entrada por valor no numérico //
-		if (sc.hasNextInt()) {
-			return sc.nextInt();
-		}
+		if (sc.hasNextInt()) return sc.nextInt();
+		
 		sc.nextLine();
 		
 		return -1;
@@ -51,9 +50,8 @@ public class Imprimir {
 			+ "INTRODUCE OPCIÓN: ");
 		
 		// Recoger error de entrada por valor no numérico //
-		if (sc.hasNextInt()) {
-			return sc.nextInt();
-		}
+		if (sc.hasNextInt()) return sc.nextInt();
+		
 		sc.nextLine();
 		
 		return -1;
