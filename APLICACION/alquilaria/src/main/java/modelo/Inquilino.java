@@ -4,22 +4,22 @@ import java.sql.*;
 
 public class Inquilino {
     
-    // ATRIBUTOS DE INQUILINO //
-	private int id, mascota = -1;
+    // ATRIBUTOS //
+	private int id, mascotas = -1;
 	private String dni, nombre, apellidos, correo, telefono;
 
 	// CONSTRUCTORES //
 	public Inquilino() {
 	}
 	
-	public Inquilino(int id, String dni, String nombre, String apellidos, String correo, String telefono, int mascota) {
+	public Inquilino(int id, String dni, String nombre, String apellidos, String correo, String telefono, int mascotas) {
 		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.telefono = telefono;
-		this.mascota = mascota;
+		this.mascotas = mascotas;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ public class Inquilino {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
-			ps.setInt(6, mascota);
+			ps.setInt(6, mascotas);
 
 			int filas = ps.executeUpdate();
 
@@ -74,16 +74,16 @@ public class Inquilino {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MODIFICAR UN INQUILINO //
-	public void modificar(Connection conex, Inquilino inquiSinModificar) throws SQLException {
+	public void modificar(Connection conex, Inquilino inquilinoSinMod )throws SQLException {
 		
 		/* Comprobar los campos vacíos. Si lo están se les asigna el valor previo */
 		
-		dni = dni.trim().isEmpty() ? inquiSinModificar.getDni() : dni;
-		nombre = nombre.trim().isEmpty() ? inquiSinModificar.getNombre() : nombre;
-		apellidos = apellidos.trim().isEmpty() ? inquiSinModificar.getApellidos() : apellidos;
-		correo = correo.trim().isEmpty() ? inquiSinModificar.getCorreo() : correo;
-		telefono = telefono.trim().isEmpty() ? inquiSinModificar.getTelefono() : telefono;
-		mascota = (mascota == -1) ? inquiSinModificar.getMascota() : mascota;
+		dni = dni.trim().isEmpty() ? inquilinoSinMod.getDni() : dni;
+		nombre = nombre.trim().isEmpty() ? inquilinoSinMod.getNombre() : nombre;
+		apellidos = apellidos.trim().isEmpty() ? inquilinoSinMod.getApellidos() : apellidos;
+		correo = correo.trim().isEmpty() ? inquilinoSinMod.getCorreo() : correo;
+		telefono = telefono.trim().isEmpty() ? inquilinoSinMod.getTelefono() : telefono;
+		mascotas = (mascotas == -1) ? inquilinoSinMod.getMascotas() : mascotas;
 		
 		try {
 			String query = "UPDATE inquilino SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, mascota = ? WHERE id = ?";
@@ -95,7 +95,7 @@ public class Inquilino {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
-			ps.setInt(6, mascota);
+			ps.setInt(6, mascotas);
 			ps.setInt(7, id);
 
 			int filas = ps.executeUpdate();
@@ -175,11 +175,11 @@ public class Inquilino {
 		this.telefono = telefono;
 	}
 	
-	public int getMascota() {
-		return mascota;
+	public int getMascotas() {
+		return mascotas;
 	}
 	
-	public void setMascota(int mascota) {
-		this.mascota = mascota;
+	public void setMascotas(int mascotas) {
+		this.mascotas = mascotas;
 	}
 }

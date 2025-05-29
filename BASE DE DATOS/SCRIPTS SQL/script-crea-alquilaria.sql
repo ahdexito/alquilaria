@@ -36,8 +36,8 @@ CREATE TABLE vivienda (
 	cod VARCHAR(10) PRIMARY KEY,
     id_propietario INT UNSIGNED,
     direccion VARCHAR(150) NOT NULL,
-    precio FLOAT DEFAULT 0,
-    superficie FLOAT DEFAULT 0,
+    precio FLOAT UNSIGNED DEFAULT 0,
+    superficie FLOAT UNSIGNED DEFAULT 0,
     descripcion VARCHAR(300),
     mascotas BOOL DEFAULT 1,
     tipo INT,
@@ -57,7 +57,7 @@ CREATE TABLE inquilino (
     apellidos VARCHAR(50) NOT NULL,
     correo VARCHAR(100) NOT NULL,
     telefono VARCHAR(15),
-    mascota BOOL DEFAULT 0,
+    mascotas BOOL DEFAULT 0,
     
     CONSTRAINT uk_dni_inquilino
 		UNIQUE KEY(dni)
@@ -68,7 +68,7 @@ CREATE TABLE contrato (
     cod_vivienda VARCHAR(10),
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
-    precio FLOAT DEFAULT 0,
+    precio FLOAT UNSIGNED DEFAULT 0,
     estado ENUM('PENDIENTE', 'ACTIVO', 'VENCIDO') DEFAULT 'PENDIENTE',
     
     PRIMARY KEY(id_inquilino, cod_vivienda),

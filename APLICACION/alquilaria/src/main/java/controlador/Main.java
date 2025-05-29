@@ -83,14 +83,14 @@ public class Main {
 								/* Comprobar si existe algún campo con ese ID */
 								if (rs.next()) {
 									/* Guardar los datos de esa consulta en un objeto */
-									Propietario propiSinModificar = new Propietario
+									Propietario propietarioSinMod = new Propietario
 										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"));
 									
 									/* Solicitar los nuevos datos y guardarlos en otro objeto */
 									propietario = InterfazPropietario.modificar(id);
 									
 									/* Modificar el objeto recibido con los datos solicitados */
-									propietario.modificar(conex, propiSinModificar);
+									propietario.modificar(conex, propietarioSinMod);
 								}
 								
 								/* Si no existe se cancela la operación */
@@ -139,6 +139,113 @@ public class Main {
 					
 				// OPCIÓN INQUILINO //
 				case 2:
+					do {
+						/* Imprimir menú mantenimiento de inquilino y solicitar opción menú */
+						subopcion = Imprimir.submenu("INQUILINO");
+						System.out.println("");
+
+						/* Instancia de objeto inquilino */
+						Inquilino inquilino = new Inquilino();
+						int id;
+
+						// INQUILINO - MENÚ PRINCIPAL //
+						switch (subopcion) {
+
+							// INQUILINO - CREAR //
+							case 1:
+								/* Solicitar datos para crear inquilino */
+								InterfazInquilino.crear(inquilino);
+
+								/* Enviar inquilino a la base de datos */
+								inquilino.crear(conex);
+
+								break;
+
+							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+							// INQUILINO - CONSULTAR //
+							case 2:									
+								/* Solicitar ID a buscar */
+								id = InterfazInquilino.solicitarID();
+
+								System.out.println("");
+
+								/* Llamada al método consultar-inquilino para recibir un ResultSet */
+								rs = Inquilino.consultar(conex, id);
+
+								/* Enviar el ResultSet al método para imprimir */
+								InterfazInquilino.imprimir(rs);
+
+								break;
+
+							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+							// INQUILINO - MODIFICAR //
+							case 3:
+								/* Solicitar ID a modificar */
+								id = InterfazInquilino.solicitarID();
+								
+								/* Realizar consulta con el ID */
+								rs = Inquilino.consultar(conex, id);
+								
+								/* Comprobar si existe algún campo con ese ID */
+								if (rs.next()) {
+									/* Guardar los datos de esa consulta en un objeto */
+									Inquilino inquilinoSinMod = new Inquilino
+										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascota"));
+									
+									/* Solicitar los nuevos datos y guardarlos en otro objeto */
+									inquilino = InterfazInquilino.modificar(id);
+									
+									/* Modificar el objeto recibido con los datos solicitados */
+									inquilino.modificar(conex, inquilinoSinMod);
+								}
+								
+								/* Si no existe se cancela la operación */
+								else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+								
+								break;
+
+							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+								
+							// INQUILINO - ELIMINAR //
+							case 4:								
+								/* Solicitar ID a eliminar */
+								id = InterfazInquilino.solicitarID();
+
+								// Llamada al método eliminar //
+								Inquilino.eliminar(conex, id);
+								
+								break;
+
+							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+							case 0:
+								// SALIR DEL MENÚ MANTENIMIENTO DE CLIENTE //
+								System.out.println("  ** REGRESANDO... **");
+								Thread.sleep(700);
+								break;
+
+							default:
+								// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
+								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
+								Thread.sleep(700);
+								break;
+						}
+						
+						if (subopcion > 0 && subopcion < 5) {
+							/* Detención del programa */
+							System.out.print("\n--> CONTINUAR [ENTER] <--");
+							sc.nextLine();
+						}
+					}
+					while (subopcion != 0);
+
+					break;
+					
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+				case 3:
 					do {
 						/* Imprimir menú mantenimiento de inquilino y solicitar opción menú */
 						subopcion = Imprimir.submenu("INQUILINO");
@@ -242,46 +349,9 @@ public class Main {
 					while (subopcion != 0);
 
 					break;
-
+					
 					/*
 					
-				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-				case 3:
-					// MENÚ MANTENIMIENTO DE DESARROLLADORES EN DESARROLLO... //
-					do {
-						subopcion = -1;
-
-						Imprimir.menuDesarrollador();
-
-						// RECOGER ERROR DE ENTRADA POR VALOR NO NUMÉRICO //
-						if (sc.hasNextInt()) subopcion = sc.nextInt();
-						sc.nextLine();
-
-						System.out.println("");
-
-						switch (subopcion) {
-							case 1: case 2: case 3: case 4:
-								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
-								Thread.sleep(700);
-								break;
-
-							case 0:
-								System.out.println("  ** REGRESANDO... **");
-								Thread.sleep(700);
-								break;
-
-							default:
-								// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-								Thread.sleep(700);
-								break;
-						}
-					}
-					while (subopcion != 0);
-
-					break;
-
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 				case 4:

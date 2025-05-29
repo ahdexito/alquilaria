@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Propietario {
     
-	// ATRIBUTOS DE PROPIETARIO //
+	// ATRIBUTOS //
 	private int id;
 	private String dni, nombre, apellidos, correo, telefono;
 

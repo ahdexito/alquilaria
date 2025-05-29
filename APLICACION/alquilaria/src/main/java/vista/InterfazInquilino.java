@@ -30,9 +30,9 @@ public class InterfazInquilino {
 		inquilino.setTelefono(sc.nextLine());
 		
 		System.out.print("  - MASCOTA(S) -> (S | N): ");
-		String mascotaString = sc.nextLine();
-		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(1);
-		if (mascotaString.trim().toUpperCase().equals("N")) inquilino.setMascota(0);
+		String mascotasString = sc.nextLine();
+		if (mascotasString.trim().toUpperCase().equals("S")) inquilino.setMascotas(1);
+		if (mascotasString.trim().toUpperCase().equals("N")) inquilino.setMascotas(0);
 		
 		return inquilino;
 	}
@@ -120,9 +120,9 @@ public class InterfazInquilino {
 		inquilino.setTelefono(sc.nextLine());
 		
 		System.out.print("  - MASCOTA(S) -> (S | N): ");
-		String mascotaString = sc.nextLine();
-		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(1);
-		if (mascotaString.trim().toUpperCase().equals("N")) inquilino.setMascota(0);
+		String mascotasString = sc.nextLine();
+		if (mascotasString.trim().toUpperCase().equals("S")) inquilino.setMascotas(1);
+		if (mascotasString.trim().toUpperCase().equals("N")) inquilino.setMascotas(0);
 		
 		return inquilino;
 	}
