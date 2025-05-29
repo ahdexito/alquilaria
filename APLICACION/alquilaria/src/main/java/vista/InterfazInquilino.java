@@ -31,8 +31,8 @@ public class InterfazInquilino {
 		
 		System.out.print("  - MASCOTA(S) -> (S | N): ");
 		String mascotaString = sc.nextLine();
-		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(true);
-		else inquilino.setMascota(false);
+		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(1);
+		if (mascotaString.trim().toUpperCase().equals("N")) inquilino.setMascota(0);
 		
 		return inquilino;
 	}
@@ -121,8 +121,8 @@ public class InterfazInquilino {
 		
 		System.out.print("  - MASCOTA(S) -> (S | N): ");
 		String mascotaString = sc.nextLine();
-		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(true);
-		else inquilino.setMascota(false);
+		if (mascotaString.trim().toUpperCase().equals("S")) inquilino.setMascota(1);
+		if (mascotaString.trim().toUpperCase().equals("N")) inquilino.setMascota(0);
 		
 		return inquilino;
 	}

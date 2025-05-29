@@ -5,15 +5,14 @@ import java.sql.*;
 public class Inquilino {
     
     // ATRIBUTOS DE INQUILINO //
-	private int id;
+	private int id, mascota = -1;
 	private String dni, nombre, apellidos, correo, telefono;
-	private boolean mascota;
 
 	// CONSTRUCTORES //
 	public Inquilino() {
 	}
 	
-	public Inquilino(int id, String dni, String nombre, String apellidos, String correo, String telefono, boolean mascota) {
+	public Inquilino(int id, String dni, String nombre, String apellidos, String correo, String telefono, int mascota) {
 		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
@@ -46,8 +45,7 @@ public class Inquilino {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
-			if (mascota) ps.setInt(6, 1);
-			else ps.setInt(6, 0);
+			ps.setInt(6, mascota);
 
 			int filas = ps.executeUpdate();
 
@@ -85,6 +83,7 @@ public class Inquilino {
 		apellidos = apellidos.trim().isEmpty() ? inquiSinModificar.getApellidos() : apellidos;
 		correo = correo.trim().isEmpty() ? inquiSinModificar.getCorreo() : correo;
 		telefono = telefono.trim().isEmpty() ? inquiSinModificar.getTelefono() : telefono;
+		mascota = (mascota == -1) ? inquiSinModificar.getMascota() : mascota;
 		
 		try {
 			String query = "UPDATE inquilino SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, mascota = ? WHERE id = ?";
@@ -96,8 +95,7 @@ public class Inquilino {
 			ps.setString(3, apellidos);
 			ps.setString(4, correo);
 			ps.setString(5, telefono);
-			if (mascota) ps.setInt(6, 1);
-			else ps.setInt(6, 0);
+			ps.setInt(6, mascota);
 			ps.setInt(7, id);
 
 			int filas = ps.executeUpdate();
@@ -177,11 +175,11 @@ public class Inquilino {
 		this.telefono = telefono;
 	}
 	
-	public boolean getMascota() {
+	public int getMascota() {
 		return mascota;
 	}
 	
-	public void setMascota(boolean mascota) {
+	public void setMascota(int mascota) {
 		this.mascota = mascota;
 	}
 }

@@ -139,7 +139,6 @@ public class Main {
 					
 				// OPCIÓN INQUILINO //
 				case 2:
-					
 					do {
 						/* Imprimir menú mantenimiento de inquilino y solicitar opción menú */
 						subopcion = Imprimir.submenu("INQUILINO");
@@ -193,7 +192,7 @@ public class Main {
 								if (rs.next()) {
 									/* Guardar los datos de esa consulta en un objeto */
 									Inquilino inquiSinModificar = new Inquilino
-										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getBoolean("mascota")); // MODIFICAR !!!!!!!!
+										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascota"));
 									
 									/* Solicitar los nuevos datos y guardarlos en otro objeto */
 									inquilino = InterfazInquilino.modificar(id);
