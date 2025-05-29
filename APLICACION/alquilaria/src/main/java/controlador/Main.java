@@ -271,60 +271,60 @@ public class Main {
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-							// VIVIENDA - CONSULTAR //
-							case 2:									
-								/* Solicitar ID a buscar */
-								cod = InterfazVivienda.solicitarID();
-
-								System.out.println("");
-
-								/* Llamada al método consultar-vivienda para recibir un ResultSet */
-								rs = Vivienda.consultar(conex, cod);
-
-								/* Enviar el ResultSet al método para imprimir */
-								InterfazVivienda.imprimir(rs);
-
-								break;
-
-							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-							// VIVIENDA - MODIFICAR //
-							case 3:
-								/* Solicitar ID a modificar */
-								cod = InterfazVivienda.solicitarID();
-								
-								/* Realizar consulta con el ID */
-								rs = Vivienda.consultar(conex, cod);
-								
-								/* Comprobar si existe algún campo con ese ID */
-								if (rs.next()) {
-									/* Guardar los datos de esa consulta en un objeto */
-									Vivienda viviendaSinMod = new Vivienda
-										(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
-									
-									/* Solicitar los nuevos datos y guardarlos en otro objeto */
-									vivienda = InterfazVivienda.modificar(cod);
-									
-									/* Modificar el objeto recibido con los datos solicitados */
-									vivienda.modificar(conex, viviendaSinMod);
-								}
-								
-								/* Si no existe se cancela la operación */
-								else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
-								
-								break;
-
-							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-								
-							// VIVIENDA - ELIMINAR //
-							case 4:								
-								/* Solicitar ID a eliminar */
-								cod = InterfazVivienda.solicitarID();
-
-								// Llamada al método eliminar //
-								Vivienda.eliminar(conex, cod);
-								
-								break;
+//							// VIVIENDA - CONSULTAR //
+//							case 2:									
+//								/* Solicitar ID a buscar */
+//								cod = InterfazVivienda.solicitarID();
+//
+//								System.out.println("");
+//
+//								/* Llamada al método consultar-vivienda para recibir un ResultSet */
+//								rs = Vivienda.consultar(conex, cod);
+//
+//								/* Enviar el ResultSet al método para imprimir */
+//								InterfazVivienda.imprimir(rs);
+//
+//								break;
+//
+//							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//							// VIVIENDA - MODIFICAR //
+//							case 3:
+//								/* Solicitar ID a modificar */
+//								cod = InterfazVivienda.solicitarID();
+//								
+//								/* Realizar consulta con el ID */
+//								rs = Vivienda.consultar(conex, cod);
+//								
+//								/* Comprobar si existe algún campo con ese ID */
+//								if (rs.next()) {
+//									/* Guardar los datos de esa consulta en un objeto */
+//									Vivienda viviendaSinMod = new Vivienda
+//										(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
+//									
+//									/* Solicitar los nuevos datos y guardarlos en otro objeto */
+//									vivienda = InterfazVivienda.modificar(cod);
+//									
+//									/* Modificar el objeto recibido con los datos solicitados */
+//									vivienda.modificar(conex, viviendaSinMod);
+//								}
+//								
+//								/* Si no existe se cancela la operación */
+//								else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+//								
+//								break;
+//
+//							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//								
+//							// VIVIENDA - ELIMINAR //
+//							case 4:								
+//								/* Solicitar ID a eliminar */
+//								cod = InterfazVivienda.solicitarID();
+//
+//								// Llamada al método eliminar //
+//								Vivienda.eliminar(conex, cod);
+//								
+//								break;
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
