@@ -245,67 +245,68 @@ public class Main {
 					
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+				// OPCIÓN VIVIENDA //
 				case 3:
 					do {
-						/* Imprimir menú mantenimiento de inquilino y solicitar opción menú */
-						subopcion = Imprimir.submenu("INQUILINO");
+						/* Imprimir menú mantenimiento de viivenda y solicitar opción menú */
+						subopcion = Imprimir.submenu("VIVIENDA");
 						System.out.println("");
 
-						/* Instancia de objeto inquilino */
-						Inquilino inquilino = new Inquilino();
-						int id;
+						/* Instancia de objeto vivienda */
+						Vivienda vivienda = new Vivienda();
+						String cod;
 
-						// INQUILINO - MENÚ PRINCIPAL //
+						// VIVIENDA - MENÚ PRINCIPAL //
 						switch (subopcion) {
 
-							// INQUILINO - CREAR //
+							// VIVIENDA - CREAR //
 							case 1:
-								/* Solicitar datos para crear inquilino */
-								InterfazInquilino.crear(inquilino);
+								/* Solicitar datos para crear vivienda */
+								InterfazVivienda.crear(vivienda);
 
-								/* Enviar inquilino a la base de datos */
-								inquilino.crear(conex);
+								/* Enviar vivienda a la base de datos */
+								vivienda.crear(conex);
 
 								break;
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-							// INQUILINO - CONSULTAR //
+							// VIVIENDA - CONSULTAR //
 							case 2:									
 								/* Solicitar ID a buscar */
-								id = InterfazInquilino.solicitarID();
+								cod = InterfazVivienda.solicitarID();
 
 								System.out.println("");
 
-								/* Llamada al método consultar-inquilino para recibir un ResultSet */
-								rs = Inquilino.consultar(conex, id);
+								/* Llamada al método consultar-vivienda para recibir un ResultSet */
+								rs = Vivienda.consultar(conex, cod);
 
 								/* Enviar el ResultSet al método para imprimir */
-								InterfazInquilino.imprimir(rs);
+								InterfazVivienda.imprimir(rs);
 
 								break;
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-							// INQUILINO - MODIFICAR //
+							// VIVIENDA - MODIFICAR //
 							case 3:
 								/* Solicitar ID a modificar */
-								id = InterfazInquilino.solicitarID();
+								cod = InterfazVivienda.solicitarID();
 								
 								/* Realizar consulta con el ID */
-								rs = Inquilino.consultar(conex, id);
+								rs = Vivienda.consultar(conex, cod);
 								
 								/* Comprobar si existe algún campo con ese ID */
 								if (rs.next()) {
 									/* Guardar los datos de esa consulta en un objeto */
-									Inquilino inquiSinModificar = new Inquilino
-										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascota"));
+									Vivienda viviendaSinMod = new Vivienda
+										(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
 									
 									/* Solicitar los nuevos datos y guardarlos en otro objeto */
-									inquilino = InterfazInquilino.modificar(id);
+									vivienda = InterfazVivienda.modificar(cod);
 									
 									/* Modificar el objeto recibido con los datos solicitados */
-									inquilino.modificar(conex, inquiSinModificar);
+									vivienda.modificar(conex, viviendaSinMod);
 								}
 								
 								/* Si no existe se cancela la operación */
@@ -315,13 +316,13 @@ public class Main {
 
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								
-							// INQUILINO - ELIMINAR //
+							// VIVIENDA - ELIMINAR //
 							case 4:								
 								/* Solicitar ID a eliminar */
-								id = InterfazInquilino.solicitarID();
+								cod = InterfazVivienda.solicitarID();
 
 								// Llamada al método eliminar //
-								Inquilino.eliminar(conex, id);
+								Vivienda.eliminar(conex, cod);
 								
 								break;
 

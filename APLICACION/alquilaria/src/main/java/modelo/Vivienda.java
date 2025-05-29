@@ -13,15 +13,15 @@ public class Vivienda {
 	public Vivienda() {
 	}
 
-	public Vivienda(String cod, String direccion, String descripcion, int idPropietario, int tipo, int mascotas, float precio, float superficie) {
+	public Vivienda(String cod, int idPropietario, String direccion, float precio, float superficie, String descripcion, int mascotas, int tipo) {
 		this.cod = cod;
-		this.direccion = direccion;
-		this.descripcion = descripcion;
 		this.idPropietario = idPropietario;
-		this.tipo = tipo;
-		this.mascotas = mascotas;
+		this.direccion = direccion;
 		this.precio = precio;
 		this.superficie = superficie;
+		this.descripcion = descripcion;
+		this.mascotas = mascotas;
+		this.tipo = tipo;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
