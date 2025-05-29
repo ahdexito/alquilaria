@@ -6,7 +6,7 @@ public class Vivienda {
     
     // ATRIBUTOS //
 	private String cod, direccion, descripcion;
-	private int idPropietario, tipo, mascotas = -1;
+	private int idPropietario = -1, tipo, mascotas = -1;
 	private float precio = -1, superficie = -1;
 	
 	// CONSTRUCTORES //
@@ -34,7 +34,10 @@ public class Vivienda {
 			para que se recoja el error en campos con restricción NOTNULL */
 			cod = cod.isEmpty() ? null : cod;
 			direccion = direccion.isEmpty() ? null : direccion;
+			precio = (precio == -1) ? 0 : precio;
+			superficie = (superficie == -1) ? 0 : superficie;
 			descripcion = descripcion.isEmpty() ? null : descripcion;
+			mascotas = (mascotas == -1) ? 1 : mascotas;
 			
 			String query = "INSERT INTO vivienda(cod, id_propietario, direccion, precio, superficie, descripcion, mascotas, tipo) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -42,12 +45,13 @@ public class Vivienda {
 			PreparedStatement ps = conex.prepareStatement(query);
 
 			ps.setString(1, cod);
-			ps.setString(2, direccion);
-			ps.setFloat(3, precio);
-			ps.setFloat(4, superficie);
-			ps.setString(5, descripcion);
-			ps.setInt(6, mascotas);
-			ps.setInt(7, tipo);
+			ps.setInt(2, idPropietario);
+			ps.setString(3, direccion);
+			ps.setFloat(4, precio);
+			ps.setFloat(5, superficie);
+			ps.setString(6, descripcion);
+			ps.setInt(7, mascotas);
+			ps.setInt(8, tipo);
 
 			int filas = ps.executeUpdate();
 

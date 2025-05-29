@@ -47,7 +47,7 @@ public class InterfazInquilino {
 		int id = -1;
 		
 		// Solicitar ID del inquilino a buscar //
-		System.out.print("  - ID: ");		
+		System.out.print("  - ID INQUILINO: ");		
 
 		// Recoger error de entrada por valor no numérico //
 		if (sc.hasNextInt()) id = sc.nextInt();

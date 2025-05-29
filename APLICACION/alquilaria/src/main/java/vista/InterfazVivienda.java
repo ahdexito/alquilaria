@@ -10,17 +10,23 @@ public class InterfazVivienda {
     
     // OPCIÓN AÑADIR NUEVA VIVIENDA DADOS SUS DATOS //
 	public static Vivienda crear(Vivienda vivienda) {
-				
+		
+		int idPropietario;
+		
 		System.out.println("-------------- [ AÑADIR VIVIENDA ] ------------\n");
+		
+		System.out.print("  - CÓDIGO VIVIENDA -> (V000): "); 
+		vivienda.setCod(sc.nextLine());
 		
 		// Solicitar los datos de la nueva vivienda y guardarlos en variables //
 		System.out.print("  - ID PROPIETARIO: "); 
 		if (sc.hasNextInt()) {
-			vivienda.setIdPropietario(sc.nextInt()); //////// DEBE COMPROBAR SI EXISTE
+			vivienda.setIdPropietario(sc.nextInt());
 			sc.nextLine();
 		}
 			
-			
+		//////////// COMPROBAR SI EXISTE EL PROPIETARIO
+		
 		System.out.print("  - DIRECCIÓN: "); 
 		vivienda.setDireccion(sc.nextLine());
 
@@ -37,8 +43,8 @@ public class InterfazVivienda {
 		System.out.print("  - SUPERFICIE -> (0,0): "); 
 		String superficieString = sc.nextLine().replace(',', '.');
 		try {
-			float superficie = Float.parseFloat(precioString);
-			vivienda.setPrecio(superficie);
+			float superficie = Float.parseFloat(superficieString);
+			vivienda.setSuperficie(superficie);
 		}
 		catch (NumberFormatException e) {
 			System.out.println("\nERROR: VALOR INCORRECTO. SE ESTABLECERÁ EL VALOR POR DEFECTO -> 0\n");
@@ -58,23 +64,25 @@ public class InterfazVivienda {
 			+ "      2. Ático\n"
 			+ "      3. Casa\n"
 			+ "    OPCIÓN: "); 
-		if (sc.hasNextInt()) 
+		if (sc.hasNextInt()) {
 			vivienda.setTipo(sc.nextInt());
+			sc.nextLine();
+		}
 		
 		return vivienda;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// OPCIÓN CONSULTAR UN INQUILINO DADO SU ID //
+	// OPCIÓN CONSULTAR UNA VIVIENDA DADO SU CÓDIGO //
 	public static int solicitarID() {
 		
-		System.out.println("--------------- [ SOLICITUD DE ID ] --------------\n");
+		System.out.println("--------------- [ SOLICITUD DE CÓDIGO ] --------------\n");
 		
 		int id = -1;
 		
 		// Solicitar ID del inquilino a buscar //
-		System.out.print("  - ID: ");		
+		System.out.print("  - CÓDIGO VIVIENDA: ");		
 
 		// Recoger error de entrada por valor no numérico //
 		if (sc.hasNextInt()) id = sc.nextInt();

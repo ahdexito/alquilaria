@@ -42,7 +42,7 @@ public class InterfazPropietario {
 		int id = -1;
 		
 		// Solicitar ID del propietario a buscar //
-		System.out.print("  - ID: ");		
+		System.out.print("  - ID PROPIETARIO: ");		
 
 		// Recoger error de entrada por valor no numérico //
 		if (sc.hasNextInt()) id = sc.nextInt();
