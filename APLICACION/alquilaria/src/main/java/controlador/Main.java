@@ -38,7 +38,6 @@ public class Main {
 
 						/* Instancia de objeto propietario */
 						Propietario propietario = new Propietario();
-						int id;
 
 						// PROPIETARIO - MENÚ PRINCIPAL //
 						switch (subopcion) {
@@ -78,7 +77,6 @@ public class Main {
 
 						/* Instancia de objeto inquilino */
 						Inquilino inquilino = new Inquilino();
-						int id;
 
 						// INQUILINO - MENÚ PRINCIPAL //
 						switch (subopcion) {
@@ -118,7 +116,6 @@ public class Main {
 
 						/* Instancia de objeto vivienda */
 						Vivienda vivienda = new Vivienda();
-						String cod;
 
 						// VIVIENDA - MENÚ PRINCIPAL //
 						switch (subopcion) {

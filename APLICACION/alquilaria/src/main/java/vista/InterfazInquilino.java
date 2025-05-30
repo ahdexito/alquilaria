@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Scanner;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import modelo.*;
 
 public class InterfazInquilino {
@@ -14,21 +16,42 @@ public class InterfazInquilino {
 		Inquilino inquilino = new Inquilino();
 		inquilino.setId(id);
 
-		/* Solicitar el resto de datos si se desean aportar */
+		/* Solicitar los datos y guardarlos en sus atributos */
 		System.out.print("  - DNI: "); 
-		inquilino.setDni(sc.nextLine());
+		inquilino.setDni(sc.nextLine().toUpperCase());
 
+		
 		System.out.print("  - NOMBRE: "); 
-		inquilino.setNombre(sc.nextLine());
+		String nombre = sc.nextLine();
+		
+		/* Formatear entrada para tener letras capitales mayúscula y el resto minúscula */
+		if (!nombre.trim().isEmpty()) {
+			ArrayList<String> lista = new ArrayList<>(Arrays.asList(nombre.toLowerCase().trim().split("\\s+")));
+			lista.replaceAll(p -> p.substring(0,1).toUpperCase() + p.substring(1));
+			inquilino.setNombre(String.join(" ", lista));
+		}	
+		else inquilino.setNombre(nombre);
 
+		
 		System.out.print("  - APELLIDOS: "); 
-		inquilino.setApellidos(sc.nextLine());
+		String apellidos = sc.nextLine();
+		
+		/* Formatear entrada para tener letras capitales mayúscula y el resto minúscula */
+		if (!apellidos.trim().isEmpty()) {
+			ArrayList<String> lista = new ArrayList<>(Arrays.asList(apellidos.toLowerCase().trim().split("\\s+")));
+			lista.replaceAll(p -> p.substring(0,1).toUpperCase() + p.substring(1));
+			inquilino.setApellidos(String.join(" ", lista));
+		}	
+		else inquilino.setApellidos(apellidos);
 
+		
 		System.out.print("  - CORREO: "); 
-		inquilino.setCorreo(sc.nextLine());
+		inquilino.setCorreo(sc.nextLine().toLowerCase());
 
+		
 		System.out.print("  - TELÉFONO: "); 
 		inquilino.setTelefono(sc.nextLine());
+		
 		
 		System.out.print("  - MASCOTA(S) -> (S | N): ");
 		String mascotasString = sc.nextLine();
@@ -50,7 +73,7 @@ public class InterfazInquilino {
 			System.out.println(("-").repeat(170));
 
 			String mascotas = "NO";	
-			if (rs.getInt("mascota") == 1) mascotas = "SÍ";
+			if (rs.getInt("mascotas") == 1) mascotas = "SÍ";
 			
 			System.out.printf("%-10s %-20s %-40s %-40s %-30s %-10s",
 				"|  " + rs.getInt("id"),

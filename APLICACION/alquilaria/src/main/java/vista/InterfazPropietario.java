@@ -2,6 +2,8 @@ package vista;
 
 import java.util.Scanner;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import modelo.*;
 
 public class InterfazPropietario {
@@ -14,19 +16,39 @@ public class InterfazPropietario {
 		Propietario propietario  = new Propietario();
 		propietario.setId(id);
 		
-		// Solicitar los datos del nuevo propietario y guardarlos en sus atributos //
+		/* Solicitar los datos y guardarlos en sus atributos */
 		System.out.print("  - DNI: "); 
-		propietario.setDni(sc.nextLine());
-			
+		propietario.setDni(sc.nextLine().toUpperCase());
+		
+		
 		System.out.print("  - NOMBRE: "); 
-		propietario.setNombre(sc.nextLine());
-
+		String nombre = sc.nextLine();
+		
+		/* Formatear entrada para tener letras capitales mayúscula y el resto minúscula */
+		if (!nombre.trim().isEmpty()) {
+			ArrayList<String> lista = new ArrayList<>(Arrays.asList(nombre.toLowerCase().trim().split("\\s+")));
+			lista.replaceAll(p -> p.substring(0,1).toUpperCase() + p.substring(1));
+			propietario.setNombre(String.join(" ", lista));
+		}	
+		else propietario.setNombre(nombre);
+		
+		
 		System.out.print("  - APELLIDOS: "); 
-		propietario.setApellidos(sc.nextLine());
-
+		String apellidos = sc.nextLine();
+		
+		/* Formatear entrada para tener letras capitales mayúscula y el resto minúscula */
+		if (!apellidos.trim().isEmpty()) {
+			ArrayList<String> lista = new ArrayList<>(Arrays.asList(apellidos.toLowerCase().trim().split("\\s+")));
+			lista.replaceAll(p -> p.substring(0,1).toUpperCase() + p.substring(1));
+			propietario.setApellidos(String.join(" ", lista));
+		}	
+		else propietario.setApellidos(apellidos);
+		
+		
 		System.out.print("  - CORREO: "); 
-		propietario.setCorreo(sc.nextLine());
+		propietario.setCorreo(sc.nextLine().toLowerCase());
 
+		
 		System.out.print("  - TELÉFONO: "); 
 		propietario.setTelefono(sc.nextLine());
 		

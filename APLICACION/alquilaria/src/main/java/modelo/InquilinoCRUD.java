@@ -23,7 +23,7 @@ public class InquilinoCRUD {
 		telefono = telefono.isEmpty() ? "(VACÍO)" : telefono;
 		
 		try {			
-			String query = "INSERT INTO inquilino(dni, nombre, apellidos, correo, telefono, mascota) VALUES (?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO inquilino(dni, nombre, apellidos, correo, telefono, mascotas) VALUES (?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement ps = conex.prepareStatement(query);
 
@@ -80,7 +80,7 @@ public class InquilinoCRUD {
 		mascotas = (mascotas == -1) ? inquilinoSinMod.getMascotas() : mascotas;
 		
 		try {
-			String query = "UPDATE inquilino SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, mascota = ? WHERE id = ?";
+			String query = "UPDATE inquilino SET dni = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, mascotas = ? WHERE id = ?";
 			
 			PreparedStatement ps = conex.prepareStatement(query);
 			

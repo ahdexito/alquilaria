@@ -18,12 +18,18 @@ public class ViviendaCRUD {
 		
 		/* Asegurar que la variable que se envía sea NULL si no se insertó ningún valor 
 		para que se recoja el error en campos con restricción NOTNULL */
-		cod = cod.isEmpty() ? null : cod;
-		direccion = direccion.isEmpty() ? null : direccion;
-		precio = (precio == -1) ? 0 : precio;
-		superficie = (superficie == -1) ? 0 : superficie;
-		descripcion = descripcion.isEmpty() ? null : descripcion;
-		mascotas = (mascotas == -1) ? 1 : mascotas;
+		
+		try {
+			cod = cod.isEmpty() ? null : cod;
+			direccion = direccion.isEmpty() ? null : direccion;
+			precio = (precio == -1) ? 0 : precio;
+			superficie = (superficie == -1) ? 0 : superficie;
+			descripcion = descripcion.isEmpty() ? null : descripcion;
+			mascotas = (mascotas == -1) ? 1 : mascotas;
+		}
+		catch (NullPointerException e) {
+			System.out.print("ERROR: ALGUNO DE LOS CAMPOS NO ES CORRECTO");
+		}
 		
 		try {			
 			String query = "INSERT INTO vivienda(cod, id_propietario, direccion, precio, superficie, descripcion, mascotas, tipo) "
@@ -55,7 +61,7 @@ public class ViviendaCRUD {
 	// CONSULTAR UNA VIVIENDA //
 	public static ResultSet consultar(Connection conex, String cod) throws SQLException {
 		
-		String query = "SELECT * FROM vivienda WHERE cod = ?";
+		String query = "SELECT * FROM vivienda v JOIN tipo_vivienda t ON v.tipo = t.numero WHERE cod = ?";
 		
 		PreparedStatement ps = conex.prepareStatement(query);
 		

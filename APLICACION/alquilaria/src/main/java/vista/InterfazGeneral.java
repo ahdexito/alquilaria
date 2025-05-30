@@ -64,7 +64,7 @@ public class InterfazGeneral {
 				break;
 			case 3:
 				System.out.print("\n------------- [ MODIFICAR " + tabla + " ] -------------\n"
-				+ "     (Si no se desea modificar un campo, pulsar [ENTER])\n");
+				+ "** Si no se desea modificar un campo, pulsar [ENTER] **\n");
 				break;
 			case 4:
 				System.out.print("\n------------- [ ELIMINAR " + tabla + " ] -------------\n");

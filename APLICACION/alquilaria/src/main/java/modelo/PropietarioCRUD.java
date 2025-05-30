@@ -14,12 +14,12 @@ public class PropietarioCRUD {
 		String telefono = propietario.getTelefono();
 		
 		/* Asegurar que la variable que se envía sea NULL si no se insertó ningún valor 
-			para que se recoja el error en campos con restricción NOTNULL */
-			dni = dni.isEmpty() ? null : dni;
-			nombre = nombre.isEmpty() ? null : nombre;
-			apellidos = apellidos.isEmpty() ? null : apellidos;
-			correo = correo.isEmpty() ? null : correo;
-			telefono = telefono.isEmpty() ? null : telefono;
+		para que se recoja el error en campos con restricción NOTNULL */
+		dni = dni.isEmpty() ? null : dni;
+		nombre = nombre.isEmpty() ? null : nombre;
+		apellidos = apellidos.isEmpty() ? null : apellidos;
+		correo = correo.isEmpty() ? null : correo;
+		telefono = telefono.isEmpty() ? null : telefono;
 		
 		try {
 			String query = "INSERT INTO propietario(dni, nombre, apellidos, correo, telefono) VALUES (?, ?, ?, ?, ?)";
@@ -70,14 +70,14 @@ public class PropietarioCRUD {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MODIFICAR UN PROPIETARIO //
-	public static void modificar(Connection conex, Propietario propietarioSinMod) throws SQLException {
+	public static void modificar(Connection conex, Propietario propietarioSinMod, Propietario propietarioMod) throws SQLException {
 		
-		int id = propietarioSinMod.getId();
-		String dni = propietarioSinMod.getDni();
-		String nombre = propietarioSinMod.getNombre();
-		String apellidos = propietarioSinMod.getApellidos();
-		String correo = propietarioSinMod.getCorreo();
-		String telefono = propietarioSinMod.getTelefono();
+		int id = propietarioMod.getId();
+		String dni = propietarioMod.getDni();
+		String nombre = propietarioMod.getNombre();
+		String apellidos = propietarioMod.getApellidos();
+		String correo = propietarioMod.getCorreo();
+		String telefono = propietarioMod.getTelefono();
 		
 		/* Comprobar los campos vacíos. Si lo están se les asigna el valor previo */
 		dni = dni.trim().isEmpty() ? propietarioSinMod.getDni() : dni;

@@ -36,7 +36,7 @@ public class Menu {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void modificarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
+	public static void modificarPropietario(Connection conex, Propietario propietarioMod, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID a modificar */
 		int id = InterfazGeneral.solicitarID();
@@ -51,10 +51,10 @@ public class Menu {
 				(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"));
 
 			/* Solicitar los nuevos datos y guardarlos en otro objeto */
-			propietario = InterfazPropietario.solicitarDatos(id);
+			propietarioMod = InterfazPropietario.solicitarDatos(id);
 
 			/* Modificar el objeto recibido con los datos solicitados */			
-			PropietarioCRUD.modificar(conex, propietarioSinMod);
+			PropietarioCRUD.modificar(conex, propietarioSinMod, propietarioMod);
 		}
 
 		/* Si no existe se cancela la operación */
@@ -72,14 +72,13 @@ public class Menu {
 		PropietarioCRUD.eliminar(conex, id);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	
 	public static void crearInquilino(Connection conex, Inquilino inquilino) throws SQLException {
 		
 		/* Solicitar datos para crear inquilino */
-		InterfazInquilino.solicitarDatos(0);
+		inquilino = InterfazInquilino.solicitarDatos(0);
 
 		/* Enviar inquilino a la base de datos */
 		InquilinoCRUD.crear(conex, inquilino);
@@ -135,18 +134,17 @@ public class Menu {
 		/* Solicitar ID a eliminar */
 		int id = InterfazGeneral.solicitarID();
 
-		// Llamada al método eliminar //
+		/* Llamada al método eliminar */
 		InquilinoCRUD.eliminar(conex, id);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	
 	public static void crearVivienda(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		/* Solicitar datos para crear vivienda */
-		InterfazVivienda.solicitarDatos(conex, vivienda);
+		vivienda = InterfazVivienda.solicitarDatos(conex, vivienda);
 
 		/* Enviar vivienda a la base de datos */
 		ViviendaCRUD.crear(conex, vivienda);
@@ -174,41 +172,40 @@ public class Menu {
 		
 		/* Solicitar ID a modificar */
 		String cod = InterfazVivienda.solicitarCod();
-
-		/* Realizar consulta con el ID */
+		
+		/* Realizar consulta con el COD */
 		rs = ViviendaCRUD.consultar(conex, cod);
 
-		/* Comprobar si existe algún campo con ese ID */
+		/* Comprobar si existe algún campo con ese COD */
 		if (rs.next()) {
 			/* Guardar los datos de esa consulta en un objeto */
 			Vivienda viviendaSinMod = new Vivienda
 				(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
-
+			
 			/* Solicitar los nuevos datos y guardarlos en otro objeto */
-			viviendaMod = InterfazVivienda.modificar(cod);
+			InterfazVivienda.solicitarDatosMod(conex, viviendaMod);
 
 			/* Modificar el objeto recibido con los datos solicitados */
 			ViviendaCRUD.modificar(conex, viviendaSinMod, viviendaMod);
 		}
 
 		/* Si no existe se cancela la operación */
-		else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+		else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE CÓDIGO **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void eliminarVivienda(Connection conex, Vivienda vivienda) {
+	public static void eliminarVivienda(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		/* Solicitar ID a eliminar */
 		String cod = InterfazVivienda.solicitarCod();
 
 		// Llamada al método eliminar //
-		Vivienda.eliminar(conex, cod);
+		ViviendaCRUD.eliminar(conex, cod);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	
 	public static void crearContrato(Connection conex, Contrato contrato) {
 		
