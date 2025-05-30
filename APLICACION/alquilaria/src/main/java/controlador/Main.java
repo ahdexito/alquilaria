@@ -262,7 +262,7 @@ public class Main {
 							// VIVIENDA - CREAR //
 							case 1:
 								/* Solicitar datos para crear vivienda */
-								InterfazVivienda.crear(vivienda);
+								InterfazVivienda.crear(conex, vivienda);
 
 								/* Enviar vivienda a la base de datos */
 								vivienda.crear(conex);
