@@ -1,6 +1,6 @@
 package controlador;
 
-import database.*;
+import modelo.Database;
 import modelo.*;
 import vista.*;
 import java.util.Scanner;
@@ -94,10 +94,10 @@ public class Main {
 								Menu.crearInquilino(conex, inquilino);
 								break;
 							case 2:									
-								Menu.consultarInquilino(conex, inquilino);
+								Menu.consultarInquilino(conex, inquilino,rs);
 								break;
 							case 3:
-								Menu.modificarInquilino(conex, inquilino);
+								Menu.modificarInquilino(conex, inquilino, rs);
 								break;								
 							case 4:
 								Menu.eliminarInquilino(conex, inquilino);
@@ -142,10 +142,10 @@ public class Main {
 								Menu.crearVivienda(conex, vivienda);
 								break;
 							case 2:									
-								Menu.consultarVivienda(conex, vivienda);
+								Menu.consultarVivienda(conex, vivienda, rs);
 								break;
 							case 3:
-								Menu.modificarVivienda(conex, vivienda);
+								Menu.modificarVivienda(conex, vivienda, rs);
 								break;
 							case 4:								
 								Menu.eliminarVivienda(conex, vivienda);

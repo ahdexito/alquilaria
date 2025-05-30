@@ -8,15 +8,16 @@ public class InterfazInquilino {
 	
 	private static Scanner sc = new Scanner(System.in);
     
-    // OPCIÓN AÑADIR NUEVO INQUILINO DADOS SUS DATOS //
-	public static Inquilino crear(Inquilino inquilino) {
-				
-		System.out.println("-------------- [ AÑADIR INQUILINO ] ------------\n");
+    // SOLICITAR DATOS DE INQUILINO PARA AÑADIR O MODIFICAR //
+	public static Inquilino solicitarDatos(int id) {
 		
-		// Solicitar los datos del nuevo inquilino y guardarlos en variables //
+		Inquilino inquilino = new Inquilino();
+		inquilino.setId(id);
+
+		/* Solicitar el resto de datos si se desean aportar */
 		System.out.print("  - DNI: "); 
 		inquilino.setDni(sc.nextLine());
-			
+
 		System.out.print("  - NOMBRE: "); 
 		inquilino.setNombre(sc.nextLine());
 
@@ -35,27 +36,7 @@ public class InterfazInquilino {
 		if (mascotasString.trim().toUpperCase().equals("N")) inquilino.setMascotas(0);
 		
 		return inquilino;
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// OPCIÓN CONSULTAR UN INQUILINO DADO SU ID //
-	public static int solicitarID() {
-		
-		System.out.println("--------------- [ SOLICITUD DE ID ] --------------\n");
-		
-		int id = -1;
-		
-		// Solicitar ID del inquilino a buscar //
-		System.out.print("  - ID INQUILINO: ");		
-
-		// Recoger error de entrada por valor no numérico //
-		if (sc.hasNextInt()) id = sc.nextInt();
-		
-		sc.nextLine();
-		
-		return id;
-	}
+	}	
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -83,41 +64,5 @@ public class InterfazInquilino {
 		}
 		
 		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// OPCIÓN MODIFICAR LOS DATOS DE UN INQUILINO DADO SU ID //
-	public static Inquilino modificar(int id) throws SQLException {
-		
-		Inquilino inquilino = new Inquilino();
-		inquilino.setId(id);
-		
-		System.out.println(""
-			+ "---------- [ MODIFICAR DATOS DE INQUILINO ] ----------\n"
-			+ "(Si no se desea modificar un campo, pulsar [ENTER])\n");
-
-		/* Solicitar el resto de datos si se desean aportar */
-		System.out.print("  - DNI: "); 
-		inquilino.setDni(sc.nextLine());
-
-		System.out.print("  - NOMBRE: "); 
-		inquilino.setNombre(sc.nextLine());
-
-		System.out.print("  - APELLIDOS: "); 
-		inquilino.setApellidos(sc.nextLine());
-
-		System.out.print("  - CORREO: "); 
-		inquilino.setCorreo(sc.nextLine());
-
-		System.out.print("  - TELÉFONO: "); 
-		inquilino.setTelefono(sc.nextLine());
-		
-		System.out.print("  - MASCOTA(S) -> (S | N): ");
-		String mascotasString = sc.nextLine();
-		if (mascotasString.trim().toUpperCase().equals("S")) inquilino.setMascotas(1);
-		if (mascotasString.trim().toUpperCase().equals("N")) inquilino.setMascotas(0);
-		
-		return inquilino;
-	}
+	}	
 }

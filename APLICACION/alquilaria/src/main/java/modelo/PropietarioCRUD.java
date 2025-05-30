@@ -1,4 +1,4 @@
-package database;
+package modelo;
 
 import modelo.Propietario;
 import java.sql.*;

@@ -1,4 +1,4 @@
-package database;
+package modelo;
 
 import modelo.Inquilino;
 import java.sql.*;
@@ -6,7 +6,7 @@ import java.sql.*;
 public class InquilinoCRUD {
     
     // CREAR UN INQUILINO //
-    public void crear(Connection conex, Inquilino inquilino) throws SQLException {
+    public static void crear(Connection conex, Inquilino inquilino) throws SQLException {
 		
 		String dni = inquilino.getDni();
 		String nombre = inquilino.getNombre();
@@ -62,7 +62,7 @@ public class InquilinoCRUD {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MODIFICAR UN INQUILINO //
-	public void modificar(Connection conex, Inquilino inquilinoMod, Inquilino inquilinoSinMod)throws SQLException {
+	public static void modificar(Connection conex, Inquilino inquilinoSinMod, Inquilino inquilinoMod)throws SQLException {
 		
 		int id = inquilinoMod.getId();
 		String dni = inquilinoMod.getDni();

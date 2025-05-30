@@ -1,5 +1,6 @@
 package vista;
 
+import modelo.PropietarioCRUD;
 import java.util.Scanner;
 import java.sql.*;
 import modelo.*;
@@ -12,9 +13,7 @@ public class InterfazVivienda {
 	public static Vivienda crear(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		int idPropietario = -1;
-		
-		System.out.println("-------------- [ AÑADIR VIVIENDA ] ------------\n");
-		
+				
 		System.out.print("  - CÓDIGO VIVIENDA -> (V000): "); 
 		vivienda.setCod(sc.nextLine());
 		
@@ -26,7 +25,7 @@ public class InterfazVivienda {
 		}
 			
 		/* Comprobar si existe el propietario */
-		if (Propietario.consultar(conex, idPropietario).next()) {
+		if (PropietarioCRUD.consultar(conex, idPropietario).next()) {
 			
 		}
 		else System.out.println("ERROR: EL ID INTRODUCIDO NO EXISTE");
@@ -78,26 +77,21 @@ public class InterfazVivienda {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// OPCIÓN CONSULTAR UNA VIVIENDA DADO SU CÓDIGO //
-	public static int solicitarID() {
+	public static String solicitarCod() {
 		
 		System.out.println("--------------- [ SOLICITUD DE CÓDIGO ] --------------\n");
-		
-		int id = -1;
 		
 		// Solicitar ID del inquilino a buscar //
 		System.out.print("  - CÓDIGO VIVIENDA: ");		
 
-		// Recoger error de entrada por valor no numérico //
-		if (sc.hasNextInt()) id = sc.nextInt();
+		String cod = sc.nextLine();
 		
-		sc.nextLine();
-		
-		return id;
+		return cod;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE INQUILINO CON FORMATO TIPO TABLA //
+	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE VIVIENDA CON FORMATO TIPO TABLA //
 	public static void imprimir(ResultSet rs) throws SQLException {
 		
 		if (rs.next()) {
@@ -125,11 +119,11 @@ public class InterfazVivienda {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// OPCIÓN MODIFICAR LOS DATOS DE UN INQUILINO DADO SU ID //
-	public static Inquilino modificar(int id) throws SQLException {
+	// OPCIÓN MODIFICAR LOS DATOS DE UNA VIVIENDA DADO SU CÓDIGO //
+	public static Inquilino modificar(String cod) throws SQLException {
 		
 		Inquilino inquilino = new Inquilino();
-		inquilino.setId(id);
+		inquilino.setId(cod);
 		
 		System.out.println(""
 			+ "---------- [ MODIFICAR DATOS DE INQUILINO ] ----------\n"
