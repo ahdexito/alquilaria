@@ -1,7 +1,5 @@
 package modelo;
 
-import java.sql.*;
-
 public class Vivienda {
     
     // ATRIBUTOS //

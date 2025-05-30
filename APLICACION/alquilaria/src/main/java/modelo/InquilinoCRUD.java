@@ -1,6 +1,5 @@
 package modelo;
 
-import modelo.Inquilino;
 import java.sql.*;
 
 public class InquilinoCRUD {

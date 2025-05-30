@@ -1,6 +1,5 @@
 package modelo;
 
-import modelo.Propietario;
 import java.sql.*;
 
 public class PropietarioCRUD {

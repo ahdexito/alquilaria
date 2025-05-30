@@ -146,7 +146,7 @@ public class Menu {
 	public static void crearVivienda(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		/* Solicitar datos para crear vivienda */
-		InterfazVivienda.crear(conex, vivienda);
+		InterfazVivienda.solicitarDatos(conex, vivienda);
 
 		/* Enviar vivienda a la base de datos */
 		ViviendaCRUD.crear(conex, vivienda);

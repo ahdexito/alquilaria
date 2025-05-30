@@ -42,27 +42,19 @@ public class Main {
 
 						// PROPIETARIO - MENÚ PRINCIPAL //
 						switch (subopcion) {
-							case 1:
-								Menu.crearPropietario(conex, propietario);
-								break;
-							case 2:
-								Menu.consultarPropietario(conex, propietario, rs);
-								break;
-							case 3:
-								Menu.modificarPropietario(conex, propietario, rs);
-								break;								
-							case 4:
-								Menu.eliminarPropietario(conex, propietario);
-								break;
-							case 0:
+							case 1 -> Menu.crearPropietario(conex, propietario);
+							case 2 -> Menu.consultarPropietario(conex, propietario, rs);
+							case 3 -> Menu.modificarPropietario(conex, propietario, rs);
+							case 4 -> Menu.eliminarPropietario(conex, propietario);
+							case 0 -> {
 								System.out.println("  ** REGRESANDO... **");
 								Thread.sleep(700);
-								break;
-							default:
+					}
+							default -> {
 								/* Recibir error de entrada por opción diferente del 0 al 4 */
 								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 								Thread.sleep(700);
-								break;
+					}
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -90,27 +82,19 @@ public class Main {
 
 						// INQUILINO - MENÚ PRINCIPAL //
 						switch (subopcion) {
-							case 1:
-								Menu.crearInquilino(conex, inquilino);
-								break;
-							case 2:									
-								Menu.consultarInquilino(conex, inquilino,rs);
-								break;
-							case 3:
-								Menu.modificarInquilino(conex, inquilino, rs);
-								break;								
-							case 4:
-								Menu.eliminarInquilino(conex, inquilino);
-								break;
-							case 0:
+							case 1 -> Menu.crearInquilino(conex, inquilino);
+							case 2 -> Menu.consultarInquilino(conex, inquilino,rs);
+							case 3 -> Menu.modificarInquilino(conex, inquilino, rs);
+							case 4 -> Menu.eliminarInquilino(conex, inquilino);
+							case 0 -> {
 								System.out.println("  ** REGRESANDO... **");
 								Thread.sleep(700);
-								break;
-							default:
+					}
+							default -> {
 								/* Recibir error de entrada por opción diferente del 0 al 4 */
 								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 								Thread.sleep(700);
-								break;
+					}
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -138,27 +122,19 @@ public class Main {
 
 						// VIVIENDA - MENÚ PRINCIPAL //
 						switch (subopcion) {
-							case 1:
-								Menu.crearVivienda(conex, vivienda);
-								break;
-							case 2:									
-								Menu.consultarVivienda(conex, vivienda, rs);
-								break;
-							case 3:
-								Menu.modificarVivienda(conex, vivienda, rs);
-								break;
-							case 4:								
-								Menu.eliminarVivienda(conex, vivienda);
-								break;
-							case 0:
+							case 1 -> Menu.crearVivienda(conex, vivienda);
+							case 2 -> Menu.consultarVivienda(conex, vivienda, rs);
+							case 3 -> Menu.modificarVivienda(conex, vivienda, rs);
+							case 4 -> Menu.eliminarVivienda(conex, vivienda);
+							case 0 -> {
 								System.out.println("  ** REGRESANDO... **");
 								Thread.sleep(700);
-								break;
-							default:
+					}
+							default -> {
 								/* Recibir error de entrada por opción diferente del 0 al 4 */
 								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
 								Thread.sleep(700);
-								break;
+					}
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {

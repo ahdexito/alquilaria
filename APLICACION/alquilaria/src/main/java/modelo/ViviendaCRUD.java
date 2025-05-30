@@ -1,6 +1,5 @@
 package modelo;
 
-import modelo.Vivienda;
 import java.sql.*;
 
 public class ViviendaCRUD {

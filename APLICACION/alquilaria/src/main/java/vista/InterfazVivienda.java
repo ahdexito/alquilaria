@@ -10,7 +10,7 @@ public class InterfazVivienda {
 	private static Scanner sc = new Scanner(System.in);
     
     // OPCIÓN AÑADIR NUEVA VIVIENDA DADOS SUS DATOS //
-	public static Vivienda crear(Connection conex, Vivienda vivienda) throws SQLException {
+	public static Vivienda solicitarDatos(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		int idPropietario = -1;
 				
@@ -26,7 +26,7 @@ public class InterfazVivienda {
 			
 		/* Comprobar si existe el propietario */
 		if (PropietarioCRUD.consultar(conex, idPropietario).next()) {
-			
+			System.out.println("EL USUARIO EXISTE");
 		}
 		else System.out.println("ERROR: EL ID INTRODUCIDO NO EXISTE");
 			
@@ -115,41 +115,5 @@ public class InterfazVivienda {
 		}
 		
 		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// OPCIÓN MODIFICAR LOS DATOS DE UNA VIVIENDA DADO SU CÓDIGO //
-	public static Inquilino modificar(String cod) throws SQLException {
-		
-		Inquilino inquilino = new Inquilino();
-		inquilino.setId(cod);
-		
-		System.out.println(""
-			+ "---------- [ MODIFICAR DATOS DE INQUILINO ] ----------\n"
-			+ "(Si no se desea modificar un campo, pulsar [ENTER])\n");
-
-		/* Solicitar el resto de datos si se desean aportar */
-		System.out.print("  - DNI: "); 
-		inquilino.setDni(sc.nextLine());
-
-		System.out.print("  - NOMBRE: "); 
-		inquilino.setNombre(sc.nextLine());
-
-		System.out.print("  - APELLIDOS: "); 
-		inquilino.setApellidos(sc.nextLine());
-
-		System.out.print("  - CORREO: "); 
-		inquilino.setCorreo(sc.nextLine());
-
-		System.out.print("  - TELÉFONO: "); 
-		inquilino.setTelefono(sc.nextLine());
-		
-		System.out.print("  - MASCOTA(S) -> (S | N): ");
-		String mascotasString = sc.nextLine();
-		if (mascotasString.trim().toUpperCase().equals("S")) inquilino.setMascotas(1);
-		if (mascotasString.trim().toUpperCase().equals("N")) inquilino.setMascotas(0);
-		
-		return inquilino;
 	}
 }
