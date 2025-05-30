@@ -141,7 +141,7 @@ public class InterfazVivienda {
 		vivienda.setCod(sc.nextLine().toUpperCase());
 		
 		/* Solicitar los datos de la vivienda y guardarlos en variables */
-		System.out.print("  - ID PROPIETARIO: "); 
+		System.out.print("  - ID PROPIETARIO: "); SEGUIR AQUI
 		if (sc.hasNextInt()) {
 			idPropietario = sc.nextInt();
 			sc.nextLine();
