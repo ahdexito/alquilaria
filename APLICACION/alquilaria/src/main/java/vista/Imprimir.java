@@ -34,6 +34,8 @@ public class Imprimir {
 	// IMPRIMIR EL SUBMENÚ DE CADA TABLA //
 	public static int submenu(String tabla) {
 		
+		int entrada = -1;
+		
 		String opcion5 = "";
 		if (tabla.equals("CONTRATO")) opcion5 = "  5. CAMBIAR ESTADO\n";
 		
@@ -50,10 +52,40 @@ public class Imprimir {
 			+ "INTRODUCE OPCIÓN: ");
 		
 		// Recoger error de entrada por valor no numérico //
-		if (sc.hasNextInt()) return sc.nextInt();
+		if (sc.hasNextInt()) entrada = sc.nextInt();
+		sc.nextLine();
+		
+		switch (entrada) {
+			case 1:
+				System.out.print("\n------------- [ CREAR " + tabla + " ] -------------\n");
+				break;
+			case 2:
+				System.out.print("\n------------- [ CONSULTAR " + tabla + " ] -------------\n");
+				break;
+			case 3:
+				System.out.print("\n------------- [ MODIFICAR " + tabla + " ] -------------\n"
+				+ "     (Si no se desea modificar un campo, pulsar [ENTER])\n");
+				break;
+			case 4:
+				System.out.print("\n------------- [ ELIMINAR " + tabla + " ] -------------\n");
+				break;
+		}
+		return entrada;
+	}
+	
+	// OPCIÓN SOLICITAR ID DE PROPIETARIO O INQUILINO PARA CONSULTAR O ELIMINAR //
+	public static int solicitarID() {
+				
+		int id = -1;
+		
+		// Solicitar ID del sujeto a buscar //
+		System.out.print("  - ID PROPIETARIO: ");		
+
+		// Recoger error de entrada por valor no numérico //
+		if (sc.hasNextInt()) id = sc.nextInt();
 		
 		sc.nextLine();
 		
-		return -1;
+		return id;
 	}
 }

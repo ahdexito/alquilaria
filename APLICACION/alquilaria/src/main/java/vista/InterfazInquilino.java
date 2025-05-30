@@ -67,13 +67,7 @@ public class InterfazInquilino {
 			System.out.printf("%-10s %-20s %-40s %-40s %-30s %-10s\n", 
 				"|  ID", "|  DNI", "|  NOMBRE", "|  CORREO", "|  TELÉFONO", "|  MASCOTAS");
 			System.out.println(("-").repeat(170));
-			
-			/*
-			// SI LOS CAMPOS SON NULOS, SE IMPRIMEN COMO CADENAS VACÍAS Y NO COMO 'NULL' //
-			String telefono = rs.getString("telefono");
-			telefono = telefono != null ? telefono : "";
-			*/
-			
+
 			String mascotas = "NO";	
 			if (rs.getInt("mascota") == 1) mascotas = "SÍ";
 			

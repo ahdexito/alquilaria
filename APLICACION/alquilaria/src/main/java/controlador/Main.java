@@ -45,11 +45,7 @@ public class Main {
 
 							// PROPIETARIO - CREAR //
 							case 1:
-								/* Solicitar datos para crear propietario */
-								InterfazPropietario.crear(propietario);
-
-								/* Enviar propietario a la base de datos */
-								propietario.crear(conex);
+								
 
 								break;
 
@@ -58,7 +54,7 @@ public class Main {
 							// PROPIETARIO - CONSULTAR //
 							case 2:									
 								/* Solicitar ID a buscar */
-								id = InterfazPropietario.solicitarID();
+								id = Imprimir.solicitarID();
 
 								System.out.println("");
 
@@ -75,7 +71,7 @@ public class Main {
 							// PROPIETARIO - MODIFICAR //
 							case 3:
 								/* Solicitar ID a modificar */
-								id = InterfazPropietario.solicitarID();
+								id = Imprimir.solicitarID();
 								
 								/* Realizar consulta con el ID */
 								rs = Propietario.consultar(conex, id);
@@ -87,7 +83,7 @@ public class Main {
 										(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"));
 									
 									/* Solicitar los nuevos datos y guardarlos en otro objeto */
-									propietario = InterfazPropietario.modificar(id);
+									propietario = InterfazPropietario.solicitarDatos(id);
 									
 									/* Modificar el objeto recibido con los datos solicitados */
 									propietario.modificar(conex, propietarioSinMod);
@@ -103,7 +99,7 @@ public class Main {
 							// PROPIETARIO - ELIMINAR //
 							case 4:								
 								/* Solicitar ID a eliminar */
-								id = InterfazPropietario.solicitarID();
+								id = Imprimir.solicitarID();
 
 								// Llamada al método eliminar //
 								Propietario.eliminar(conex, id);
@@ -248,7 +244,7 @@ public class Main {
 				// OPCIÓN VIVIENDA //
 				case 3:
 					do {
-						/* Imprimir menú mantenimiento de viivenda y solicitar opción menú */
+						/* Imprimir menú mantenimiento de vivienda y solicitar opción menú */
 						subopcion = Imprimir.submenu("VIVIENDA");
 						System.out.println("");
 
