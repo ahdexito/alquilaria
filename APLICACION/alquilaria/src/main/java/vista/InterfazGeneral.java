@@ -2,7 +2,7 @@ package vista;
 
 import java.util.Scanner;
 
-public class Imprimir {
+public class InterfazGeneral {
 	
 	private static Scanner sc = new Scanner(System.in);			
 			

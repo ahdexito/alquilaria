@@ -6,7 +6,7 @@ import java.sql.*;
 public class PropietarioCRUD {
 	
     // CREAR UN PROPIETARIO //
-    public void crear(Connection conex, Propietario propietario) throws SQLException {
+    public static void crear(Connection conex, Propietario propietario) throws SQLException {
 		
 		String dni = propietario.getDni();
 		String nombre = propietario.getNombre();
@@ -58,7 +58,7 @@ public class PropietarioCRUD {
 	}
 	
 	// COMPROBAR SI EXISTE //
-	public boolean existe(Connection conex, Propietario propietario) throws SQLException {
+	public static boolean existe(Connection conex, Propietario propietario) throws SQLException {
 		boolean existe = false;
 		
 		int id = propietario.getId();
@@ -71,7 +71,7 @@ public class PropietarioCRUD {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MODIFICAR UN PROPIETARIO //
-	public void modificar(Connection conex, Propietario propietarioSinMod) throws SQLException {
+	public static void modificar(Connection conex, Propietario propietarioSinMod) throws SQLException {
 		
 		int id = propietarioSinMod.getId();
 		String dni = propietarioSinMod.getDni();
