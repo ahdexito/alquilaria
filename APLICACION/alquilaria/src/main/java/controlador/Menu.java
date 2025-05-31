@@ -170,7 +170,7 @@ public class Menu {
 	
 	public static void modificarVivienda(Connection conex, Vivienda viviendaMod, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a modificar */
+		/* Solicitar COD a modificar */
 		String cod = InterfazVivienda.solicitarCod();
 		
 		/* Realizar consulta con el COD */

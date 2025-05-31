@@ -25,7 +25,7 @@ public class Main {
 
 			/* Imprimir menú principal y solicitar opción menú */
 			opcion = InterfazGeneral.menuPrincipal();
-
+			
 			// MENÚ PRINCIPAL //
 			switch (opcion) {
 
@@ -48,12 +48,7 @@ public class Main {
 							case 0 -> {
 								System.out.println("  ** REGRESANDO... **");
 								Thread.sleep(700);
-					}
-							default -> {
-								/* Recibir error de entrada por opción diferente del 0 al 4 */
-								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-								Thread.sleep(700);
-					}
+							}
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -87,12 +82,7 @@ public class Main {
 							case 0 -> {
 								System.out.println("  ** REGRESANDO... **");
 								Thread.sleep(700);
-					}
-							default -> {
-								/* Recibir error de entrada por opción diferente del 0 al 4 */
-								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-								Thread.sleep(700);
-					}
+							}
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -126,12 +116,7 @@ public class Main {
 							case 0 -> {
 								System.out.println("  ** REGRESANDO... **");
 								Thread.sleep(700);
-					}
-							default -> {
-								/* Recibir error de entrada por opción diferente del 0 al 4 */
-								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-								Thread.sleep(700);
-					}
+							}
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -165,11 +150,6 @@ public class Main {
 								System.out.println("  ** REGRESANDO... **");
 								Thread.sleep(700);
 								break;
-							default:
-								// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-								System.out.println("ERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-								Thread.sleep(700);
-								break;
 						}
 					}
 					while (subopcion != 0);
@@ -186,12 +166,6 @@ public class Main {
 					db.cerrarConex();
 					sc.close();
 					break;
-					
-				default:
-					// RECIBIR ERROR DE ENTRADA POR OPCIÓN DIFERENTE DEL 0 AL 4 //
-					System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-					Thread.sleep(700);
-					break;
 			}
 
 			// CERRAR EL RESULTSET SI SE HA USADO //
@@ -200,6 +174,5 @@ public class Main {
 				rs.close();
 			}
 		} while (opcion != 0);
-		
     }	
 }

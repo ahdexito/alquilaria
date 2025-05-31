@@ -141,10 +141,17 @@ public class InterfazVivienda {
 		vivienda.setCod(sc.nextLine().toUpperCase());
 		
 		/* Solicitar los datos de la vivienda y guardarlos en variables */
-		System.out.print("  - ID PROPIETARIO: "); SEGUIR AQUI
-		if (sc.hasNextInt()) {
-			idPropietario = sc.nextInt();
-			sc.nextLine();
+		System.out.print("  - ID PROPIETARIO: ");
+		String idString = sc.nextLine();
+		if (!idString.isBlank()) {
+			try {
+				idPropietario = Integer.parseInt(idString);
+				System.out.println("es número");
+				
+			}
+			catch (NumberFormatException e) {
+				System.out.println("no es número");
+			}
 		}
 		
 		/* Comprobar si existe el propietario */
