@@ -142,7 +142,23 @@ public class Main {
 
 
 						switch (subopcion) {
-							case 1: case 2: case 3: case 4:
+							case 1: 
+								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
+								Thread.sleep(700);
+								break;
+							case 2: 
+								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
+								Thread.sleep(700);
+								break;
+							case 3: 
+								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
+								Thread.sleep(700);
+								break;
+							case 4:
+								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
+								Thread.sleep(700);
+								break;
+							case 5:
 								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
 								Thread.sleep(700);
 								break;

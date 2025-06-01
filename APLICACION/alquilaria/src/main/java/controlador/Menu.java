@@ -114,7 +114,7 @@ public class Menu {
 		if (rs.next()) {
 			/* Guardar los datos de esa consulta en un objeto */
 			Inquilino inquilinoSinMod = new Inquilino
-				(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascota"));
+				(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascotas"));
 
 			/* Solicitar los nuevos datos y guardarlos en otro objeto */
 			inquilinoMod = InterfazInquilino.solicitarDatos(id);

@@ -66,12 +66,15 @@ public class InterfazPropietario {
 				"|  ID", "|  DNI", "|  NOMBRE", "|  CORREO", "|  TELÉFONO");
 			System.out.println(("-").repeat(150));
 			
+			String telefono = rs.getString("telefono");
+			if (telefono == null) telefono = "(VACÍO)";
+			
 			System.out.printf("%-10s %-20s %-40s %-40s %-20s",
 				"|  " + rs.getInt("id"),
 				"|  " + rs.getString("DNI"),
 				"|  " + rs.getString("apellidos") + ", " + rs.getString("nombre"),
 				"|  " + rs.getString("correo"),
-				"|  " + rs.getString("telefono"));
+				"|  " + telefono);
 			
 			System.out.println("\n" + ("-").repeat(150));
 		}

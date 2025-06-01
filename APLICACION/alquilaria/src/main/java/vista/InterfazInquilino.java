@@ -75,12 +75,15 @@ public class InterfazInquilino {
 			String mascotas = "NO";	
 			if (rs.getInt("mascotas") == 1) mascotas = "SÍ";
 			
+			String telefono = rs.getString("telefono");
+			if (telefono == null) telefono = "(VACÍO)";
+			
 			System.out.printf("%-10s %-20s %-40s %-40s %-30s %-10s",
 				"|  " + rs.getInt("id"),
 				"|  " + rs.getString("DNI"),
 				"|  " + rs.getString("apellidos") + ", " + rs.getString("nombre"),
 				"|  " + rs.getString("correo"),
-				"|  " + rs.getString("telefono"),
+				"|  " + telefono,
 				"|  " + mascotas);
 			
 			System.out.println("\n" + ("-").repeat(170));

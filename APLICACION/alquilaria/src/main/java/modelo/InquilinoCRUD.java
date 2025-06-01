@@ -20,7 +20,8 @@ public class InquilinoCRUD {
 		nombre = nombre.isEmpty() ? null : nombre;
 		apellidos = apellidos.isEmpty() ? null : apellidos;
 		correo = correo.isEmpty() ? null : correo;
-		telefono = telefono.isEmpty() ? "(VACÍO)" : telefono;
+		telefono = telefono.isEmpty() ? null : telefono;
+		mascotas = (mascotas == -1) ? 0 : mascotas;
 		
 		try {			
 			String query = "INSERT INTO inquilino(dni, nombre, apellidos, correo, telefono, mascotas) VALUES (?, ?, ?, ?, ?, ?)";
