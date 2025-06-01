@@ -56,17 +56,6 @@ public class PropietarioCRUD {
 		return ps.executeQuery();
 	}
 	
-	// COMPROBAR SI EXISTE //
-	public static boolean existe(Connection conex, Propietario propietario) throws SQLException {
-		boolean existe = false;
-		
-		int id = propietario.getId();
-		
-		if (consultar(conex, id).next()) existe = true;
-		
-		return existe;
-	}
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MODIFICAR UN PROPIETARIO //

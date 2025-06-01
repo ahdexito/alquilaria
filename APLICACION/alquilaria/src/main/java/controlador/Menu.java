@@ -58,7 +58,7 @@ public class Menu {
 		}
 
 		/* Si no existe se cancela la operación */
-		else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ public class Menu {
 		}
 
 		/* Si no existe se cancela la operación */
-		else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");						
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");						
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +168,7 @@ public class Menu {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void modificarVivienda(Connection conex, Vivienda viviendaMod, ResultSet rs) throws SQLException {
+	public static void modificarVivienda(Connection conex, Vivienda vivienda, ResultSet rs) throws SQLException {
 		
 		/* Solicitar COD a modificar */
 		String cod = InterfazVivienda.solicitarCod();
@@ -179,18 +179,18 @@ public class Menu {
 		/* Comprobar si existe algún campo con ese COD */
 		if (rs.next()) {
 			/* Guardar los datos de esa consulta en un objeto */
-			Vivienda viviendaSinMod = new Vivienda
+			vivienda = new Vivienda
 				(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
 			
-			/* Solicitar los nuevos datos y guardarlos en otro objeto */
-			InterfazVivienda.solicitarDatosMod(conex, viviendaMod);
+			/* Solicitar los nuevos datos y guardarlos */
+			vivienda = InterfazVivienda.solicitarDatosMod(conex, vivienda);
 
 			/* Modificar el objeto recibido con los datos solicitados */
-			ViviendaCRUD.modificar(conex, viviendaSinMod, viviendaMod);
+			ViviendaCRUD.modificar(conex, vivienda, cod);
 		}
 
 		/* Si no existe se cancela la operación */
-		else System.out.println("\n  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE CÓDIGO **");
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE CÓDIGO **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -73,40 +73,22 @@ public class ViviendaCRUD {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MODIFICAR UNA VIVIENDA //
-	public static void modificar(Connection conex, Vivienda viviendaSinMod, Vivienda viviendaMod) throws SQLException {
-		
-		String cod = viviendaMod.getCod();
-		int idPropietario = viviendaMod.getIdPropietario();
-		String direccion = viviendaMod.getDireccion();
-		float precio = viviendaMod.getPrecio();
-		float superficie = viviendaMod.getSuperficie();
-		String descripcion = viviendaMod.getDescripcion();
-		int mascotas = viviendaMod.getMascotas();
-		int tipo = viviendaMod.getTipo();
-		
-		/* Comprobar los campos vacíos. Si lo están se les asigna el valor previo */
-		cod = cod.trim().isEmpty() ? viviendaSinMod.getCod() : cod;
-		idPropietario = (idPropietario == -1) ? viviendaSinMod.getIdPropietario() : idPropietario;
-		direccion = direccion.trim().isEmpty() ? viviendaSinMod.getDireccion() : direccion;
-		precio = (precio == -1) ? viviendaSinMod.getPrecio() : precio;
-		superficie = (superficie == -1) ? viviendaSinMod.getSuperficie(): superficie;
-		descripcion = descripcion.trim().isEmpty() ? viviendaSinMod.getDescripcion() : descripcion;
-		mascotas = (mascotas == -1) ? viviendaSinMod.getMascotas() : mascotas;
-		tipo = (tipo == -1) ? viviendaSinMod.getTipo(): tipo;
+	public static void modificar(Connection conex, Vivienda vivienda, String cod) throws SQLException {	
 		
 		try {
-			String query = "UPDATE vivienda SET id_propietario = ?, direccion = ?, precio = ?, superficie = ?, descripcion = ?, mascotas = ?, tipo = ? WHERE cod = ?";
+			String query = "UPDATE vivienda SET cod = ?, id_propietario = ?, direccion = ?, precio = ?, superficie = ?, descripcion = ?, mascotas = ?, tipo = ? WHERE cod = ?";
 			
 			PreparedStatement ps = conex.prepareStatement(query);
 			
-			ps.setInt(1, idPropietario);
-			ps.setString(2, direccion);
-			ps.setFloat(3, precio);
-			ps.setFloat(4, superficie);
-			ps.setString(5, descripcion);
-			ps.setInt(6, mascotas);
-			ps.setInt(7, tipo);
-			ps.setString(8, cod);
+			ps.setString(1, vivienda.getCod());
+			ps.setInt(2, vivienda.getIdPropietario());
+			ps.setString(3, vivienda.getDireccion());
+			ps.setFloat(4, vivienda.getPrecio());
+			ps.setFloat(5, vivienda.getSuperficie());
+			ps.setString(6, vivienda.getDescripcion());
+			ps.setInt(7, vivienda.getMascotas());
+			ps.setInt(8, vivienda.getTipo());
+			ps.setString(9, cod);
 
 			int filas = ps.executeUpdate();
 

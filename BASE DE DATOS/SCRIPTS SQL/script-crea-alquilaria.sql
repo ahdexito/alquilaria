@@ -78,4 +78,5 @@ CREATE TABLE contrato (
 	CONSTRAINT fk_cod_vivienda_contrato 
 		FOREIGN KEY(cod_vivienda) REFERENCES vivienda(cod)
     ON DELETE CASCADE
+    ON UPDATE CASCADE
     );
