@@ -9,6 +9,51 @@ public class InterfazVivienda {
 	
 	private static Scanner sc = new Scanner(System.in);
     
+	// OPCIÓN CONSULTAR UNA VIVIENDA DADO SU CÓDIGO //
+	public static String solicitarCod() {
+				
+		// Solicitar ID del inquilino a buscar //
+		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");		
+
+		String cod = sc.nextLine().toUpperCase();
+		
+		return cod;
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE VIVIENDA CON FORMATO TIPO TABLA //
+	public static void imprimir(ResultSet rs) throws SQLException {
+		
+		System.out.println(("-").repeat(170));
+		System.out.printf("%-15s %-20s %-50s %-15s %-20s %-15s %-15s\n", 
+			"|  CÓDIGO", "|  ID PROPIETARIO", "|  DIRECCIÓN", "|  PRECIO", "|  SUPERFICIE", "|  MASCOTAS", "|  TIPO");
+		System.out.println(("-").repeat(170));
+
+		String mascotas = "NO";	
+		if (rs.getInt("mascotas") == 1) mascotas = "SÍ";
+
+		String descripcion = rs.getString("descripcion");
+		if (descripcion == null) descripcion = "(VACÍO)";
+
+		System.out.printf("%-15s %-20s %-50s %-15s %-20s %-15s %-15s",
+			"|  " + rs.getString("cod"),
+			"|  " + rs.getInt("id_propietario"),
+			"|  " + rs.getString("direccion"),
+			"|  " + (rs.getFloat("precio") + " €").replace('.', ','),
+			"|  " + (rs.getFloat("superficie") + " m2").replace('.', ','),
+			"|  " + mascotas,
+			"|  " + rs.getString("nombre").toUpperCase());
+
+		System.out.println("\n" + ("-").repeat(170));
+
+		System.out.println("|  DESCRIPCIÓN -> " + descripcion);
+
+		System.out.println(("-").repeat(170));
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
     // SOLICITAR DATOS DE VIVIENDA PARA AÑADIR //
 	public static Vivienda solicitarDatos(Connection conex, Vivienda vivienda) throws SQLException {
 		
@@ -86,55 +131,8 @@ public class InterfazVivienda {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// OPCIÓN CONSULTAR UNA VIVIENDA DADO SU CÓDIGO //
-	public static String solicitarCod() {
-				
-		// Solicitar ID del inquilino a buscar //
-		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");		
-
-		String cod = sc.nextLine().toUpperCase();
-		
-		return cod;
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE VIVIENDA CON FORMATO TIPO TABLA //
-	public static void imprimir(ResultSet rs) throws SQLException {
-		
-		if (rs.next()) {
-			System.out.println(("-").repeat(170));
-			System.out.printf("%-15s %-20s %-50s %-15s %-20s %-15s %-15s\n", 
-				"|  CÓDIGO", "|  ID PROPIETARIO", "|  DIRECCIÓN", "|  PRECIO", "|  SUPERFICIE", "|  MASCOTAS", "|  TIPO");
-			System.out.println(("-").repeat(170));
-			
-			String mascotas = "NO";	
-			if (rs.getInt("mascotas") == 1) mascotas = "SÍ";
-			
-			String descripcion = rs.getString("descripcion");
-			if (descripcion == null) descripcion = "(VACÍO)";
-			
-			System.out.printf("%-15s %-20s %-50s %-15s %-20s %-15s %-15s",
-				"|  " + rs.getString("cod"),
-				"|  " + rs.getInt("id_propietario"),
-				"|  " + rs.getString("direccion"),
-				"|  " + (rs.getFloat("precio") + " €").replace('.', ','),
-				"|  " + (rs.getFloat("superficie") + " m2").replace('.', ','),
-				"|  " + mascotas,
-				"|  " + rs.getString("nombre").toUpperCase());
-			
-			System.out.println("\n" + ("-").repeat(170));
-			
-			System.out.println("|  DESCRIPCIÓN -> " + descripcion);
-			
-			System.out.println(("-").repeat(170));
-		}
-		
-		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
-	}
-	
 	// SOLICITAR DATOS DE VIVIENDA PARA MODIFICAR //
-	public static Vivienda solicitarDatosMod(Connection conex, Vivienda vivienda) throws SQLException {
+	public static Vivienda solicitarDatosMod(Vivienda vivienda) {
 		
 		/*
 		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");

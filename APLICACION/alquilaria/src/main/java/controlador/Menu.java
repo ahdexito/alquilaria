@@ -9,52 +9,59 @@ import vista.*;
 
 public class Menu {
     
+	// CREAR PROPIETARIO //
     public static void crearPropietario(Connection conex, Propietario propietario) throws SQLException {
 		
-		/* Solicitar datos para crear propietario */
-		propietario = InterfazPropietario.solicitarDatos(0);
+		/* Solicitar datos para crear objeto */
+		propietario = InterfazPropietario.solicitarDatos(propietario, 0);
 
-		/* Enviar propietario a la base de datos */
+		/* Ejecutar sentencia de creación */
 		PropietarioCRUD.crear(conex, propietario);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// CONSULTAR PROPIETARIO //
 	public static void consultarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a buscar */
-		int id = InterfazMenu.solicitarID();
+		/* Solicitar ID */
+		int idPropietario = InterfazPropietario.solicitarID();
 
 		System.out.println("");
 
-		/* Llamada al método consultar-propietario para recibir un ResultSet */
-		rs = PropietarioCRUD.consultar(conex, id);
+		/* Ejecutar sentencia de consulta */
+		rs = PropietarioCRUD.consultar(conex, idPropietario);
 
-		/* Enviar el ResultSet al método para imprimir */
-		InterfazPropietario.imprimir(rs);
+		/* Comprobar si ha habido resultado e imprimirlo */
+		if (rs.next()) InterfazPropietario.imprimir(rs);
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void modificarPropietario(Connection conex, Propietario propietarioMod, ResultSet rs) throws SQLException {
+	// MODIFICAR PROPIETARIO //
+	public static void modificarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a modificar */
-		int id = InterfazMenu.solicitarID();
+		/* Solicitar ID */
+		int idPropietario = InterfazPropietario.solicitarID();
 
-		/* Realizar consulta con el ID */
-		rs = PropietarioCRUD.consultar(conex, id);
+		/* Ejecutar sentencia de consulta */
+		rs = PropietarioCRUD.consultar(conex, idPropietario);
 
-		/* Comprobar si existe algún campo con ese ID */
+		/* Comprobar si ha habido resultado */
 		if (rs.next()) {
+			
 			/* Guardar los datos de esa consulta en un objeto */
-			Propietario propietarioSinMod = new Propietario
-				(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"));
+			propietario = new Propietario
+				(idPropietario, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"));
 
-			/* Solicitar los nuevos datos y guardarlos en otro objeto */
-			propietarioMod = InterfazPropietario.solicitarDatos(id);
+			/* Sobreescribir objeto con los nuevos datos */
+			propietario = InterfazPropietario.solicitarDatos(propietario, idPropietario);
 
-			/* Modificar el objeto recibido con los datos solicitados */			
-			PropietarioCRUD.modificar(conex, propietarioSinMod, propietarioMod);
+			/* Ejecutar sentencia de modificación */			
+			PropietarioCRUD.modificar(conex, propietario);
 		}
 
 		/* Si no existe se cancela la operación */
@@ -63,64 +70,82 @@ public class Menu {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void eliminarPropietario(Connection conex, Propietario propietario) throws SQLException {
+	// ELIMINAR PROPIETARIO //
+	public static void eliminarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a eliminar */
-		int id = InterfazMenu.solicitarID();
-
-		// Llamada al método eliminar //
-		PropietarioCRUD.eliminar(conex, id);
+		/* Solicitar ID */
+		int idPropietario = InterfazPropietario.solicitarID();
+		
+		/* Ejecutar sentencia de consulta */
+		rs = PropietarioCRUD.consultar(conex, idPropietario);
+		
+		/* Comprobar si ha habido resultado y eliminarlo */
+		if (rs.next()) {
+			
+			// Ejecutar sentencia de eliminación //
+			PropietarioCRUD.eliminar(conex, idPropietario);
+		}
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	
+	// CREAR INQUILINO //
 	public static void crearInquilino(Connection conex, Inquilino inquilino) throws SQLException {
 		
-		/* Solicitar datos para crear inquilino */
-		inquilino = InterfazInquilino.solicitarDatos(0);
+		/* Solicitar datos para crear objeto */
+		inquilino = InterfazInquilino.solicitarDatos(inquilino, 0);
 
-		/* Enviar inquilino a la base de datos */
+		/* Ejecutar sentencia de creación */
 		InquilinoCRUD.crear(conex, inquilino);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// CONSULTAR INQUILINO //
 	public static void consultarInquilino(Connection conex, Inquilino inquilino, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a buscar */
-		int id = InterfazMenu.solicitarID();
+		/* Solicitar ID */
+		int idInquilino = InterfazInquilino.solicitarID();
 
 		System.out.println("");
 
-		/* Llamada al método consultar-inquilino para recibir un ResultSet */
-		rs = InquilinoCRUD.consultar(conex, id);
-
-		/* Enviar el ResultSet al método para imprimir */
-		InterfazInquilino.imprimir(rs);
+		/* Ejecutar sentencia de consulta */
+		rs = InquilinoCRUD.consultar(conex, idInquilino);
+		
+		/* Comprobar si ha habido resultado e imprimirlo */
+		if (rs.next()) InterfazInquilino.imprimir(rs);
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void modificarInquilino(Connection conex, Inquilino inquilinoMod, ResultSet rs) throws SQLException {
+	// MODIFICAR INQUILINO //
+	public static void modificarInquilino(Connection conex, Inquilino inquilino, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a modificar */
-		int id = InterfazMenu.solicitarID();
+		/* Solicitar ID */
+		int idInquilino = InterfazInquilino.solicitarID();
 
-		/* Realizar consulta con el ID */
-		rs = InquilinoCRUD.consultar(conex, id);
+		/* Ejecutar sentencia de consulta */
+		rs = InquilinoCRUD.consultar(conex, idInquilino);
 
-		/* Comprobar si existe algún campo con ese ID */
+		/* Comprobar si ha habido resultado */
 		if (rs.next()) {
+			
 			/* Guardar los datos de esa consulta en un objeto */
-			Inquilino inquilinoSinMod = new Inquilino
-				(id, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascotas"));
+			inquilino = new Inquilino
+				(idInquilino, rs.getString("dni"), rs.getString("nombre"), rs.getString("apellidos"), rs.getString("correo"), rs.getString("telefono"), rs.getInt("mascotas"));
 
-			/* Solicitar los nuevos datos y guardarlos en otro objeto */
-			inquilinoMod = InterfazInquilino.solicitarDatos(id);
+			/* Sobreescribir objeto con los nuevos datos */
+			inquilino = InterfazInquilino.solicitarDatos(inquilino, idInquilino);
 
-			/* Modificar el objeto recibido con los datos solicitados */
-			InquilinoCRUD.modificar(conex, inquilinoSinMod, inquilinoMod);
+			/* Ejecutar sentencia de modificación */
+			InquilinoCRUD.modificar(conex, inquilino);
 		}
 
 		/* Si no existe se cancela la operación */
@@ -129,63 +154,81 @@ public class Menu {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void eliminarInquilino(Connection conex, Inquilino inquilino) throws SQLException {
+	// ELIMINAR INQUILINO //
+	public static void eliminarInquilino(Connection conex, Inquilino inquilino, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a eliminar */
-		int id = InterfazMenu.solicitarID();
-
-		/* Llamada al método eliminar */
-		InquilinoCRUD.eliminar(conex, id);
+		/* Solicitar ID */
+		int idInquilino = InterfazInquilino.solicitarID();
+		
+		/* Ejecutar sentencia de consulta */
+		rs = InquilinoCRUD.consultar(conex, idInquilino);
+		
+		/* Comprobar si ha habido resultado y eliminarlo */
+		if (rs.next()) {
+			
+			// Ejecutar sentencia de eliminación //
+			InquilinoCRUD.eliminar(conex, idInquilino);
+		}
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	
+	// CREAR VIVIENDA //
 	public static void crearVivienda(Connection conex, Vivienda vivienda) throws SQLException {
 		
-		/* Solicitar datos para crear vivienda */
+		/* Solicitar datos para crear objeto */
 		vivienda = InterfazVivienda.solicitarDatos(conex, vivienda);
 
-		/* Enviar vivienda a la base de datos */
+		/* Ejecutar sentencia de creación */
 		ViviendaCRUD.crear(conex, vivienda);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// CONSULTAR VIVIENDA //
 	public static void consultarVivienda(Connection conex, Vivienda vivienda, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a buscar */
+		/* Solicitar COD */
 		String cod = InterfazVivienda.solicitarCod();
 
 		System.out.println("");
-
-		/* Llamada al método consultar-vivienda para recibir un ResultSet */
+		
+		/* Ejecutar sentencia de consulta */
 		rs = ViviendaCRUD.consultar(conex, cod);
-
-		/* Enviar el ResultSet al método para imprimir */
-		InterfazVivienda.imprimir(rs);
+		
+		/* Comprobar si ha habido resultado e imprimirlo */
+		if (rs.next()) InterfazVivienda.imprimir(rs);
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// MODIFICAR VIVIENDA //
 	public static void modificarVivienda(Connection conex, Vivienda vivienda, ResultSet rs) throws SQLException {
 		
-		/* Solicitar COD a modificar */
+		/* Solicitar COD */
 		String cod = InterfazVivienda.solicitarCod();
 		
-		/* Realizar consulta con el COD */
+		/* Ejecutar sentencia de consulta */
 		rs = ViviendaCRUD.consultar(conex, cod);
 
-		/* Comprobar si existe algún campo con ese COD */
+		/* Comprobar si ha habido resultado */
 		if (rs.next()) {
+			
 			/* Guardar los datos de esa consulta en un objeto */
 			vivienda = new Vivienda
 				(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
 			
-			/* Solicitar los nuevos datos y guardarlos */
-			vivienda = InterfazVivienda.solicitarDatosMod(conex, vivienda);
+			/* Sobreescribir objeto con los nuevos datos */
+			vivienda = InterfazVivienda.solicitarDatosMod(vivienda);
 
-			/* Modificar el objeto recibido con los datos solicitados */
+			/* Ejecutar sentencia de modificación */
 			ViviendaCRUD.modificar(conex, vivienda, cod);
 		}
 
@@ -195,64 +238,85 @@ public class Menu {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void eliminarVivienda(Connection conex, Vivienda vivienda) throws SQLException {
+	// ELIMINAR VIVIENDA //
+	public static void eliminarVivienda(Connection conex, Vivienda vivienda, ResultSet rs) throws SQLException {
 		
-		/* Solicitar ID a eliminar */
-		String cod = InterfazVivienda.solicitarCod();
+		/* Solicitar COD */
+		String codVivienda = InterfazVivienda.solicitarCod();
 		
+		/* Ejecutar sentencia de consulta */
+		rs = ViviendaCRUD.consultar(conex, codVivienda);
 		
-
-		/* Llamada al método eliminar */
-		ViviendaCRUD.eliminar(conex, cod);
+		/* Comprobar si ha habido resultado y eliminarlo */
+		if (rs.next()) {
+			
+			// Ejecutar sentencia de eliminación //
+			ViviendaCRUD.eliminar(conex, codVivienda);
+		}
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	
+	// CREAR CONTRATO //
 	public static void crearContrato(Connection conex, Contrato contrato) throws SQLException {
 		
-		contrato = InterfazContrato.solicitarDatos(conex, contrato);
+		/* Solicitar datos para crear objeto */
+		contrato = InterfazContrato.solicitarDatos(contrato);
 		
+		/* Ejecutar sentencia de creación */
 		ContratoCRUD.crear(conex, contrato);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// CONSULTAR CONTRATO //
 	public static void consultarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
-		int idInquilino = InterfazMenu.solicitarID();
+		/* Solicitar ID, COD, y fechaInicio (clave primaria conjunta) */
+		int idInquilino = InterfazInquilino.solicitarID();
 		String codVivienda = InterfazVivienda.solicitarCod();
 		Date fechaInicio = InterfazContrato.solicitarFecha();
 		
 		System.out.println("");
 		
+		/* Ejecutar sentencia de consulta */
 		rs = ContratoCRUD.consultar(conex, idInquilino, codVivienda, fechaInicio);
 		
-		InterfazContrato.imprimir(rs);
+		/* Comprobar si ha habido resultado e imprimirlo */
+		if (rs.next()) InterfazContrato.imprimir(rs);
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// MODIFICAR CONTRATO //
 	public static void modificarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
-		/* Solicitar COD a modificar */
-		int idPropietario = InterfazMenu.solicitarID();
+		/* Solicitar ID, COD, y fechaInicio (clave primaria conjunta) */
+		int idInquilino = InterfazInquilino.solicitarID();
 		String codVivienda = InterfazVivienda.solicitarCod();
 		Date fechaInicio = InterfazContrato.solicitarFecha();
 		
-		/* Realizar consulta con el COD */
-		rs = ContratoCRUD.consultar(conex, idPropietario, codVivienda, fechaInicio);
+		/* Ejecutar sentencia de consulta */
+		rs = ContratoCRUD.consultar(conex, idInquilino, codVivienda, fechaInicio);
 
-		/* Comprobar si existe algún campo con ese COD */
+		/* Comprobar si ha habido resultado */
 		if (rs.next()) {
+			
 			/* Guardar los datos de esa consulta en un objeto */
 			contrato = new Contrato
-				(idPropietario, codVivienda, fechaInicio, rs.getDate("fecha_fin"), rs.getFloat("precio"), rs.getString("estado"));
+				(idInquilino, codVivienda, fechaInicio, rs.getDate("fecha_fin"), rs.getFloat("precio"), rs.getString("estado"));
 			
-			/* Solicitar los nuevos datos y guardarlos */	
-			contrato = InterfazContrato.solicitarDatosMod(conex, contrato);
+			/* Sobreescribir objeto con los nuevos datos */	
+			contrato = InterfazContrato.solicitarDatosMod(contrato);
 
-			/* Modificar el objeto recibido con los datos solicitados */
+			/* Ejecutar sentencia de modificación */
 			ContratoCRUD.modificar(conex, contrato);
 		}
 
@@ -262,17 +326,31 @@ public class Menu {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void eliminarContrato(Connection conex, Contrato contrato) throws SQLException {
+	// ELIMINAR CONTRATO //
+	public static void eliminarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
-		int idInquilino = InterfazMenu.solicitarID();
+		/* Solicitar ID, COD, y fechaInicio (clave primaria conjunta) */
+		int idInquilino = InterfazInquilino.solicitarID();
 		String codVivienda = InterfazVivienda.solicitarCod();
 		Date fechaInicio = InterfazContrato.solicitarFecha();
 		
-		ContratoCRUD.eliminar(conex, idInquilino, codVivienda, fechaInicio);
+		/* Ejecutar sentencia de consulta */
+		rs = ContratoCRUD.consultar(conex, idInquilino, codVivienda, fechaInicio);
+		
+		/* Comprobar si ha habido resultado */
+		if (rs.next()) {
+			
+			/* Ejecutar sentencia de eliminación */
+			ContratoCRUD.eliminar(conex, idInquilino, codVivienda, fechaInicio);
+		}
+		
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// CAMBIAR ESTADO CONTRATO //
 	public static void cambiarEstadoContrato(Connection conex, Contrato contrato) {
 		
 	}

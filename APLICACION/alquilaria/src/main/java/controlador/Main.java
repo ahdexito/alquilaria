@@ -45,7 +45,6 @@ public class Main {
 							case 2 -> Menu.consultarPropietario(conex, propietario, rs);
 							case 3 -> Menu.modificarPropietario(conex, propietario, rs);
 							case 4 -> Menu.eliminarPropietario(conex, propietario);
-							case 0 ->System.out.println("** REGRESANDO... **");
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -75,9 +74,7 @@ public class Main {
 							case 1 -> Menu.crearInquilino(conex, inquilino);
 							case 2 -> Menu.consultarInquilino(conex, inquilino,rs);
 							case 3 -> Menu.modificarInquilino(conex, inquilino, rs);
-							case 4 -> Menu.eliminarInquilino(conex, inquilino);
-							case 0 -> System.out.println("** REGRESANDO... **");
-							
+							case 4 -> Menu.eliminarInquilino(conex, inquilino);							
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -108,7 +105,6 @@ public class Main {
 							case 2 -> Menu.consultarVivienda(conex, vivienda, rs);
 							case 3 -> Menu.modificarVivienda(conex, vivienda, rs);
 							case 4 -> Menu.eliminarVivienda(conex, vivienda);
-							case 0 ->System.out.println("** REGRESANDO... **");
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -141,7 +137,6 @@ public class Main {
 								Thread.sleep(700);
 								break;
 							}
-							case 0 -> System.out.println("** REGRESANDO... **");
 						}
 					}
 					while (subopcion != 0);

@@ -26,14 +26,14 @@ public class InterfazMenu {
 				int opcion = sc.nextInt();
 				sc.nextLine();
 				if (opcion >= 0 && opcion <= 4) {
-					Thread.sleep(700);
+					Thread.sleep(500);
 					return opcion;
 				}
 			}
 			else sc.nextLine();
 			
 			System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-			Thread.sleep(700);
+			Thread.sleep(500);
 			
 		} while (true);
 	}
@@ -49,7 +49,7 @@ public class InterfazMenu {
 		if (tabla.equals("CONTRATO")) opcion5 = "  5. CAMBIAR ESTADO\n";
 			
 		do {
-			System.out.print("\n"
+			System.out.print("\n\n"
 				+ "---------- [ MANTENIMIENTO TABLA " + tabla + " ] ---------\n"
 				+ "  1. CREAR\n"
 				+ "  2. CONSULTAR\n"
@@ -76,40 +76,29 @@ public class InterfazMenu {
 							+ "** Si no se desea modificar un campo, pulsar [ENTER] **\n");
 						case 4 -> System.out.print("\n------------- [ ELIMINAR " + tabla + " ] -------------\n");
 						case 5 -> System.out.print("\n------------- [ CAMBIAR ESTADO " + tabla + " ] -------------\n");
+						case 0 -> {
+							System.out.print("\n** REGRESANDO... **");
+							System.out.println("");
+							Thread.sleep(500);
+						}
 					}
 					break;
 				}
 				
 				else {
 					System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-					Thread.sleep(700);
+					Thread.sleep(500);
 				}
 			}
 			
 			else {
 				sc.nextLine();
 				System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
-				Thread.sleep(700);
+				Thread.sleep(500);
 			}
 			
 		} while (true);
 		
 		return opcion;
-	}
-	
-	// OPCIÓN SOLICITAR ID DE PROPIETARIO O INQUILINO PARA CONSULTAR O ELIMINAR //
-	public static int solicitarID() {
-				
-		int id = -1;
-		
-		// Solicitar ID del sujeto a buscar //
-		System.out.print("  - ID: ");		
-
-		// Recoger error de entrada por valor no numérico //
-		if (sc.hasNextInt()) id = sc.nextInt();
-		
-		sc.nextLine();
-		
-		return id;
 	}
 }

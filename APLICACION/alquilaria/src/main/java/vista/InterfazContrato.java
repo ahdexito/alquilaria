@@ -11,8 +11,56 @@ public class InterfazContrato {
 	
 	private static Scanner sc = new Scanner(System.in);
     
+	// SOLICITAR FECHA DE INICIO DE CONTRATO //
+	public static Date solicitarFecha() {
+				
+		// Solicitar fecha del contrato a buscar //
+		System.out.print("  - FECHA INICIO -> (dd/mm/aaaa): ");
+		String fechaInicioString = sc.nextLine().trim();
+		if (!fechaInicioString.isEmpty()) {
+			try {
+				LocalDate fechaInicioLocal = LocalDate.parse(fechaInicioString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				return Date.valueOf(fechaInicioLocal);
+			}
+			catch (DateTimeParseException e) {
+				System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **");
+				return null;
+			}
+		}
+		else {
+			System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **");
+			return null;
+		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE CONTRATO CON FORMATO TIPO TABLA //
+	public static void imprimir(ResultSet rs) throws SQLException {
+		
+		System.out.println(("-").repeat(160));
+		System.out.printf("%-20s %-20s %-30s %-30s %-20s %-30s\n", 
+			"|  ID INQUILINO", "|  COD VIVIENDA", "|  FECHA INICIO", "|  FECHA FIN", "|  PRECIO", "|  ESTADO");
+		System.out.println(("-").repeat(170));
+
+		String fechaInicio = rs.getDate("fecha_inicio").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		String fechaFin = rs.getDate("fecha_fin").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+		System.out.printf("%-20s %-20s %-30s %-30s %-20s %-30s",
+			"|  " + rs.getInt("id_inquilino"),
+			"|  " + rs.getString("cod_vivienda"),
+			"|  " + fechaInicio,
+			"|  " + fechaFin,
+			"|  " + (rs.getFloat("precio") + " €").replace('.', ','),
+			"|  " + rs.getString("estado").toUpperCase());
+
+		System.out.println("\n" + ("-").repeat(160));
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
     // SOLICITAR DATOS DE CONTRATO PARA AÑADIR //
-	public static Contrato solicitarDatos(Connection conex, Contrato contrato) throws SQLException {
+	public static Contrato solicitarDatos(Contrato contrato) {
 		
 		System.out.print("  - ID INQUILINO: ");
 		String idInquilinoString = sc.nextLine().trim();
@@ -100,60 +148,8 @@ public class InterfazContrato {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// SOLICITAR FECHA DE INICIO DE CONTRATO //
-	public static Date solicitarFecha() {
-				
-		// Solicitar fecha del contrato a buscar //
-		System.out.print("  - FECHA INICIO -> (dd/mm/aaaa): ");
-		String fechaInicioString = sc.nextLine().trim();
-		if (!fechaInicioString.isEmpty()) {
-			try {
-				LocalDate fechaInicioLocal = LocalDate.parse(fechaInicioString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-				return Date.valueOf(fechaInicioLocal);
-			}
-			catch (DateTimeParseException e) {
-				System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **");
-				return null;
-			}
-		}
-		else {
-			System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **");
-			return null;
-		}
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE CONTRATO CON FORMATO TIPO TABLA //
-	public static void imprimir(ResultSet rs) throws SQLException {
-		
-		if (rs.next()) {
-			System.out.println(("-").repeat(160));
-			System.out.printf("%-20s %-20s %-30s %-30s %-20s %-30s\n", 
-				"|  ID INQUILINO", "|  COD VIVIENDA", "|  FECHA INICIO", "|  FECHA FIN", "|  PRECIO", "|  ESTADO");
-			System.out.println(("-").repeat(170));
-			
-			String fechaInicio = rs.getDate("fecha_inicio").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			String fechaFin = rs.getDate("fecha_fin").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			
-			System.out.printf("%-20s %-20s %-30s %-30s %-20s %-30s",
-				"|  " + rs.getInt("id_inquilino"),
-				"|  " + rs.getString("cod_vivienda"),
-				"|  " + fechaInicio,
-				"|  " + fechaFin,
-				"|  " + (rs.getFloat("precio") + " €").replace('.', ','),
-				"|  " + rs.getString("estado").toUpperCase());
-			
-			System.out.println("\n" + ("-").repeat(160));
-		}
-		
-		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	// SOLICITAR DATOS DE CONTRATO PARA MODIFICAR //
-	public static Contrato solicitarDatosMod(Connection conex, Contrato contrato) throws SQLException {
+	public static Contrato solicitarDatosMod(Contrato contrato) {
 		
 		int idInquilino = contrato.getIdInquilino();
 		String codVivienda = contrato.getCodVivienda();
