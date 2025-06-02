@@ -44,7 +44,7 @@ public class Main {
 							case 1 -> Menu.crearPropietario(conex, propietario);
 							case 2 -> Menu.consultarPropietario(conex, propietario, rs);
 							case 3 -> Menu.modificarPropietario(conex, propietario, rs);
-							case 4 -> Menu.eliminarPropietario(conex, propietario);
+							case 4 -> Menu.eliminarPropietario(conex, propietario, rs);
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -74,7 +74,7 @@ public class Main {
 							case 1 -> Menu.crearInquilino(conex, inquilino);
 							case 2 -> Menu.consultarInquilino(conex, inquilino,rs);
 							case 3 -> Menu.modificarInquilino(conex, inquilino, rs);
-							case 4 -> Menu.eliminarInquilino(conex, inquilino);							
+							case 4 -> Menu.eliminarInquilino(conex, inquilino, rs);							
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -104,7 +104,7 @@ public class Main {
 							case 1 -> Menu.crearVivienda(conex, vivienda);
 							case 2 -> Menu.consultarVivienda(conex, vivienda, rs);
 							case 3 -> Menu.modificarVivienda(conex, vivienda, rs);
-							case 4 -> Menu.eliminarVivienda(conex, vivienda);
+							case 4 -> Menu.eliminarVivienda(conex, vivienda, rs);
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -131,7 +131,7 @@ public class Main {
 							case 1 -> Menu.crearContrato(conex, contrato);
 							case 2 -> Menu.consultarContrato(conex, contrato, rs);
 							case 3 -> Menu.modificarContrato(conex, contrato, rs);
-							case 4 -> Menu.eliminarContrato(conex, contrato);
+							case 4 -> Menu.eliminarContrato(conex, contrato, rs);
 							case 5 -> {
 								System.out.println("** OPCIÓN EN DESARROLLO... **");
 								Thread.sleep(700);
