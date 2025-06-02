@@ -71,7 +71,7 @@ public class InterfazPropietario {
 			lista.replaceAll(p -> p.substring(0,1).toUpperCase() + p.substring(1));
 			nombre = (String.join(" ", lista));
 		}	
-		else nombre = propietario.getDni();
+		else nombre = propietario.getNombre();
 		
 		
 		System.out.print("  - APELLIDOS: "); 

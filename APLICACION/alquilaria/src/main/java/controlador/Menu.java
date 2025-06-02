@@ -111,8 +111,6 @@ public class Menu {
 		/* Solicitar ID */
 		int idInquilino = InterfazInquilino.solicitarID();
 
-		System.out.println("");
-
 		/* Ejecutar sentencia de consulta */
 		rs = InquilinoCRUD.consultar(conex, idInquilino);
 		
@@ -229,7 +227,7 @@ public class Menu {
 			vivienda = InterfazVivienda.solicitarDatosMod(vivienda);
 
 			/* Ejecutar sentencia de modificación */
-			ViviendaCRUD.modificar(conex, vivienda, cod);
+			ViviendaCRUD.modificar(conex, vivienda);
 		}
 
 		/* Si no existe se cancela la operación */

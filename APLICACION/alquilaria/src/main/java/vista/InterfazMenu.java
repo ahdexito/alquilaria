@@ -32,7 +32,7 @@ public class InterfazMenu {
 			}
 			else sc.nextLine();
 			
-			System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
+			System.out.println("\n** LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4 **");
 			Thread.sleep(500);
 			
 		} while (true);
@@ -70,12 +70,12 @@ public class InterfazMenu {
 					(tabla.equals("CONTRATO") && opcion == 5)
 				) {
 					switch (opcion) {
-						case 1 -> System.out.print("\n------------- [ CREAR " + tabla + " ] -------------\n");
-						case 2 -> System.out.print("\n------------- [ CONSULTAR " + tabla + " ] -------------\n");
-						case 3 -> System.out.print("\n------------- [ MODIFICAR " + tabla + " ] -------------\n"
+						case 1 -> System.out.print("\n\n------------- [ CREAR " + tabla + " ] -------------\n");
+						case 2 -> System.out.print("\n\n------------- [ CONSULTAR " + tabla + " ] -------------\n");
+						case 3 -> System.out.print("\n\n------------- [ MODIFICAR " + tabla + " ] -------------\n"
 							+ "** Si no se desea modificar un campo, pulsar [ENTER] **\n");
-						case 4 -> System.out.print("\n------------- [ ELIMINAR " + tabla + " ] -------------\n");
-						case 5 -> System.out.print("\n------------- [ CAMBIAR ESTADO " + tabla + " ] -------------\n");
+						case 4 -> System.out.print("\n\n------------- [ ELIMINAR " + tabla + " ] -------------\n");
+						case 5 -> System.out.print("\n\n------------- [ CAMBIAR ESTADO " + tabla + " ] -------------\n");
 						case 0 -> {
 							System.out.print("\n** REGRESANDO... **");
 							System.out.println("");
@@ -86,14 +86,14 @@ public class InterfazMenu {
 				}
 				
 				else {
-					System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
+					System.out.println("\n** LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4 **");
 					Thread.sleep(500);
 				}
 			}
 			
 			else {
 				sc.nextLine();
-				System.out.println("\nERROR: LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4");
+				System.out.println("\n** LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4 **");
 				Thread.sleep(500);
 			}
 			

@@ -49,22 +49,21 @@ public class ViviendaCRUD {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// MODIFICAR UNA VIVIENDA //
-	public static void modificar(Connection conex, Vivienda vivienda, String cod) throws SQLException {	
+	public static void modificar(Connection conex, Vivienda vivienda) throws SQLException {	
 		
 		try {
-			String query = "UPDATE vivienda SET cod = ?, id_propietario = ?, direccion = ?, precio = ?, superficie = ?, descripcion = ?, mascotas = ?, tipo = ? WHERE cod = ?";
+			String query = "UPDATE vivienda SET id_propietario = ?, direccion = ?, precio = ?, superficie = ?, descripcion = ?, mascotas = ?, tipo = ? WHERE cod = ?";
 			
 			PreparedStatement ps = conex.prepareStatement(query);
 			
-			ps.setString(1, vivienda.getCod());
-			ps.setInt(2, vivienda.getIdPropietario());
-			ps.setString(3, vivienda.getDireccion());
-			ps.setFloat(4, vivienda.getPrecio());
-			ps.setFloat(5, vivienda.getSuperficie());
-			ps.setString(6, vivienda.getDescripcion());
-			ps.setInt(7, vivienda.getMascotas());
-			ps.setInt(8, vivienda.getTipo());
-			ps.setString(9, cod);
+			ps.setInt(1, vivienda.getIdPropietario());
+			ps.setString(2, vivienda.getDireccion());
+			ps.setFloat(3, vivienda.getPrecio());
+			ps.setFloat(4, vivienda.getSuperficie());
+			ps.setString(5, vivienda.getDescripcion());
+			ps.setInt(6, vivienda.getMascotas());
+			ps.setInt(7, vivienda.getTipo());
+			ps.setString(8, vivienda.getCod());
 
 			int filas = ps.executeUpdate();
 

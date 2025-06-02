@@ -41,7 +41,7 @@ public class InterfazContrato {
 		System.out.println(("-").repeat(160));
 		System.out.printf("%-20s %-20s %-30s %-30s %-20s %-30s\n", 
 			"|  ID INQUILINO", "|  COD VIVIENDA", "|  FECHA INICIO", "|  FECHA FIN", "|  PRECIO", "|  ESTADO");
-		System.out.println(("-").repeat(170));
+		System.out.println(("-").repeat(160));
 
 		String fechaInicio = rs.getDate("fecha_inicio").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		String fechaFin = rs.getDate("fecha_fin").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));

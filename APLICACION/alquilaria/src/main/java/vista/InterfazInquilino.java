@@ -31,7 +31,7 @@ public class InterfazInquilino {
 	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE INQUILINO CON FORMATO TIPO TABLA //
 	public static void imprimir(ResultSet rs) throws SQLException {
 		
-		System.out.println(("-").repeat(170));
+		System.out.println("\n" + ("-").repeat(170));
 		System.out.printf("%-10s %-20s %-40s %-40s %-30s %-10s\n", 
 			"|  ID", "|  DNI", "|  NOMBRE", "|  CORREO", "|  TELÉFONO", "|  MASCOTAS");
 		System.out.println(("-").repeat(170));
@@ -74,7 +74,7 @@ public class InterfazInquilino {
 			lista.replaceAll(p -> p.substring(0,1).toUpperCase() + p.substring(1));
 			nombre = (String.join(" ", lista));
 		}	
-		else nombre = inquilino.getDni();
+		else nombre = inquilino.getNombre();
 
 		
 		System.out.print("  - APELLIDOS: "); 

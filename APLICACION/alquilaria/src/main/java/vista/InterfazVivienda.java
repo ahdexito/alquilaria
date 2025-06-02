@@ -57,76 +57,91 @@ public class InterfazVivienda {
     // SOLICITAR DATOS DE VIVIENDA PARA AÑADIR //
 	public static Vivienda solicitarDatos(Connection conex, Vivienda vivienda) throws SQLException {
 		
-		int idPropietario = -1;
-				
-		System.out.print("  - CÓDIGO VIVIENDA -> (V000): "); 
-		vivienda.setCod(sc.nextLine().toUpperCase());
+		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");
+		String codVivienda = sc.nextLine().trim().toUpperCase();
+
 		
-		/* Solicitar los datos de la vivienda y guardarlos en variables */
-		System.out.print("  - ID PROPIETARIO: "); 
+		System.out.print("  - ID PROPIETARIO: ");
+		int idPropietario = -1;
 		if (sc.hasNextInt()) {
 			idPropietario = sc.nextInt();
 			sc.nextLine();
-		}
-		
-		/* Comprobar si existe el propietario */
-		if (PropietarioCRUD.consultar(conex, idPropietario).next()) {
-			
-			vivienda.setIdPropietario(idPropietario);
-			
-			System.out.print("  - DIRECCIÓN: "); 
-			vivienda.setDireccion(sc.nextLine());
-
-			
-			System.out.print("  - PRECIO -> (0,0): "); 
-			String precioString = sc.nextLine().replace(',', '.');
-			try {
-				float precio = Float.parseFloat(precioString);
-				vivienda.setPrecio(precio);
-			}
-			catch (Exception e) {
-				System.out.println("    ERROR: VALOR INCORRECTO. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0)\n");
-			}
-
-			
-			System.out.print("  - SUPERFICIE -> (0,0): "); 
-			String superficieString = sc.nextLine().replace(',', '.');
-			try {
-				float superficie = Float.parseFloat(superficieString);
-				vivienda.setSuperficie(superficie);
-			}
-			catch (NumberFormatException e) {
-				System.out.println("    ERROR: VALOR INCORRECTO. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0)\n");
-			}
-
-			
-			System.out.print("  - DESCRIPCIÓN: "); 
-			vivienda.setDescripcion(sc.nextLine());
-
-			
-			System.out.print("  - MASCOTA(S) -> (S | N): ");
-			String mascotasString = sc.nextLine();
-			if (mascotasString.trim().toUpperCase().equals("S")) vivienda.setMascotas(1);
-			if (mascotasString.trim().toUpperCase().equals("N")) vivienda.setMascotas(0);
-
-			
-			System.out.print(""
-				+ "  - TIPO VIVIENDA\n"
-				+ "      1. Apartamento\n"
-				+ "      2. Ático\n"
-				+ "      3. Casa\n"
-				+ "    OPCIÓN: "); 
-			if (sc.hasNextInt()) {
-				vivienda.setTipo(sc.nextInt());
-				sc.nextLine();
-			}
-			
-			return vivienda;
-		}
+		} 
 		else {
-			System.out.print("\nEL ID INTRODUCIDO NO EXISTE");
+			sc.nextLine();
+			System.out.println("** ENTRADA INCORRECTA. CANCELANDO OPERACIÓN **");
 			return vivienda;
 		}
+
+		
+		// VERIFICAR SI EXISTE PROPIETARIO //
+		if (!PropietarioCRUD.consultar(conex, idPropietario).next()) {
+			System.out.println("** EL ID INTRODUCIDO NO EXISTE **");
+			return vivienda;
+		}
+
+		
+		System.out.print("  - DIRECCIÓN: ");
+		String direccion = sc.nextLine().trim();
+		direccion = direccion.isEmpty() ? null : direccion;
+
+		
+		System.out.print("  - PRECIO -> (0,0): ");
+		String precioString = sc.nextLine().trim().replace(',', '.');
+		float precio;
+		try {
+			precio = Float.parseFloat(precioString);
+		} catch (NumberFormatException e) {
+			System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0) **\n");
+			precio = 0;
+		}
+
+		
+		System.out.print("  - SUPERFICIE -> (0,0): ");
+		String superficieString = sc.nextLine().trim().replace(',', '.');
+		float superficie;
+		try {
+			superficie = Float.parseFloat(superficieString);
+		} catch (NumberFormatException e) {
+			System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0) **\n");
+			superficie = 0;
+		}
+
+		
+		System.out.print("  - DESCRIPCIÓN: ");
+		String descripcion = sc.nextLine().trim();
+		descripcion = descripcion.isEmpty() ? null : descripcion;
+
+		
+		System.out.print("  - MASCOTA(S) -> (S | N): ");
+		String mascotasString = sc.nextLine().trim();
+		int mascotas;
+		if (mascotasString.equalsIgnoreCase("S")) {
+			mascotas = 1;
+		} else if (mascotasString.equalsIgnoreCase("N")) {
+			mascotas = 0;
+		} else {
+			System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (N) **\n");
+			mascotas = 0;
+		}
+
+		
+		System.out.print(""
+			+ "  - TIPO VIVIENDA\n"
+			+ "      1. Apartamento\n"
+			+ "      2. Ático\n"
+			+ "      3. Casa\n"
+			+ "    OPCIÓN: "); 
+		int tipo = 1;
+		if (sc.hasNextInt()) {
+			tipo = sc.nextInt();
+			sc.nextLine();
+		} else {
+			sc.nextLine();
+			System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (1) **");
+		}
+
+		return new Vivienda(codVivienda, idPropietario, direccion, precio, superficie, descripcion, mascotas, tipo);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,11 +149,6 @@ public class InterfazVivienda {
 	// SOLICITAR DATOS DE VIVIENDA PARA MODIFICAR //
 	public static Vivienda solicitarDatosMod(Vivienda vivienda) {
 		
-		/*
-		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");
-		String cod = sc.nextLine().trim().toUpperCase();
-		cod = cod.isEmpty() ? vivienda.getCod() : cod;
-		*/
 		String codVivienda = vivienda.getCod();
 		
 		System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");
