@@ -136,10 +136,14 @@ public class InterfazVivienda {
 	// SOLICITAR DATOS DE VIVIENDA PARA MODIFICAR //
 	public static Vivienda solicitarDatosMod(Connection conex, Vivienda vivienda) throws SQLException {
 		
+		/*
 		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");
 		String cod = sc.nextLine().trim().toUpperCase();
 		cod = cod.isEmpty() ? vivienda.getCod() : cod;
+		*/
+		String codVivienda = vivienda.getCod();
 		
+		System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");
 		
 		System.out.print("  - ID PROPIETARIO: ");
 		String idPropietarioString = sc.nextLine().trim();
@@ -225,6 +229,6 @@ public class InterfazVivienda {
 			tipo = vivienda.getTipo();
 		}
 				
-		return new Vivienda(cod, idPropietario, direccion, precio, superficie, descripcion, mascotas, tipo);
+		return new Vivienda(codVivienda, idPropietario, direccion, precio, superficie, descripcion, mascotas, tipo);
 	}
 }

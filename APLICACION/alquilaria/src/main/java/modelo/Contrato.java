@@ -5,10 +5,10 @@ import java.sql.Date;
 public class Contrato {
     
     // ATRIBUTOS //
-	private int idInquilino = -1;
+	private int idInquilino;
 	private String codVivienda, estado;
 	private Date fechaInicio, fechaFin;
-	private float precio = -1;
+	private float precio;
 	
 	// CONSTRUCTORES //
 

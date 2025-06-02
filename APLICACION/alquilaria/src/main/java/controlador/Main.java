@@ -24,7 +24,7 @@ public class Main {
 			ResultSet rs = null;
 
 			/* Imprimir menú principal y solicitar opción menú */
-			opcion = InterfazGeneral.menuPrincipal();
+			opcion = InterfazMenu.menuPrincipal();
 			
 			// MENÚ PRINCIPAL //
 			switch (opcion) {
@@ -33,7 +33,7 @@ public class Main {
 				case 1:
 					do {
 						/* Imprimir menú mantenimiento de propietario y solicitar opción menú */
-						subopcion = InterfazGeneral.submenu("PROPIETARIO");
+						subopcion = InterfazMenu.submenu("PROPIETARIO");
 						System.out.println("");
 
 						/* Instancia de objeto propietario */
@@ -64,7 +64,7 @@ public class Main {
 				case 2:
 					do {
 						/* Imprimir menú mantenimiento de inquilino y solicitar opción menú */
-						subopcion = InterfazGeneral.submenu("INQUILINO");
+						subopcion = InterfazMenu.submenu("INQUILINO");
 						System.out.println("");
 
 						/* Instancia de objeto inquilino */
@@ -96,7 +96,7 @@ public class Main {
 				case 3:
 					do {
 						/* Imprimir menú mantenimiento de vivienda y solicitar opción menú */
-						subopcion = InterfazGeneral.submenu("VIVIENDA");
+						subopcion = InterfazMenu.submenu("VIVIENDA");
 						System.out.println("");
 
 						/* Instancia de objeto vivienda */
@@ -126,7 +126,7 @@ public class Main {
 				// OPCIÓN CONTRATO //
 				case 4:
 					do {
-						subopcion = InterfazGeneral.submenu("CONTRATO");
+						subopcion = InterfazMenu.submenu("CONTRATO");
 						System.out.println("");
 						
 						Contrato contrato = new Contrato();
@@ -141,11 +141,7 @@ public class Main {
 								Thread.sleep(700);
 								break;
 							}
-							case 0 -> {
-								System.out.println("** REGRESANDO... **");
-								Thread.sleep(700);
-								break;
-							}
+							case 0 -> System.out.println("** REGRESANDO... **");
 						}
 					}
 					while (subopcion != 0);

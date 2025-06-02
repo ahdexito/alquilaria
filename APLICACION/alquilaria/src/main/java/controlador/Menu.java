@@ -23,7 +23,7 @@ public class Menu {
 	public static void consultarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID a buscar */
-		int id = InterfazGeneral.solicitarID();
+		int id = InterfazMenu.solicitarID();
 
 		System.out.println("");
 
@@ -39,7 +39,7 @@ public class Menu {
 	public static void modificarPropietario(Connection conex, Propietario propietarioMod, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID a modificar */
-		int id = InterfazGeneral.solicitarID();
+		int id = InterfazMenu.solicitarID();
 
 		/* Realizar consulta con el ID */
 		rs = PropietarioCRUD.consultar(conex, id);
@@ -66,7 +66,7 @@ public class Menu {
 	public static void eliminarPropietario(Connection conex, Propietario propietario) throws SQLException {
 		
 		/* Solicitar ID a eliminar */
-		int id = InterfazGeneral.solicitarID();
+		int id = InterfazMenu.solicitarID();
 
 		// Llamada al método eliminar //
 		PropietarioCRUD.eliminar(conex, id);
@@ -89,7 +89,7 @@ public class Menu {
 	public static void consultarInquilino(Connection conex, Inquilino inquilino, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID a buscar */
-		int id = InterfazGeneral.solicitarID();
+		int id = InterfazMenu.solicitarID();
 
 		System.out.println("");
 
@@ -105,7 +105,7 @@ public class Menu {
 	public static void modificarInquilino(Connection conex, Inquilino inquilinoMod, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID a modificar */
-		int id = InterfazGeneral.solicitarID();
+		int id = InterfazMenu.solicitarID();
 
 		/* Realizar consulta con el ID */
 		rs = InquilinoCRUD.consultar(conex, id);
@@ -132,7 +132,7 @@ public class Menu {
 	public static void eliminarInquilino(Connection conex, Inquilino inquilino) throws SQLException {
 		
 		/* Solicitar ID a eliminar */
-		int id = InterfazGeneral.solicitarID();
+		int id = InterfazMenu.solicitarID();
 
 		/* Llamada al método eliminar */
 		InquilinoCRUD.eliminar(conex, id);
@@ -183,7 +183,6 @@ public class Menu {
 				(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
 			
 			/* Solicitar los nuevos datos y guardarlos */
-			System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");	
 			vivienda = InterfazVivienda.solicitarDatosMod(conex, vivienda);
 
 			/* Modificar el objeto recibido con los datos solicitados */
@@ -221,7 +220,7 @@ public class Menu {
 	
 	public static void consultarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
-		int idInquilino = InterfazGeneral.solicitarID();
+		int idInquilino = InterfazMenu.solicitarID();
 		String codVivienda = InterfazVivienda.solicitarCod();
 		Date fechaInicio = InterfazContrato.solicitarFecha();
 		
@@ -237,7 +236,7 @@ public class Menu {
 	public static void modificarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
 		/* Solicitar COD a modificar */
-		int idPropietario = InterfazGeneral.solicitarID();
+		int idPropietario = InterfazMenu.solicitarID();
 		String codVivienda = InterfazVivienda.solicitarCod();
 		Date fechaInicio = InterfazContrato.solicitarFecha();
 		
@@ -250,8 +249,7 @@ public class Menu {
 			contrato = new Contrato
 				(idPropietario, codVivienda, fechaInicio, rs.getDate("fecha_fin"), rs.getFloat("precio"), rs.getString("estado"));
 			
-			/* Solicitar los nuevos datos y guardarlos */
-			System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");	
+			/* Solicitar los nuevos datos y guardarlos */	
 			contrato = InterfazContrato.solicitarDatosMod(conex, contrato);
 
 			/* Modificar el objeto recibido con los datos solicitados */
@@ -266,7 +264,7 @@ public class Menu {
 	
 	public static void eliminarContrato(Connection conex, Contrato contrato) throws SQLException {
 		
-		int idInquilino = InterfazGeneral.solicitarID();
+		int idInquilino = InterfazMenu.solicitarID();
 		String codVivienda = InterfazVivienda.solicitarCod();
 		Date fechaInicio = InterfazContrato.solicitarFecha();
 		

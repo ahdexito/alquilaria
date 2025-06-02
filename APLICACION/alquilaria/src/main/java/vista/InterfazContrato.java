@@ -152,12 +152,14 @@ public class InterfazContrato {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// SOLICITAR DATOS DE CONTRATO PARA AÑADIR //
+	// SOLICITAR DATOS DE CONTRATO PARA MODIFICAR //
 	public static Contrato solicitarDatosMod(Connection conex, Contrato contrato) throws SQLException {
 		
 		int idInquilino = contrato.getIdInquilino();
 		String codVivienda = contrato.getCodVivienda();
 		Date fechaInicio = contrato.getFechaInicio();
+		
+		System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");
 		
 		System.out.print("  - FECHA FIN -> (dd/mm/aaaa): ");
 		String fechaFinString = sc.nextLine().trim();

@@ -2,7 +2,7 @@ package vista;
 
 import java.util.Scanner;
 
-public class InterfazGeneral {
+public class InterfazMenu {
 	
 	private static Scanner sc = new Scanner(System.in);			
 			

@@ -4,8 +4,8 @@ public class Vivienda {
     
     // ATRIBUTOS //
 	private String cod, direccion, descripcion;
-	private int idPropietario = -1, tipo, mascotas = -1;
-	private float precio = -1, superficie = -1;
+	private int idPropietario, tipo, mascotas;
+	private float precio, superficie;
 	
 	// CONSTRUCTORES //
 	public Vivienda() {
