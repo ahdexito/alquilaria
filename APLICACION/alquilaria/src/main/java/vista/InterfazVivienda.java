@@ -40,7 +40,7 @@ public class InterfazVivienda {
 				vivienda.setPrecio(precio);
 			}
 			catch (Exception e) {
-				System.out.println("    ERROR: VALOR INCORRECTO. SE ESTABLECERÁ EL VALOR POR DEFECTO -> 0\n");
+				System.out.println("    ERROR: VALOR INCORRECTO. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0)\n");
 			}
 
 			
@@ -51,7 +51,7 @@ public class InterfazVivienda {
 				vivienda.setSuperficie(superficie);
 			}
 			catch (NumberFormatException e) {
-				System.out.println("    ERROR: VALOR INCORRECTO. SE ESTABLECERÁ EL VALOR POR DEFECTO -> 0\n");
+				System.out.println("    ERROR: VALOR INCORRECTO. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0)\n");
 			}
 
 			
@@ -135,8 +135,6 @@ public class InterfazVivienda {
 	
 	// SOLICITAR DATOS DE VIVIENDA PARA MODIFICAR //
 	public static Vivienda solicitarDatosMod(Connection conex, Vivienda vivienda) throws SQLException {
-				
-		System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");	
 		
 		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");
 		String cod = sc.nextLine().trim().toUpperCase();

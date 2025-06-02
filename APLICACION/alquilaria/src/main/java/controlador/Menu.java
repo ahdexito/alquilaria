@@ -183,6 +183,7 @@ public class Menu {
 				(cod, rs.getInt("id_propietario"), rs.getString("direccion"), rs.getFloat("precio"), rs.getFloat("superficie"), rs.getString("descripcion"), rs.getInt("mascotas"), rs.getInt("tipo"));
 			
 			/* Solicitar los nuevos datos y guardarlos */
+			System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");	
 			vivienda = InterfazVivienda.solicitarDatosMod(conex, vivienda);
 
 			/* Modificar el objeto recibido con los datos solicitados */
@@ -199,8 +200,10 @@ public class Menu {
 		
 		/* Solicitar ID a eliminar */
 		String cod = InterfazVivienda.solicitarCod();
+		
+		
 
-		// Llamada al método eliminar //
+		/* Llamada al método eliminar */
 		ViviendaCRUD.eliminar(conex, cod);
 	}
 	
@@ -216,20 +219,58 @@ public class Menu {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void consultarContrato(Connection conex, Contrato contrato) {
+	public static void consultarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
+		int idInquilino = InterfazGeneral.solicitarID();
+		String codVivienda = InterfazVivienda.solicitarCod();
+		Date fechaInicio = InterfazContrato.solicitarFecha();
+		
+		System.out.println("");
+		
+		rs = ContratoCRUD.consultar(conex, idInquilino, codVivienda, fechaInicio);
+		
+		InterfazContrato.imprimir(rs);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void modificarContrato(Connection conex, Contrato contrato) {
+	public static void modificarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
+		/* Solicitar COD a modificar */
+		int idPropietario = InterfazGeneral.solicitarID();
+		String codVivienda = InterfazVivienda.solicitarCod();
+		Date fechaInicio = InterfazContrato.solicitarFecha();
+		
+		/* Realizar consulta con el COD */
+		rs = ContratoCRUD.consultar(conex, idPropietario, codVivienda, fechaInicio);
+
+		/* Comprobar si existe algún campo con ese COD */
+		if (rs.next()) {
+			/* Guardar los datos de esa consulta en un objeto */
+			contrato = new Contrato
+				(idPropietario, codVivienda, fechaInicio, rs.getDate("fecha_fin"), rs.getFloat("precio"), rs.getString("estado"));
+			
+			/* Solicitar los nuevos datos y guardarlos */
+			System.out.println("\nINTRODUCE LOS NUEVOS DATOS:");	
+			contrato = InterfazContrato.solicitarDatosMod(conex, contrato);
+
+			/* Modificar el objeto recibido con los datos solicitados */
+			ContratoCRUD.modificar(conex, contrato);
+		}
+
+		/* Si no existe se cancela la operación */
+		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE CÓDIGO **");
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void eliminarContrato(Connection conex, Contrato contrato) {
+	public static void eliminarContrato(Connection conex, Contrato contrato) throws SQLException {
 		
+		int idInquilino = InterfazGeneral.solicitarID();
+		String codVivienda = InterfazVivienda.solicitarCod();
+		Date fechaInicio = InterfazContrato.solicitarFecha();
+		
+		ContratoCRUD.eliminar(conex, idInquilino, codVivienda, fechaInicio);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

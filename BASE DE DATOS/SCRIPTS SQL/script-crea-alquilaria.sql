@@ -71,7 +71,7 @@ CREATE TABLE contrato (
     precio FLOAT UNSIGNED DEFAULT 0,
     estado ENUM('PENDIENTE', 'ACTIVO', 'VENCIDO') DEFAULT 'PENDIENTE',
     
-    PRIMARY KEY(id_inquilino, cod_vivienda),
+    PRIMARY KEY(id_inquilino, cod_vivienda, fecha_inicio),
 	CONSTRAINT fk_id_inquilino_contrato
 		FOREIGN KEY(id_inquilino) REFERENCES inquilino(id)
     ON DELETE CASCADE,

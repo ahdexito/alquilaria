@@ -45,7 +45,7 @@ public class Main {
 							case 2 -> Menu.consultarPropietario(conex, propietario, rs);
 							case 3 -> Menu.modificarPropietario(conex, propietario, rs);
 							case 4 -> Menu.eliminarPropietario(conex, propietario);
-							case 0 ->System.out.println("  ** REGRESANDO... **");
+							case 0 ->System.out.println("** REGRESANDO... **");
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -76,7 +76,7 @@ public class Main {
 							case 2 -> Menu.consultarInquilino(conex, inquilino,rs);
 							case 3 -> Menu.modificarInquilino(conex, inquilino, rs);
 							case 4 -> Menu.eliminarInquilino(conex, inquilino);
-							case 0 -> System.out.println("  ** REGRESANDO... **");
+							case 0 -> System.out.println("** REGRESANDO... **");
 							
 						}
 						
@@ -108,7 +108,7 @@ public class Main {
 							case 2 -> Menu.consultarVivienda(conex, vivienda, rs);
 							case 3 -> Menu.modificarVivienda(conex, vivienda, rs);
 							case 4 -> Menu.eliminarVivienda(conex, vivienda);
-							case 0 ->System.out.println("  ** REGRESANDO... **");
+							case 0 ->System.out.println("** REGRESANDO... **");
 						}
 						
 						if (subopcion > 0 && subopcion < 5) {
@@ -129,35 +129,23 @@ public class Main {
 						subopcion = InterfazGeneral.submenu("CONTRATO");
 						System.out.println("");
 						
-						
-						// crear objeto
-
+						Contrato contrato = new Contrato();
 
 						switch (subopcion) {
-							case 1: 
-								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
+							case 1 -> Menu.crearContrato(conex, contrato);
+							case 2 -> Menu.consultarContrato(conex, contrato, rs);
+							case 3 -> Menu.modificarContrato(conex, contrato, rs);
+							case 4 -> Menu.eliminarContrato(conex, contrato);
+							case 5 -> {
+								System.out.println("** OPCIÓN EN DESARROLLO... **");
 								Thread.sleep(700);
 								break;
-							case 2: 
-								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
+							}
+							case 0 -> {
+								System.out.println("** REGRESANDO... **");
 								Thread.sleep(700);
 								break;
-							case 3: 
-								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
-								Thread.sleep(700);
-								break;
-							case 4:
-								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
-								Thread.sleep(700);
-								break;
-							case 5:
-								System.out.println("  ** OPCIÓN EN DESARROLLO... **");
-								Thread.sleep(700);
-								break;
-							case 0:
-								System.out.println("  ** REGRESANDO... **");
-								Thread.sleep(700);
-								break;
+							}
 						}
 					}
 					while (subopcion != 0);
@@ -168,7 +156,7 @@ public class Main {
 
 				case 0:
 					// OPCIÓN SALIR DEL PROGRAMA Y CERRAR CONEXIÓN //
-					System.out.println("\n  ** SALIENDO... ¡HASTA PRONTO! **");
+					System.out.println("\n** SALIENDO... ¡HASTA PRONTO! **");
 					Thread.sleep(700);
 
 					db.cerrarConex();

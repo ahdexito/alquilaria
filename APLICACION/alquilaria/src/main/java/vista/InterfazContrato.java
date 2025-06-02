@@ -1,6 +1,5 @@
 package vista;
 
-import modelo.ContratoCRUD;
 import java.util.Scanner;
 import java.sql.*;
 import java.time.LocalDate;
@@ -12,7 +11,7 @@ public class InterfazContrato {
 	
 	private static Scanner sc = new Scanner(System.in);
     
-    // SOLICITAR DATOS DE CONTRATO PARA AÑADIR O MODIFICAR //
+    // SOLICITAR DATOS DE CONTRATO PARA AÑADIR //
 	public static Contrato solicitarDatos(Connection conex, Contrato contrato) throws SQLException {
 		
 		System.out.print("  - ID INQUILINO: ");
@@ -23,7 +22,6 @@ public class InterfazContrato {
 				contrato.getIdInquilino() : Integer.parseInt(idInquilinoString);
 		}
 		catch (NumberFormatException e) {
-			System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR PREVIO **\n");
 			idInquilino = contrato.getIdInquilino();
 		}
 		
@@ -42,11 +40,124 @@ public class InterfazContrato {
 				fechaInicio = Date.valueOf(fechaInicioLocal);
 			}
 			catch (DateTimeParseException e) {
-				System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR PREVIO **\n");
 				fechaInicio = contrato.getFechaInicio();
 			}
 		}
 		
+		
+		System.out.print("  - FECHA FIN -> (dd/mm/aaaa): ");
+		String fechaFinString = sc.nextLine().trim();
+		Date fechaFin = contrato.getFechaFin();
+		if (!fechaFinString.isEmpty()) {
+			try {
+				LocalDate fechaFinLocal = LocalDate.parse(fechaFinString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				fechaFin = Date.valueOf(fechaFinLocal);
+			}
+			catch (DateTimeParseException e) {
+				fechaFin = contrato.getFechaFin();
+			}
+		}
+		
+		
+		System.out.print("  - PRECIO -> (0,0): ");
+		String precioString = sc.nextLine().trim().replace(',', '.');
+		float precio;
+		
+		if (!precioString.isEmpty()) {
+			try {
+				precio = Float.parseFloat(precioString);
+			}
+			catch (NumberFormatException e) {
+				System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0) **\n");
+				precio = 0;
+			}
+		}
+		else {
+			precio = 0;
+			System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (0) **\n");
+		}
+		
+		
+		System.out.print(""
+				+ "  - ESTADO\n"
+				+ "      1. Pendiente\n"
+				+ "      2. Activo\n"
+				+ "      3. Vencido\n"
+				+ "    OPCIÓN: "); 
+		String estado = sc.nextLine().trim();
+		switch (estado) {
+			case "1" -> estado = "PENDIENTE";
+			case "2" -> estado = "ACTIVO";
+			case "3" -> estado = "VENCIDO";
+			default -> {
+				estado = "PENDIENTE";
+				System.out.println("** ENTRADA INCORRECTA. SE ESTABLECERÁ EL VALOR POR DEFECTO -> (PENDIENTE) **");
+			}			
+		}
+		
+		return new Contrato(idInquilino, codVivienda, fechaInicio, fechaFin, precio, estado);
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// SOLICITAR FECHA DE INICIO DE CONTRATO //
+	public static Date solicitarFecha() {
+				
+		// Solicitar fecha del contrato a buscar //
+		System.out.print("  - FECHA INICIO -> (dd/mm/aaaa): ");
+		String fechaInicioString = sc.nextLine().trim();
+		if (!fechaInicioString.isEmpty()) {
+			try {
+				LocalDate fechaInicioLocal = LocalDate.parse(fechaInicioString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				return Date.valueOf(fechaInicioLocal);
+			}
+			catch (DateTimeParseException e) {
+				System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **");
+				return null;
+			}
+		}
+		else {
+			System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **");
+			return null;
+		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE CONTRATO CON FORMATO TIPO TABLA //
+	public static void imprimir(ResultSet rs) throws SQLException {
+		
+		if (rs.next()) {
+			System.out.println(("-").repeat(160));
+			System.out.printf("%-20s %-20s %-30s %-30s %-20s %-30s\n", 
+				"|  ID INQUILINO", "|  COD VIVIENDA", "|  FECHA INICIO", "|  FECHA FIN", "|  PRECIO", "|  ESTADO");
+			System.out.println(("-").repeat(170));
+			
+			String fechaInicio = rs.getDate("fecha_inicio").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			String fechaFin = rs.getDate("fecha_fin").toLocalDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			
+			System.out.printf("%-20s %-20s %-30s %-30s %-20s %-30s",
+				"|  " + rs.getInt("id_inquilino"),
+				"|  " + rs.getString("cod_vivienda"),
+				"|  " + fechaInicio,
+				"|  " + fechaFin,
+				"|  " + (rs.getFloat("precio") + " €").replace('.', ','),
+				"|  " + rs.getString("estado").toUpperCase());
+			
+			System.out.println("\n" + ("-").repeat(160));
+		}
+		
+		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// SOLICITAR DATOS DE CONTRATO PARA AÑADIR //
+	public static Contrato solicitarDatosMod(Connection conex, Contrato contrato) throws SQLException {
+		
+		int idInquilino = contrato.getIdInquilino();
+		String codVivienda = contrato.getCodVivienda();
+		Date fechaInicio = contrato.getFechaInicio();
 		
 		System.out.print("  - FECHA FIN -> (dd/mm/aaaa): ");
 		String fechaFinString = sc.nextLine().trim();
@@ -82,66 +193,15 @@ public class InterfazContrato {
 				+ "      2. Activo\n"
 				+ "      3. Vencido\n"
 				+ "    OPCIÓN: "); 
-		String estado = sc.nextLine().trim();
-		estado = estado.isEmpty() ? contrato.getEstado() : estado;
-		switch (estado) {
-			case "1" -> estado = "PENDIENTE";
-			case "2" -> estado = "ACTIVO";
-			case "3" -> estado = "VENCIDO";
-			default -> estado = "PENDIENTE";
-		}
+		String estadoEntrada = sc.nextLine().trim();
+		String estado = switch (estadoEntrada) {
+			case "1" -> "PENDIENTE";
+			case "2" -> "ACTIVO";
+			case "3" -> "VENCIDO";
+			case "" -> contrato.getEstado() == null ? "PENDIENTE" : contrato.getEstado();
+			default -> contrato.getEstado() == null ? "PENDIENTE" : contrato.getEstado();
+		};
 		
-		return new Contrato(idInquilino, estado, codVivienda, fechaInicio, fechaFin, precio);
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// SOLICITAR FECHA DE INICIO DE CONTRATO //
-	public static Date solicitarIdCod() {
-				
-		// Solicitar fecha del contrato a buscar //
-		System.out.print("  - FECHA INICIO -> (dd/mm/aaaa): ");
-		String fechaInicioString = sc.nextLine().trim();
-		if (!fechaInicioString.isEmpty()) {
-			try {
-				LocalDate fechaInicioLocal = LocalDate.parse(fechaInicioString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-				return Date.valueOf(fechaInicioLocal);
-			}
-			catch (DateTimeParseException e) {
-				System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **\n");
-				return null;
-			}
-		}
-		else {
-			System.out.println("** ENTRADA INCORRECTA. INTÉNTALO DE NUEVO **\n");
-			return null;
-		}
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE VIVIENDA CON FORMATO TIPO TABLA //
-	public static void imprimir(ResultSet rs) throws SQLException {
-		
-		if (rs.next()) {
-			System.out.println(("-").repeat(170));
-			System.out.printf("%-20s %-20s %-30 %-30s %-20s %-30s\n", 
-				"|  ID INQUILINO", "|  COD VIVIENDA", "|  FECHA INICIO", "|  FECHA FIN", "|  PRECIO", "|  ESTADO");
-			System.out.println(("-").repeat(170));
-			
-			System.out.printf("%-20s %-20s %-30 %-30s %-20s %-30s",
-				"|  " + rs.getInt("id_inquilino"),
-				"|  " + rs.getString("cod_vivienda"),
-				"|  " + rs.getDate("fecha_inicio"),
-				"|  " + rs.getDate("fecha_fin"),
-				"|  " + (rs.getFloat("precio") + " €").replace('.', ','),
-				"|  " + rs.getString("estado").toUpperCase());
-			
-			System.out.println("\n" + ("-").repeat(170));
-						
-			System.out.println(("-").repeat(170));
-		}
-		
-		else System.out.println("  ** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
+		return new Contrato(idInquilino, codVivienda, fechaInicio, fechaFin, precio, estado);
 	}
 }

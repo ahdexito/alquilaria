@@ -6,7 +6,7 @@ public class ContratoCRUD {
     
     // CREAR UN CONTRATO //
     public static void crear(Connection conex, Contrato contrato) throws SQLException {
-	
+		
 		try {			
 			String query = "INSERT INTO contrato(id_inquilino, cod_vivienda, fecha_inicio, fecha_fin, precio, estado) "
 					+ "VALUES (?, ?, ?, ?, ?, ?)";
@@ -59,6 +59,9 @@ public class ContratoCRUD {
 			ps.setDate(1, contrato.getFechaFin());
 			ps.setFloat(2, contrato.getPrecio());
 			ps.setString(3, contrato.getEstado());
+			ps.setInt(4, contrato.getIdInquilino());
+			ps.setString(5, contrato.getCodVivienda());
+			ps.setDate(6, contrato.getFechaInicio());
 
 			int filas = ps.executeUpdate();
 
@@ -73,13 +76,15 @@ public class ContratoCRUD {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// ELIMINAR UN CONTRATO //
-	public static void eliminar(Connection conex, String cod) throws SQLException {
+	public static void eliminar(Connection conex, int idInquilino, String codVivienda, Date fechaInicio) throws SQLException {
 		
 		String query = "DELETE FROM contrato WHERE id_inquilino = ? AND cod_vivienda = ? AND fecha_inicio = ?";
 		
 		PreparedStatement ps = conex.prepareStatement(query);
 		
-		ps.setString(1, cod);
+		ps.setInt(1, idInquilino);
+		ps.setString(2, codVivienda);
+		ps.setDate(3, fechaInicio);
 		
 		int filas = ps.executeUpdate();
 		

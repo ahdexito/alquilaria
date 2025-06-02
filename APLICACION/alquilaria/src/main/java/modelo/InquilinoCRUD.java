@@ -37,7 +37,7 @@ public class InquilinoCRUD {
 
 			int filas = ps.executeUpdate();
 
-			System.out.println("\n  ** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
+			System.out.println("\n** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
 		}
 		
 		catch (SQLException e) {
@@ -95,7 +95,7 @@ public class InquilinoCRUD {
 
 			int filas = ps.executeUpdate();
 
-			System.out.println("\n  ** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
+			System.out.println("\n** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
 		}
 		
 		catch (SQLException e) {
@@ -116,6 +116,6 @@ public class InquilinoCRUD {
 		
 		int filas = ps.executeUpdate();
 		
-		System.out.println("\n  ** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
+		System.out.println("\n** OPERACIÓN REALIZADA CON " + filas + " FILAS AFECTADAS **");
 	}
 }

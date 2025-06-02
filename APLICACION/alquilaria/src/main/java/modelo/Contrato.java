@@ -15,7 +15,7 @@ public class Contrato {
 	public Contrato() {
 	}
 
-	public Contrato(int idInquilino, String estado, String codVivienda, Date fechaInicio, Date fechaFin, float precio) {
+	public Contrato(int idInquilino, String codVivienda, Date fechaInicio, Date fechaFin, float precio, String estado) {
 		this.idInquilino = idInquilino;
 		this.estado = estado;
 		this.codVivienda = codVivienda;

@@ -103,7 +103,7 @@ public class InterfazGeneral {
 		int id = -1;
 		
 		// Solicitar ID del sujeto a buscar //
-		System.out.print("  - ID PROPIETARIO: ");		
+		System.out.print("  - ID: ");		
 
 		// Recoger error de entrada por valor no numérico //
 		if (sc.hasNextInt()) id = sc.nextInt();
