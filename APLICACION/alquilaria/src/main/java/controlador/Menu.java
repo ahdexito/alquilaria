@@ -207,8 +207,11 @@ public class Menu {
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	
-	public static void crearContrato(Connection conex, Contrato contrato) {
+	public static void crearContrato(Connection conex, Contrato contrato) throws SQLException {
 		
+		contrato = InterfazContrato.solicitarDatos(conex, contrato);
+		
+		ContratoCRUD.crear(conex, contrato);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
