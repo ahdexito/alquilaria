@@ -1,0 +1,158 @@
+@startuml
+
+' === Entidades ===
+class Propietario {
+  - int id
+  - String dni
+  - String nombre
+  - String apellidos
+  - String correo
+  - String telefono
+  + getters/setters
+}
+
+class Vivienda {
+  - String cod
+  - int idPropietario
+  - String direccion
+  - float precio
+  - float superficie
+  - String descripcion
+  - int mascotas
+  - int tipo
+  + getters/setters
+}
+
+class Inquilino {
+  - int id
+  - String dni
+  - String nombre
+  - String apellidos
+  - String correo
+  - String telefono
+  + getters/setters
+}
+
+class Contrato {
+  - int id
+  - String codVivienda
+  - int idInquilino
+  - Date fechaInicio
+  - Date fechaFin
+  - float precio
+  - String estado
+  + getters/setters
+}
+
+' === Clases CRUD ===
+class PropietarioCRUD {
+  + consultar(Connection, int) : ResultSet
+  + insertar(Connection, Propietario) : boolean
+  + modificar(Connection, Propietario) : boolean
+  + eliminar(Connection, int) : boolean
+  + listar(Connection) : ResultSet
+}
+
+class ViviendaCRUD {
+  + consultar(Connection, String) : ResultSet
+  + insertar(Connection, Vivienda) : boolean
+  + modificar(Connection, Vivienda) : boolean
+  + eliminar(Connection, String) : boolean
+  + listar(Connection) : ResultSet
+}
+
+class InquilinoCRUD {
+  + consultar(Connection, int) : ResultSet
+  + insertar(Connection, Inquilino) : boolean
+  + modificar(Connection, Inquilino) : boolean
+  + eliminar(Connection, int) : boolean
+  + listar(Connection) : ResultSet
+}
+
+class ContratoCRUD {
+  + consultar(Connection, int) : ResultSet
+  + insertar(Connection, Contrato) : boolean
+  + modificar(Connection, Contrato) : boolean
+  + eliminar(Connection, int) : boolean
+  + listar(Connection) : ResultSet
+}
+
+class EstadisticasCRUD {
+  + gastoInquilino(Connection) : ResultSet
+  + cantidadAlquileresPropietario(Connection) : ResultSet
+  + estadoContratos(Connection) : ResultSet
+}
+
+' === Interfaz por consola ===
+class InterfazPropietario {
+  + solicitarID() : int
+  + imprimir(ResultSet) : void
+  + solicitarDatos(Propietario, int) : Propietario
+}
+
+class InterfazVivienda {
+  + solicitarCod() : String
+  + imprimir(ResultSet) : void
+  + solicitarDatos(Connection, Vivienda) : Vivienda
+  + solicitarDatosMod(Vivienda) : Vivienda
+}
+
+class InterfazInquilino {
+  + solicitarID() : int
+  + imprimir(ResultSet) : void
+  + solicitarDatos(Inquilino, int) : Inquilino
+}
+
+class InterfazContrato {
+  + solicitarID() : int
+  + imprimir(ResultSet) : void
+  + solicitarDatos(Connection, Contrato) : Contrato
+  + solicitarDatosMod(Contrato) : Contrato
+}
+
+class InterfazEstadisticas {
+  + mostrarGastoInquilino()
+  + mostrarCantidadAlquileresPropietario()
+  + mostrarEstadoContratos()
+}
+
+' === Clase principal ===
+class Menu {
+  + main(String[]) : void
+  + mostrarMenu() : void
+  + ejecutarOpcion(int) : void
+}
+
+' === Clase Singleton Database ===
+class Database {
+  - static Database conexUnica
+  - Connection conex
+  - Database(String)
+  + static getConex(String) : Database
+  + getConex() : Connection
+  + cerrarConex() : void
+}
+
+' === Relaciones ===
+PropietarioCRUD ..> Propietario
+ViviendaCRUD ..> Vivienda
+InquilinoCRUD ..> Inquilino
+ContratoCRUD ..> Contrato
+EstadisticasCRUD ..> Connection
+
+InterfazPropietario ..> PropietarioCRUD
+InterfazVivienda ..> ViviendaCRUD
+InterfazInquilino ..> InquilinoCRUD
+InterfazContrato ..> ContratoCRUD
+InterfazEstadisticas ..> EstadisticasCRUD
+
+Menu ..> InterfazPropietario
+Menu ..> InterfazVivienda
+Menu ..> InterfazInquilino
+Menu ..> InterfazContrato
+Menu ..> InterfazEstadisticas
+Menu ..> Database
+
+Database --> Connection
+
+@enduml
