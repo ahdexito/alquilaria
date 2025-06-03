@@ -22,7 +22,7 @@ public class EstadisticasCRUD {
 		String query = ""
 			+ "SELECT p.nombre, p.apellidos, COUNT(DISTINCT c.cod_vivienda) AS viviendas_alquiladas "
 			+ "FROM contrato c "
-			+ "JOIN vivienda v oN c.cod_vivienda = v.cod "
+			+ "JOIN vivienda v ON c.cod_vivienda = v.cod "
 			+ "JOIN propietario p ON v.id_propietario = p.id "
 			+ "GROUP BY p.id";
 

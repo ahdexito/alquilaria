@@ -95,7 +95,7 @@ public class InterfazContrato {
 				fechaInicio = contrato.getFechaInicio();
 			}
 		}
-		
+		System.out.println("fecha: " + fechaInicio);
 		
 		System.out.print("  - FECHA FIN -> (dd/mm/aaaa): ");
 		String fechaFinString = sc.nextLine().trim();

@@ -112,7 +112,7 @@ public class InterfazMenu {
 	// IMPRIMIR MENÚ ESTADÍSTICAS //
 	public static int estadisticas() throws InterruptedException {
 		
-		int opcion = -1;
+		int opcion;
 		
 		do {			
 			System.out.print("\n\n"
@@ -125,30 +125,33 @@ public class InterfazMenu {
 			+ "---------------------------------------------------\n"
 			+ "\n"
 			+ "INTRODUCE OPCIÓN: ");
-		
+			
+			opcion = -1;
 			
 			if (sc.hasNextInt()) {
-					opcion = sc.nextInt();
-					sc.nextLine();
+				opcion = sc.nextInt();
+				sc.nextLine();
+				
+				if (opcion == 0) {
+					System.out.print("\n** REGRESANDO... **");
+					System.out.println("");
+					Thread.sleep(500);
+					return opcion;
+				}
+				
+				else if (opcion >= 1 && opcion <= 3) return opcion;
+				
+				else {
+					System.out.println("\n** LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4 **");
+					Thread.sleep(500);
+				}
 			}
 			else {
+				System.out.println("\n** LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4 **");
 				Thread.sleep(500);
 				sc.nextLine();
 			}
-			
-			if (opcion == 0) {
-				System.out.print("\n** REGRESANDO... **");
-				System.out.println("");
-				Thread.sleep(500);
-			}
-			else if (opcion < 0 || opcion > 3){
-				System.out.println("\n** LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4 **");
-				Thread.sleep(500);
-			}
-			
 		}
-		while (opcion < 0 || opcion > 3);
-		
-		return opcion;
+		while (true);
 	} 
 }

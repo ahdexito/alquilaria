@@ -151,20 +151,23 @@ public class Main {
 				
 				// OPCIÓN ESTADÍSTICAS //
 				case 5:
-							
-					subopcion = InterfazMenu.estadisticas();
-					System.out.println("");
+					
+					do {						
+						subopcion = InterfazMenu.estadisticas();
+						System.out.println("");
 
-					switch (subopcion) {
-						case 1 -> Menu.gastoInquilino(conex, rs);
-						case 2 -> Menu.cantidadAlquileresPropietario(conex, rs);
-						case 3 -> Menu.estadoContratos(conex, rs);
+						switch (subopcion) {
+							case 1 -> Menu.gastoInquilino(conex, rs);
+							case 2 -> Menu.cantidadAlquileresPropietario(conex, rs);
+							case 3 -> Menu.estadoContratos(conex, rs);
+						}
+						if (subopcion > 0 && subopcion < 5) {
+							/* Detención del programa */
+							System.out.print("\n--> CONTINUAR [ENTER] <--");
+							sc.nextLine();
+						}
 					}
-					if (subopcion > 0 && subopcion < 5) {
-						/* Detención del programa */
-						System.out.print("\n--> CONTINUAR [ENTER] <--");
-						sc.nextLine();
-					}
+					while (subopcion != 0);
 					
 					break;
 				
