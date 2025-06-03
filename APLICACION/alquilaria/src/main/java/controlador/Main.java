@@ -157,6 +157,8 @@ public class Main {
 
 					switch (subopcion) {
 						case 1 -> Menu.gastoInquilino(conex, rs);
+						case 2 -> Menu.cantidadAlquileresPropietario(conex, rs);
+						case 3 -> Menu.estadoContratos(conex, rs);
 					}
 					if (subopcion > 0 && subopcion < 5) {
 						/* Detención del programa */

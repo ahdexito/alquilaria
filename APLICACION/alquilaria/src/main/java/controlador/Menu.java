@@ -366,4 +366,20 @@ public class Menu {
 		
 		InterfazEstadisticas.gastoInquilino(rs);
 	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static void cantidadAlquileresPropietario(Connection conex, ResultSet rs) throws SQLException {
+		
+		rs = EstadisticasCRUD.cantidadAlquileresPropietario(conex);
+		
+		InterfazEstadisticas.cantidadAlquileresPropietario(rs);
+	}
+	
+	public static void estadoContratos(Connection conex, ResultSet rs) throws SQLException {
+		
+		rs = EstadisticasCRUD.estadoContratos(conex);
+		
+		InterfazEstadisticas.estadoContratos(rs);
+	}
 }
