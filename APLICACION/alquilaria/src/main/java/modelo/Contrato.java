@@ -2,6 +2,10 @@ package modelo;
 
 import java.sql.Date;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class Contrato {
     
     // ATRIBUTOS //

@@ -2,6 +2,10 @@ package modelo;
 
 import java.sql.*;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 // PATRÓN SINGLETON //
 public class Database {
     

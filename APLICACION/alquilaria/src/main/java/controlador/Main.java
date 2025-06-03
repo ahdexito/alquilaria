@@ -6,6 +6,10 @@ import vista.*;
 import java.util.Scanner;
 import java.sql.*;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class Main {
     
     public static void main(String[] args) throws InterruptedException, SQLException {

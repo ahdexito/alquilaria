@@ -2,6 +2,10 @@ package vista;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class InterfazMenu {
 	
 	private static Scanner sc = new Scanner(System.in);			

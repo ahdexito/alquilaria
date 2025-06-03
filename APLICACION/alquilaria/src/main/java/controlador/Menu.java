@@ -7,6 +7,10 @@ import java.sql.*;
 import modelo.*;
 import vista.*;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class Menu {
     
 	// CREAR PROPIETARIO //

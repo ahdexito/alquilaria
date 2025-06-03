@@ -7,6 +7,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import modelo.*;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class InterfazContrato {
 	
 	private static Scanner sc = new Scanner(System.in);

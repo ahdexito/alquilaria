@@ -5,6 +5,10 @@ import java.util.Scanner;
 import java.sql.*;
 import modelo.*;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class InterfazVivienda {
 	
 	private static Scanner sc = new Scanner(System.in);

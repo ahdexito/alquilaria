@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import modelo.*;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class InterfazInquilino {
 	
 	private static Scanner sc = new Scanner(System.in);

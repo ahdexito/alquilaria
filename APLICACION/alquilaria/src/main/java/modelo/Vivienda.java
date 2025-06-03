@@ -1,5 +1,9 @@
 package modelo;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class Vivienda {
     
     // ATRIBUTOS //

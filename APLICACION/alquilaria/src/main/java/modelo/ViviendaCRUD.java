@@ -2,6 +2,10 @@ package modelo;
 
 import java.sql.*;
 
+/**
+ *
+ * @author Ángel García Smakula
+ */
 public class ViviendaCRUD {
     
     // CREAR UNA VIVIENDA //
