@@ -37,7 +37,7 @@ public class Main {
 				case 1:
 					do {
 						/* Imprimir menú mantenimiento de propietario y solicitar opción menú */
-						subopcion = InterfazMenu.submenu("PROPIETARIO");
+						subopcion = InterfazMenu.submenu("PROPIETARIOS");
 						System.out.println("");
 
 						/* Instancia de objeto propietario */
@@ -67,7 +67,7 @@ public class Main {
 				case 2:
 					do {
 						/* Imprimir menú mantenimiento de inquilino y solicitar opción menú */
-						subopcion = InterfazMenu.submenu("INQUILINO");
+						subopcion = InterfazMenu.submenu("INQUILINOS");
 						System.out.println("");
 
 						/* Instancia de objeto inquilino */
@@ -97,7 +97,7 @@ public class Main {
 				case 3:
 					do {
 						/* Imprimir menú mantenimiento de vivienda y solicitar opción menú */
-						subopcion = InterfazMenu.submenu("VIVIENDA");
+						subopcion = InterfazMenu.submenu("VIVIENDAS");
 						System.out.println("");
 
 						/* Instancia de objeto vivienda */
@@ -126,7 +126,7 @@ public class Main {
 				// OPCIÓN CONTRATO //
 				case 4:
 					do {
-						subopcion = InterfazMenu.submenu("CONTRATO");
+						subopcion = InterfazMenu.submenu("CONTRATOS");
 						System.out.println("");
 						
 						Contrato contrato = new Contrato();
@@ -148,7 +148,24 @@ public class Main {
 					break;
 
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				
+				// OPCIÓN ESTADÍSTICAS //
+				case 5:
+							
+					subopcion = InterfazMenu.estadisticas();
+					System.out.println("");
 
+					switch (subopcion) {
+						case 1 -> Menu.gastoInquilino(conex, rs);
+					}
+					if (subopcion > 0 && subopcion < 5) {
+						/* Detención del programa */
+						System.out.print("\n--> CONTINUAR [ENTER] <--");
+						sc.nextLine();
+					}
+					
+					break;
+				
 				case 0:
 					// OPCIÓN SALIR DEL PROGRAMA Y CERRAR CONEXIÓN //
 					System.out.println("\n** SALIENDO... ¡HASTA PRONTO! **");

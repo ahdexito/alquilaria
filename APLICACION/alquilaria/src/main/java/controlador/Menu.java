@@ -356,4 +356,14 @@ public class Menu {
 	public static void cambiarEstadoContrato(Connection conex, Contrato contrato) {
 		
 	}
+	
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+	
+	public static void gastoInquilino(Connection conex, ResultSet rs) throws SQLException {
+		
+		rs = EstadisticasCRUD.gastoInquilino(conex);
+		
+		InterfazEstadisticas.gastoInquilino(rs);
+	}
 }

@@ -20,6 +20,7 @@ public class InterfazMenu {
 				+ "  2. INQUILINOS\n"
 				+ "  3. VIVIENDAS\n"
 				+ "  4. CONTRATOS\n"
+				+ "  5. ESTADÍSTICAS\n"
 				+ "\n"
 				+ "  0. SALIR\n"
 				+ "----------------------------------------------------\n"
@@ -29,7 +30,7 @@ public class InterfazMenu {
 			if (sc.hasNextInt()) {
 				int opcion = sc.nextInt();
 				sc.nextLine();
-				if (opcion >= 0 && opcion <= 4) {
+				if (opcion >= 0 && opcion <= 5) {
 					Thread.sleep(500);
 					return opcion;
 				}
@@ -50,11 +51,11 @@ public class InterfazMenu {
 		int opcion = -1;
 		String opcion5 = "";
 
-		if (tabla.equals("CONTRATO")) opcion5 = "  5. CAMBIAR ESTADO\n";
+		if (tabla.equals("CONTRATOS")) opcion5 = "  5. CAMBIAR ESTADO\n";
 			
 		do {
 			System.out.print("\n\n"
-				+ "---------- [ MANTENIMIENTO TABLA " + tabla + " ] ---------\n"
+				+ "---------- [ GESTIÓN DE " + tabla + " ] ---------\n"
 				+ "  1. CREAR\n"
 				+ "  2. CONSULTAR\n"
 				+ "  3. MODIFICAR\n"
@@ -71,7 +72,7 @@ public class InterfazMenu {
 				
 				if (
 					(opcion >= 0 && opcion <= 4) ||
-					(tabla.equals("CONTRATO") && opcion == 5)
+					(tabla.equals("CONTRATOS") && opcion == 5)
 				) {
 					switch (opcion) {
 						case 1 -> System.out.print("\n\n------------- [ CREAR " + tabla + " ] -------------\n");
@@ -105,4 +106,49 @@ public class InterfazMenu {
 		
 		return opcion;
 	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// IMPRIMIR MENÚ ESTADÍSTICAS //
+	public static int estadisticas() throws InterruptedException {
+		
+		int opcion = -1;
+		
+		do {			
+			System.out.print("\n\n"
+			+ "------------- [ MENÚ ESTADÍSTICAS ] --------------\n"
+			+ "  1. GASTO TOTAL DE CADA INQUILINO\n"
+			+ "  2. CANTIDAD DE VIVIENDAS EN ALQUILER POR PROPIETARIO\n"
+			+ "  3. CANTIDAD DE CONTRATOS SEGÚN ESTADO DE FIRMA\n"
+			+ "\n"
+			+ "  0. VOLVER\n"
+			+ "---------------------------------------------------\n"
+			+ "\n"
+			+ "INTRODUCE OPCIÓN: ");
+		
+			
+			if (sc.hasNextInt()) {
+					opcion = sc.nextInt();
+					sc.nextLine();
+			}
+			else {
+				Thread.sleep(500);
+				sc.nextLine();
+			}
+			
+			if (opcion == 0) {
+				System.out.print("\n** REGRESANDO... **");
+				System.out.println("");
+				Thread.sleep(500);
+			}
+			else if (opcion < 0 || opcion > 3){
+				System.out.println("\n** LA ENTRADA DEBE SER UN NÚMERO ENTERO DEL 0 AL 4 **");
+				Thread.sleep(500);
+			}
+			
+		}
+		while (opcion < 0 || opcion > 3);
+		
+		return opcion;
+	} 
 }
