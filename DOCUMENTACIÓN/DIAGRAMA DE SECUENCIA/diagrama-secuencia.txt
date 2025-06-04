@@ -1,0 +1,19 @@
+Cliente -> InterfazMenu: 5: ESTADÍSTICAS
+activate InterfazMenu
+InterfazMenu -> InterfazEstadisticas: estadisticas()
+activate InterfazEstadisticas
+InterfazEstadisticas -> Database: getConex("nombreBD").getConex()
+activate Database
+Database -->> InterfazEstadisticas: Connection (Singleton instance)
+deactivate Database
+InterfazEstadisticas -> EstadisticasCRUD: gastoInquilino(conex)
+activate EstadisticasCRUD
+EstadisticasCRUD -->> InterfazEstadisticas: ResultSet
+deactivate EstadisticasCRUD
+InterfazEstadisticas -> InterfazEstadisticas: gastoInquilino(resultSet)
+InterfazEstadisticas -> InterfazEstadisticas: preguntarExportar(prefijo, filas)
+InterfazEstadisticas -> Cliente: ** EXPORTAR DATOS EN FORMATO JSON? ** — (S / N)
+Cliente -->> InterfazEstadisticas: Respuesta del usuario
+InterfazEstadisticas -> InterfazEstadisticas: Crear y escribir archivo JSON (si la respuesta es "S")
+deactivate InterfazEstadisticas
+deactivate InterfazMenu
