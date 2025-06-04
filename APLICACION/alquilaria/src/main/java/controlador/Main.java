@@ -7,11 +7,25 @@ import java.util.Scanner;
 import java.sql.*;
 
 /**
- *
+ * Clase principal que actúa como punto de entrada del programa.
+ * Gestiona la navegación por los menús y las operaciones CRUD sobre propietarios, inquilinos,
+ * viviendas, contratos y estadísticas.
+ * 
  * @author Ángel García Smakula
  */
+
 public class Main {
     
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Método principal que inicia la aplicación de consola para la gestión de alquileres.
+	 * Establece laconexión con la base de datos y gestiona la navegación por los distintos menús.
+	 * 
+	 * @param args
+	 * @throws InterruptedException
+	 * @throws SQLException 
+	 */
+	
     public static void main(String[] args) throws InterruptedException, SQLException {
         
 		Scanner sc = new Scanner(System.in);

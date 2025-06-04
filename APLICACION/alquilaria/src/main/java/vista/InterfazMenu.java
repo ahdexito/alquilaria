@@ -3,14 +3,25 @@ package vista;
 import java.util.Scanner;
 
 /**
- *
+ * Clase que gestiona la interfaz de menú en consola para las distintas secciones del programa.
+ * Permite al usuario navegar por las opciones del sistema y seleccionar acciones específicas.
+ * 
  * @author Ángel García Smakula
  */
+
 public class InterfazMenu {
 	
 	private static Scanner sc = new Scanner(System.in);			
-			
-	// IMPRIMIR EL MENÚ PRINCIPAL //
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Muestra el menú principal del sistema y solicita al usuario una opción válida.
+	 *
+	 * @return
+	 * @throws InterruptedException
+	 * 
+	 */ 
+	
     public static int menuPrincipal() throws InterruptedException {	
 		
 		do {			
@@ -43,9 +54,16 @@ public class InterfazMenu {
 		} while (true);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Muestra el submenú de gestión correspondiente a una tabla específica (como propietarios, inquilinos, etc.)
+	 * y solicita al usuario una opción válida
+	 * 
+	 * @param tabla
+	 * @return
+	 * @throws InterruptedException 
+	 */
 	
-	// IMPRIMIR EL SUBMENÚ DE CADA TABLA //
 	public static int submenu(String tabla) throws InterruptedException {
 		
 		int opcion = -1;
@@ -107,9 +125,14 @@ public class InterfazMenu {
 		return opcion;
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Muestra el menú de estadísticas y solicita al usuario una opción válida.
+	 * 
+	 * @return
+	 * @throws InterruptedException 
+	 */
 	
-	// IMPRIMIR MENÚ ESTADÍSTICAS //
 	public static int estadisticas() throws InterruptedException {
 		
 		int opcion;

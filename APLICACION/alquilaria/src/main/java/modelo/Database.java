@@ -3,10 +3,12 @@ package modelo;
 import java.sql.*;
 
 /**
+ * Implementa el patrón Singleton para asegurar una única instancia de conexión a la base de datos.
+ * Proporciona métodos para obtener y cerrar la conexión.
  *
  * @author Ángel García Smakula
  */
-// PATRÓN SINGLETON //
+
 public class Database {
     
     private static Database conexUnica = null;

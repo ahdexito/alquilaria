@@ -3,12 +3,23 @@ package modelo;
 import java.sql.*;
 
 /**
+ * Clase que gestiona las operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * para la entidad Inquilino en la base de datos.
  *
  * @author Ángel García Smakula
  */
+
 public class InquilinoCRUD {
     
-    // CREAR UN INQUILINO //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Inserta un nuevo inquilino en la base de datos.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param inquilino Objeto Inquilino con los datos a insertar.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
+	
     public static void crear(Connection conex, Inquilino inquilino) throws SQLException {
 		
 		try {			
@@ -34,8 +45,15 @@ public class InquilinoCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Consulta un inquilino en la base de datos por su ID.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param id El ID del inquilino a consultar.
+     * @return Un ResultSet que contiene los datos del inquilino encontrado.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// CONSULTAR UN INQUILINO //
 	public static ResultSet consultar(Connection conex, int id) throws SQLException {
 		
 		String query = "SELECT * FROM inquilino WHERE id = ?";
@@ -48,8 +66,14 @@ public class InquilinoCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Modifica un inquilino existente en la base de datos.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param inquilino Objeto Inquilino con los nuevos datos, incluyendo el ID para la modificación.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// MODIFICAR UN INQUILINO //
 	public static void modificar(Connection conex, Inquilino inquilino) throws SQLException {
 			
 		try {
@@ -76,8 +100,14 @@ public class InquilinoCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Elimina un inquilino de la base de datos por su ID.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param id El ID del inquilino a eliminar.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// ELIMINAR UN INQUILINO //
 	public static void eliminar(Connection conex, int id) throws SQLException {
 		
 		String query = "DELETE FROM inquilino WHERE id = ?";

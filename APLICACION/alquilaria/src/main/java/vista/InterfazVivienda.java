@@ -6,14 +6,25 @@ import java.sql.*;
 import modelo.*;
 
 /**
+ * Clase que gestiona la interacción con el usuario para las operaciones relacionadas con viviendas.
+ * Incluye métodos para solicitar datos de entrada, como el código de la vivienda, y para imprimir
+ * los resultados de consultas de viviendas en un formato legible.
  *
  * @author Ángel García Smakula
  */
+
 public class InterfazVivienda {
 	
 	private static Scanner sc = new Scanner(System.in);
     
-	// OPCIÓN CONSULTAR UNA VIVIENDA DADO SU CÓDIGO //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario el código de una vivienda.
+     * Convierte la entrada a mayúsculas para estandarización.
+     *
+     * @return El código de la vivienda introducido por el usuario.
+     */
+	
 	public static String solicitarCod() {
 				
 		// Solicitar ID del inquilino a buscar //
@@ -25,8 +36,17 @@ public class InterfazVivienda {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Imprime los datos de una vivienda obtenidos de un ResultSet en un formato de tabla.
+     * Formatea el precio con el símbolo del euro y la coma como separador decimal,
+     * la superficie con unidades de m2 y la coma como separador decimal,
+     * y el estado de las mascotas y el tipo de vivienda en mayúsculas para una presentación clara.
+     * También muestra la descripción de la vivienda en una línea separada.
+     *
+     * @param rs El ResultSet que contiene los datos de la consulta de una vivienda.
+     * @throws SQLException Si ocurre un error al acceder a los datos del ResultSet.
+     */
 	
-	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE VIVIENDA CON FORMATO TIPO TABLA //
 	public static void imprimir(ResultSet rs) throws SQLException {
 		
 		System.out.println(("-").repeat(170));
@@ -57,8 +77,19 @@ public class InterfazVivienda {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario los datos para la creación de una nueva vivienda.
+     * Incluye la solicitud del código de la vivienda, ID del propietario, dirección, precio, superficie,
+     * descripción, si permite mascotas y el tipo de vivienda.
+     * Realiza validación de la existencia del propietario, formateo de texto y validación de entrada
+     * para valores numéricos, asignando valores por defecto en caso de errores o entradas vacías.
+     *
+     * @param conex Conexión activa a la base de datos, necesaria para verificar la existencia del propietario.
+     * @param vivienda Objeto Vivienda que se utiliza como base, aunque para una nueva vivienda se espera que sea un objeto vacío.
+     * @return Un nuevo objeto Vivienda con los datos introducidos por el usuario o los valores por defecto.
+     * @throws SQLException Si ocurre un error al consultar la base de datos (por ejemplo, al verificar el propietario).
+     */
 	
-    // SOLICITAR DATOS DE VIVIENDA PARA AÑADIR //
 	public static Vivienda solicitarDatos(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		System.out.print("  - CÓDIGO VIVIENDA -> (V000): ");
@@ -149,8 +180,19 @@ public class InterfazVivienda {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario los datos para la modificación de una vivienda existente.
+     * Mantiene el código de la vivienda original ya que es la clave de identificación.
+     * Permite al usuario actualizar el ID del propietario, dirección, precio, superficie, descripción,
+     * si permite mascotas y el tipo de vivienda.
+     * Incluye validación de formato para números y maneja las entradas vacías, conservando los valores previos
+     * del objeto Vivienda si la entrada es incorrecta o no se proporciona.
+     *
+     * @param vivienda Objeto Vivienda que contiene los datos actuales de la vivienda a modificar,
+     * los cuales se utilizan como valores por defecto en caso de entradas vacías o incorrectas.
+     * @return Un nuevo objeto Vivienda con los datos actualizados, manteniendo el código original.
+     */
 	
-	// SOLICITAR DATOS DE VIVIENDA PARA MODIFICAR //
 	public static Vivienda solicitarDatosMod(Vivienda vivienda) {
 		
 		String codVivienda = vivienda.getCod();

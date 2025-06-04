@@ -3,12 +3,23 @@ package modelo;
 import java.sql.*;
 
 /**
- *
+ * Clase que gestiona las operaciones CRUD sobre la tabla de contratos en la base de datos.
+ * Incluye métodos para crear, consultar, modificar y eliminar contratos.
+ * 
  * @author Ángel García Smakula
  */
+
 public class ContratoCRUD {
     
-    // CREAR UN CONTRATO //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Inserta un nuevo contrato en la base de datos.
+     * 
+     * @param conex Conexión activa a la base de datos.
+     * @param contrato Objeto contrato con los datos a insertar.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta.
+     */
+	
     public static void crear(Connection conex, Contrato contrato) throws SQLException {
 		
 		try {			
@@ -35,8 +46,17 @@ public class ContratoCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Consulta un contrato en la base de datos según ID del inquilino, código de vivienda y fecha de inicio.
+     * 
+     * @param conex Conexión activa a la base de datos.
+     * @param idInquilino ID del inquilino asociado al contrato.
+     * @param codVivienda Código de la vivienda asociada.
+     * @param fechaInicio Fecha de inicio del contrato.
+     * @return Resultado de la consulta como un ResultSet.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta.
+     */
 	
-	// CONSULTAR UN CONTRATO //
 	public static ResultSet consultar(Connection conex, int idInquilino, String codVivienda, Date fechaInicio) throws SQLException {
 		
 		String query = "SELECT * FROM contrato WHERE id_inquilino = ? AND cod_vivienda = ? AND fecha_inicio = ?";
@@ -51,8 +71,14 @@ public class ContratoCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// MODIFICAR UN CONTRATO //
+    /**
+     * Modifica un contrato existente en la base de datos.
+     * 
+     * @param conex Conexión activa a la base de datos.
+     * @param contrato Objeto contrato con los nuevos datos.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta.
+     */
+
 	public static void modificar(Connection conex, Contrato contrato) throws SQLException {	
 		
 		try {
@@ -78,8 +104,16 @@ public class ContratoCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	// ELIMINAR UN CONTRATO //
+    /**
+     * Elimina un contrato de la base de datos según ID del inquilino, código de vivienda y fecha de inicio.
+     * 
+     * @param conex Conexión activa a la base de datos.
+     * @param idInquilino ID del inquilino asociado al contrato.
+     * @param codVivienda Código de la vivienda asociada.
+     * @param fechaInicio Fecha de inicio del contrato.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta.
+     */
+
 	public static void eliminar(Connection conex, int idInquilino, String codVivienda, Date fechaInicio) throws SQLException {
 		
 		String query = "DELETE FROM contrato WHERE id_inquilino = ? AND cod_vivienda = ? AND fecha_inicio = ?";

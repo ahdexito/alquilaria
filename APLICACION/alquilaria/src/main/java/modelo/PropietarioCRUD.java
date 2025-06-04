@@ -3,12 +3,23 @@ package modelo;
 import java.sql.*;
 
 /**
+ * Clase que gestiona las operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * para la entidad Propietario en la base de datos.
  *
  * @author Ángel García Smakula
  */
+
 public class PropietarioCRUD {
 	
-    // CREAR UN PROPIETARIO //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Inserta un nuevo propietario en la base de datos.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param propietario Objeto Propietario con los datos a insertar.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
+	
     public static void crear(Connection conex, Propietario propietario) throws SQLException {
 		
 		try {
@@ -33,8 +44,15 @@ public class PropietarioCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Consulta un propietario en la base de datos por su ID.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param id El ID del propietario a consultar.
+     * @return Un ResultSet que contiene los datos del propietario encontrado.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// CONSULTAR UN PROPIETARIO //
 	public static ResultSet consultar(Connection conex, int id) throws SQLException {
 		
 		String query = "SELECT * FROM propietario WHERE id = ?";
@@ -47,8 +65,14 @@ public class PropietarioCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Modifica un propietario existente en la base de datos.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param propietario Objeto Propietario con los nuevos datos, incluyendo el ID para la modificación.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// MODIFICAR UN PROPIETARIO //
 	public static void modificar(Connection conex, Propietario propietario) throws SQLException {
 				
 		try {
@@ -74,8 +98,14 @@ public class PropietarioCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Elimina un propietario de la base de datos por su ID.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param id El ID del propietario a eliminar.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// ELIMINAR UN PROPIETARIO //
 	public static void eliminar(Connection conex, int id) throws SQLException {
 		
 		String query = "DELETE FROM propietario WHERE id = ?";

@@ -8,12 +8,23 @@ import modelo.*;
 import vista.*;
 
 /**
- *
+ * Clase Menu que contiene métodos estáticos para gestionar
+ * operaciones CRUD de Propietarios, Inquilinos, Viviendas y Contratos.
+ * 
  * @author Ángel García Smakula
  */
+
 public class Menu {
-    
-	// CREAR PROPIETARIO //
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Crea un nuevo propietario solicitando datos por consola y guardándolo en la base de datos.
+	 * 
+	 * @param conex
+	 * @param propietario
+	 * @throws SQLException 
+	 */
+
     public static void crearPropietario(Connection conex, Propietario propietario) throws SQLException {
 		
 		/* Solicitar datos para crear objeto */
@@ -23,9 +34,16 @@ public class Menu {
 		PropietarioCRUD.crear(conex, propietario);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Consulta y muestra un propietario por su ID.
+	 * 
+	 * @param conex
+	 * @param propietario
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// CONSULTAR PROPIETARIO //
 	public static void consultarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID */
@@ -43,9 +61,16 @@ public class Menu {
 		else System.out.println("** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Modifica los datos de un propietario existente, solicitando nuevos datos por consola.
+	 * 
+	 * @param conex
+	 * @param propietario
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// MODIFICAR PROPIETARIO //
 	public static void modificarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID */
@@ -72,9 +97,16 @@ public class Menu {
 		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Elimina un propietario según su ID.
+	 * 
+	 * @param conex
+	 * @param propietario
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// ELIMINAR PROPIETARIO //
 	public static void eliminarPropietario(Connection conex, Propietario propietario, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID */
@@ -96,8 +128,14 @@ public class Menu {
 	
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-	
-	// CREAR INQUILINO //
+	/**
+     * Crea un nuevo inquilino solicitando datos por consola y guardándolo en la base de datos.
+	 * 
+	 * @param conex
+	 * @param inquilino
+	 * @throws SQLException 
+	 */
+
 	public static void crearInquilino(Connection conex, Inquilino inquilino) throws SQLException {
 		
 		/* Solicitar datos para crear objeto */
@@ -107,9 +145,16 @@ public class Menu {
 		InquilinoCRUD.crear(conex, inquilino);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Consulta y muestra un inquilino por su ID.
+	 * 
+	 * @param conex
+	 * @param inquilino
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// CONSULTAR INQUILINO //
 	public static void consultarInquilino(Connection conex, Inquilino inquilino, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID */
@@ -125,9 +170,16 @@ public class Menu {
 		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Modifica los datos de un inquilino existente, solicitando nuevos datos por consola.
+	 * 
+	 * @param conex
+	 * @param inquilino
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// MODIFICAR INQUILINO //
 	public static void modificarInquilino(Connection conex, Inquilino inquilino, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID */
@@ -154,9 +206,16 @@ public class Menu {
 		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");						
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Elimina un inquilino según su ID.
+	 * 
+	 * @param conex
+	 * @param inquilino
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// ELIMINAR INQUILINO //
 	public static void eliminarInquilino(Connection conex, Inquilino inquilino, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID */
@@ -178,8 +237,14 @@ public class Menu {
 	
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+	/**
+     * Crea una nueva vivienda solicitando datos por consola y guardándola en la base de datos.
+	 * 
+	 * @param conex
+	 * @param vivienda
+	 * @throws SQLException 
+	 */
 	
-	// CREAR VIVIENDA //
 	public static void crearVivienda(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		/* Solicitar datos para crear objeto */
@@ -189,9 +254,16 @@ public class Menu {
 		ViviendaCRUD.crear(conex, vivienda);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Consulta y muestra una vivienda por su código.
+	 * 
+	 * @param conex
+	 * @param vivienda
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// CONSULTAR VIVIENDA //
 	public static void consultarVivienda(Connection conex, Vivienda vivienda, ResultSet rs) throws SQLException {
 		
 		/* Solicitar COD */
@@ -209,9 +281,16 @@ public class Menu {
 		else System.out.println("** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Modifica los datos de una vivienda existente, solicitando nuevos datos por consola.
+	 * 
+	 * @param conex
+	 * @param vivienda
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// MODIFICAR VIVIENDA //
 	public static void modificarVivienda(Connection conex, Vivienda vivienda, ResultSet rs) throws SQLException {
 		
 		/* Solicitar COD */
@@ -238,9 +317,16 @@ public class Menu {
 		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE CÓDIGO **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Elimina una vivienda según su código.
+	 * 
+	 * @param conex
+	 * @param vivienda
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// ELIMINAR VIVIENDA //
 	public static void eliminarVivienda(Connection conex, Vivienda vivienda, ResultSet rs) throws SQLException {
 		
 		/* Solicitar COD */
@@ -262,8 +348,14 @@ public class Menu {
 	
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-	
-	// CREAR CONTRATO //
+	/**
+     * Crea un nuevo contrato solicitando datos por consola y guardándolo en la base de datos.
+	 * 
+	 * @param conex
+	 * @param contrato
+	 * @throws SQLException 
+	 */
+
 	public static void crearContrato(Connection conex, Contrato contrato) throws SQLException {
 		
 		/* Solicitar datos para crear objeto */
@@ -274,8 +366,15 @@ public class Menu {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Consulta y muestra un contrato según su clave compuesta: idInquilino, codVivienda y fechaInicio.
+	 * 
+	 * @param conex
+	 * @param contrato
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// CONSULTAR CONTRATO //
 	public static void consultarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID, COD, y fechaInicio (clave primaria conjunta) */
@@ -295,9 +394,16 @@ public class Menu {
 		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Modifica los datos de un contrato existente, solicitando nuevos datos por consola.
+	 * 
+	 * @param conex
+	 * @param contrato
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// MODIFICAR CONTRATO //
 	public static void modificarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID, COD, y fechaInicio (clave primaria conjunta) */
@@ -326,9 +432,16 @@ public class Menu {
 		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE CÓDIGO **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Elimina un contrato según su clave compuesta: idInquilino, codVivienda y fechaInicio.
+	 * 
+	 * @param conex
+	 * @param contrato
+	 * @param rs
+	 * @throws SQLException 
+	 */
 	
-	// ELIMINAR CONTRATO //
 	public static void eliminarContrato(Connection conex, Contrato contrato, ResultSet rs) throws SQLException {
 		
 		/* Solicitar ID, COD, y fechaInicio (clave primaria conjunta) */
@@ -350,16 +463,26 @@ public class Menu {
 		else System.out.println("\n** NO SE HAN ENCONTRADO REGISTROS PARA ESE ID **");
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * @param conex
+	 * @param contrato 
+	 */
 	
-	// CAMBIAR ESTADO CONTRATO //
 	public static void cambiarEstadoContrato(Connection conex, Contrato contrato) {
 		
 	}
 	
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 	// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-	
+	/**
+	 * Calcula y muestra el gasto total en alquiler de cada inquilino.
+	 * 
+	 * @param conex
+	 * @param rs
+	 * @throws java.sql.SQLException
+	 */
+		
 	public static void gastoInquilino(Connection conex, ResultSet rs) throws SQLException {
 		
 		rs = EstadisticasCRUD.gastoInquilino(conex);
@@ -367,8 +490,15 @@ public class Menu {
 		InterfazEstadisticas.gastoInquilino(rs);
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Calcula y muestra cuántas viviendas en alquiler tiene cada propietario.
+	 * 
+	 * @param conex
+	 * @param rs
+	 * @throws SQLException 
+	 */
+		
 	public static void cantidadAlquileresPropietario(Connection conex, ResultSet rs) throws SQLException {
 		
 		rs = EstadisticasCRUD.cantidadAlquileresPropietario(conex);
@@ -376,6 +506,15 @@ public class Menu {
 		InterfazEstadisticas.cantidadAlquileresPropietario(rs);
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Cuenta y muestra cuántos contratos existen en cada estado (por ejemplo: activos, finalizados).
+	 * 
+	 * @param conex
+	 * @param rs
+	 * @throws SQLException 
+	 */
+		
 	public static void estadoContratos(Connection conex, ResultSet rs) throws SQLException {
 		
 		rs = EstadisticasCRUD.estadoContratos(conex);

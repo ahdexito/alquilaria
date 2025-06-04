@@ -1,0 +1,5 @@
+[
+  { "estado": "PENDIENTE", "cantidad": 6 },
+  { "estado": "ACTIVO", "cantidad": 5 },
+  { "estado": "VENCIDO", "cantidad": 6 }
+]

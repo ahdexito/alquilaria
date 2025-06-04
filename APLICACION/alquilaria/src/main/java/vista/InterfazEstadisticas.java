@@ -11,9 +11,28 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Clase que gestiona la presentación de estadísticas a través de la interfaz de usuario
+ * y permite la exportación de estos datos a un archivo JSON.
+ *
+ * @author Ángel García Smakula
+ */
+
 public class InterfazEstadisticas {
     
 	private static final Scanner sc = new Scanner(System.in);
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Procesa y muestra los resultados de la consulta de gasto total por inquilino.
+     * Imprime el nombre, apellidos y el gasto total de cada inquilino.
+     * También formatea estos datos en una cadena JSON y los recolecta en un ArrayList.
+     * Al finalizar, pregunta al usuario si desea exportar los datos a un archivo JSON.
+     *
+     * @param rs El ResultSet que contiene los datos de la consulta de gasto de inquilinos.
+     * @return Un ArrayList de cadenas, donde cada cadena es un objeto JSON que representa un inquilino y su gasto.
+     * @throws SQLException Si ocurre un error al acceder a los datos del ResultSet.
+     */
 	
     public static ArrayList<String> gastoInquilino(ResultSet rs) throws SQLException {
 		
@@ -36,6 +55,18 @@ public class InterfazEstadisticas {
 		
 		return filas;
 	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Procesa y muestra los resultados de la consulta de cantidad de viviendas alquiladas por propietario.
+     * Imprime el nombre, apellidos y el número de viviendas alquiladas de cada propietario.
+     * También formatea estos datos en una cadena JSON y los recolecta en un ArrayList.
+     * Al finalizar, pregunta al usuario si desea exportar los datos a un archivo JSON.
+     *
+     * @param rs El ResultSet que contiene los datos de la consulta de viviendas alquiladas por propietario.
+     * @return Un ArrayList de cadenas, donde cada cadena es un objeto JSON que representa un propietario y sus viviendas alquiladas.
+     * @throws SQLException Si ocurre un error al acceder a los datos del ResultSet.
+     */
 	
 	public static ArrayList<String> cantidadAlquileresPropietario(ResultSet rs) throws SQLException {
 		
@@ -60,6 +91,18 @@ public class InterfazEstadisticas {
 		return filas;
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Procesa y muestra los resultados de la consulta del estado de los contratos.
+     * Imprime cada estado de contrato y la cantidad de contratos en ese estado.
+     * También formatea estos datos en una cadena JSON y los recolecta en un ArrayList.
+     * Al finalizar, pregunta al usuario si desea exportar los datos a un archivo JSON.
+     *
+     * @param rs El ResultSet que contiene los datos de la consulta del estado de los contratos.
+     * @return Un ArrayList de cadenas, donde cada cadena es un objeto JSON que representa un estado de contrato y su cantidad.
+     * @throws SQLException Si ocurre un error al acceder a los datos del ResultSet.
+     */
+	
 	public static ArrayList<String> estadoContratos(ResultSet rs) throws SQLException {
 		
 		ArrayList<String> filas = new ArrayList<String>();
@@ -81,6 +124,17 @@ public class InterfazEstadisticas {
 		
 		return filas;
 	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Pregunta al usuario si desea exportar los datos proporcionados a un archivo JSON.
+     * Si el usuario confirma (ingresando 'S' o 'N'), crea una carpeta "export" si no existe,
+     * genera un nombre de archivo único con prefijo y fecha/hora, y escribe los datos en formato JSON.
+     * Maneja las excepciones de entrada/salida durante la escritura del archivo.
+     *
+     * @param prefijo Un prefijo para el nombre del archivo JSON exportado.
+     * @param filas Un ArrayList de cadenas, donde cada cadena es un objeto JSON que representa una fila de datos.
+     */
 	
 	public static void preguntarExportar(String prefijo, ArrayList<String> filas) {
 		

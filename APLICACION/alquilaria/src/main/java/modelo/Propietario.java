@@ -1,9 +1,11 @@
 package modelo;
 
 /**
+ * Clase que representa a un propietario con sus datos personales y de contacto.
  *
  * @author Ángel García Smakula
  */
+
 public class Propietario {
     
 	// ATRIBUTOS //

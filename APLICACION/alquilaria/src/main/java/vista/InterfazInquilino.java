@@ -7,14 +7,25 @@ import java.util.Arrays;
 import modelo.*;
 
 /**
+ * Clase que gestiona la interacción con el usuario para las operaciones relacionadas con inquilinos.
+ * Incluye métodos para solicitar datos de entrada, como el ID, y para imprimir los resultados de consultas
+ * de inquilinos en un formato legible.
  *
  * @author Ángel García Smakula
  */
+
 public class InterfazInquilino {
 	
 	private static Scanner sc = new Scanner(System.in);
     
-	// OPCIÓN SOLICITAR ID INQUILINO //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario el ID de un inquilino.
+     * Gestiona la entrada de datos para asegurar que sea un valor numérico.
+     *
+     * @return El ID del inquilino introducido por el usuario, o -1 si la entrada no es un número.
+     */
+	
 	public static int solicitarID() {
 				
 		int id = -1;
@@ -31,8 +42,14 @@ public class InterfazInquilino {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Imprime los datos de un inquilino obtenidos de un ResultSet en un formato de tabla.
+     * Formatea los datos de DNI, nombre, apellidos, correo, teléfono y si tiene mascotas.
+     *
+     * @param rs El ResultSet que contiene los datos de la consulta de un inquilino.
+     * @throws SQLException Si ocurre un error al acceder a los datos del ResultSet.
+     */
 	
-	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE INQUILINO CON FORMATO TIPO TABLA //
 	public static void imprimir(ResultSet rs) throws SQLException {
 		
 		System.out.println("\n" + ("-").repeat(170));
@@ -58,8 +75,16 @@ public class InterfazInquilino {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario los datos de un inquilino para su creación o modificación.
+     * Si se proporciona un objeto Inquilino existente y un ID, se utilizan como valores por defecto.
+     * Incluye validación y formateo básico para algunos campos como nombre y apellidos.
+     *
+     * @param inquilino Objeto Inquilino con datos preexistentes (para modificación) o nulo (para creación).
+     * @param id El ID del inquilino a establecer.
+     * @return Un nuevo objeto Inquilino con los datos introducidos o los valores por defecto.
+     */
 	
-    // SOLICITAR DATOS DE INQUILINO PARA AÑADIR O MODIFICAR //
 	public static Inquilino solicitarDatos(Inquilino inquilino, int id) {
 		
 		inquilino.setId(id);

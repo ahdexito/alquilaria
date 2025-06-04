@@ -3,12 +3,23 @@ package modelo;
 import java.sql.*;
 
 /**
+ * Clase que gestiona las operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * para la entidad Vivienda en la base de datos.
  *
  * @author Ángel García Smakula
  */
+
 public class ViviendaCRUD {
     
-    // CREAR UNA VIVIENDA //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Inserta una nueva vivienda en la base de datos.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param vivienda Objeto Vivienda con los datos a insertar.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
+		
     public static void crear(Connection conex, Vivienda vivienda) throws SQLException {
 		
 		try {			
@@ -37,8 +48,16 @@ public class ViviendaCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Consulta una vivienda en la base de datos por su código.
+     * Realiza un JOIN con la tabla 'tipo_vivienda' para obtener información detallada del tipo.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param cod El código de la vivienda a consultar.
+     * @return Un ResultSet que contiene los datos de la vivienda encontrada.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// CONSULTAR UNA VIVIENDA //
 	public static ResultSet consultar(Connection conex, String cod) throws SQLException {
 		
 		String query = "SELECT * FROM vivienda v JOIN tipo_vivienda t ON v.tipo = t.numero WHERE cod = ?";
@@ -51,8 +70,14 @@ public class ViviendaCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Modifica una vivienda existente en la base de datos.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param vivienda Objeto Vivienda con los nuevos datos, incluyendo el código para la modificación.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// MODIFICAR UNA VIVIENDA //
 	public static void modificar(Connection conex, Vivienda vivienda) throws SQLException {	
 		
 		try {
@@ -80,8 +105,14 @@ public class ViviendaCRUD {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Elimina una vivienda de la base de datos por su código.
+     *
+     * @param conex Conexión activa a la base de datos.
+     * @param cod El código de la vivienda a eliminar.
+     * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
+     */
 	
-	// ELIMINAR UNA VIVIENDA //
 	public static void eliminar(Connection conex, String cod) throws SQLException {
 		
 		String query = "DELETE FROM vivienda WHERE cod = ?";

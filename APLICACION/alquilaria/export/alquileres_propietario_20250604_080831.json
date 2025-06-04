@@ -1,0 +1,17 @@
+[
+  { "nombre": "Luis", "apellidos": "García Pérez", "viviendas_alquiladas": 1 },
+  { "nombre": "María", "apellidos": "López Fernández", "viviendas_alquiladas": 1 },
+  { "nombre": "Carlos", "apellidos": "Martínez Ruiz", "viviendas_alquiladas": 1 },
+  { "nombre": "Ana", "apellidos": "Sánchez Gómez", "viviendas_alquiladas": 1 },
+  { "nombre": "Pedro", "apellidos": "Gómez Díaz", "viviendas_alquiladas": 1 },
+  { "nombre": "Laura", "apellidos": "Rodríguez Moreno", "viviendas_alquiladas": 1 },
+  { "nombre": "Javier", "apellidos": "Fernández Torres", "viviendas_alquiladas": 1 },
+  { "nombre": "Sofía", "apellidos": "Jiménez Ortega", "viviendas_alquiladas": 1 },
+  { "nombre": "Miguel", "apellidos": "Ruiz Vargas", "viviendas_alquiladas": 1 },
+  { "nombre": "Elena", "apellidos": "Morales Castro", "viviendas_alquiladas": 1 },
+  { "nombre": "David", "apellidos": "Núñez Herrera", "viviendas_alquiladas": 1 },
+  { "nombre": "Isabel", "apellidos": "Díaz Jiménez", "viviendas_alquiladas": 1 },
+  { "nombre": "Raúl", "apellidos": "Vargas Sánchez", "viviendas_alquiladas": 1 },
+  { "nombre": "Marta", "apellidos": "Castillo Blanco", "viviendas_alquiladas": 1 },
+  { "nombre": "Jorge", "apellidos": "Blanco Morales", "viviendas_alquiladas": 1 }
+]

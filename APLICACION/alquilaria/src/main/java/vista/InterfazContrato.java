@@ -8,14 +8,25 @@ import java.time.format.DateTimeParseException;
 import modelo.*;
 
 /**
+ * Clase que gestiona la interacción con el usuario para las operaciones relacionadas con contratos.
+ * Incluye métodos para solicitar datos de entrada, como fechas y detalles del contrato,
+ * y para imprimir los resultados de consultas de contratos en un formato legible.
  *
  * @author Ángel García Smakula
  */
+
 public class InterfazContrato {
 	
 	private static Scanner sc = new Scanner(System.in);
     
-	// SOLICITAR FECHA DE INICIO DE CONTRATO //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario una fecha en formato "dd/mm/aaaa" y la convierte a un objeto `java.sql.Date`.
+     * Valida el formato de la fecha introducida y maneja posibles errores de parsing.
+     *
+     * @return Un objeto `java.sql.Date` con la fecha introducida, o `null` si la entrada es incorrecta o vacía.
+     */
+	
 	public static Date solicitarFecha() {
 				
 		// Solicitar fecha del contrato a buscar //
@@ -38,8 +49,15 @@ public class InterfazContrato {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Imprime los datos de un contrato obtenidos de un ResultSet en un formato de tabla.
+     * Formatea las fechas a "dd/MM/yyyy", el precio con el símbolo del euro y la coma como separador decimal,
+     * y el estado en mayúsculas para una presentación clara.
+     *
+     * @param rs El ResultSet que contiene los datos de la consulta de un contrato.
+     * @throws SQLException Si ocurre un error al acceder a los datos del ResultSet.
+     */
 	
-	// MÉTODO PARA IMPRIMIR UNA CONSULTA DE CONTRATO CON FORMATO TIPO TABLA //
 	public static void imprimir(ResultSet rs) throws SQLException {
 		
 		System.out.println(("-").repeat(160));
@@ -62,8 +80,17 @@ public class InterfazContrato {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario los datos para la creación de un nuevo contrato.
+     * Permite al usuario introducir el ID del inquilino, el código de la vivienda,
+     * las fechas de inicio y fin, el precio y el estado del contrato.
+     * Incluye validación de formato para fechas y números, así como manejo de valores por defecto
+     * en caso de entradas incorrectas o vacías.
+     *
+     * @param contrato Objeto Contrato que se utiliza para obtener valores por defecto si el usuario deja campos vacíos.
+     * @return Un nuevo objeto Contrato con los datos introducidos o los valores por defecto.
+     */
 	
-    // SOLICITAR DATOS DE CONTRATO PARA AÑADIR //
 	public static Contrato solicitarDatos(Contrato contrato) {
 		
 		System.out.print("  - ID INQUILINO: ");
@@ -151,8 +178,19 @@ public class InterfazContrato {
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+     * Solicita al usuario los datos para la modificación de un contrato existente.
+     * Los campos como ID de inquilino, código de vivienda y fecha de inicio no se solicitan
+     * ya que son las claves primarias para identificar el contrato a modificar.
+     * Permite al usuario actualizar la fecha de fin, el precio y el estado del contrato.
+     * Incluye validación de formato para fechas y números, y mantiene los valores previos
+     * si la entrada es incorrecta o vacía.
+     *
+     * @param contrato Objeto Contrato que contiene los datos actuales del contrato a modificar,
+     * los cuales se utilizan como valores por defecto.
+     * @return Un nuevo objeto Contrato con los datos actualizados, manteniendo las claves primarias originales.
+     */
 	
-	// SOLICITAR DATOS DE CONTRATO PARA MODIFICAR //
 	public static Contrato solicitarDatosMod(Contrato contrato) {
 		
 		int idInquilino = contrato.getIdInquilino();

@@ -3,9 +3,11 @@ package modelo;
 import java.sql.Date;
 
 /**
+ * Clase que representa un contrato de alquiler, incluyendo detalles del inquilino, la vivienda, fechas y precio.
  *
  * @author Ángel García Smakula
  */
+
 public class Contrato {
     
     // ATRIBUTOS //

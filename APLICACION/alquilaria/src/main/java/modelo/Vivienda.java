@@ -1,9 +1,11 @@
 package modelo;
 
 /**
+ * Clase que representa una vivienda con sus características principales, como dirección, precio y tipo.
  *
  * @author Ángel García Smakula
  */
+
 public class Vivienda {
     
     // ATRIBUTOS //

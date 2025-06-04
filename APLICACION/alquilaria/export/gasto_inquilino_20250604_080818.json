@@ -1,0 +1,17 @@
+[
+  { "nombre": "Laura", "apellidos": "Fernández Ruiz", "gasto_total": 675.50 },
+  { "nombre": "Diego", "apellidos": "Martínez López", "gasto_total": 1120.20 },
+  { "nombre": "Carla", "apellidos": "Santos García", "gasto_total": 1699.99 },
+  { "nombre": "Ángel", "apellidos": "Pérez Sánchez", "gasto_total": 1150.75 },
+  { "nombre": "Nuria", "apellidos": "Ramírez Díaz", "gasto_total": 1355.55 },
+  { "nombre": "Iván", "apellidos": "Moreno Castillo", "gasto_total": 950.00 },
+  { "nombre": "Sara", "apellidos": "Gil Ortega", "gasto_total": 785.50 },
+  { "nombre": "Jorge", "apellidos": "Blanco Herrera", "gasto_total": 820.00 },
+  { "nombre": "Eva", "apellidos": "Vargas Morales", "gasto_total": 734.95 },
+  { "nombre": "Luis", "apellidos": "Domínguez Ruiz", "gasto_total": 720.00 },
+  { "nombre": "Clara", "apellidos": "Medina Torres", "gasto_total": 780.00 },
+  { "nombre": "Raúl", "apellidos": "Fuentes Jiménez", "gasto_total": 810.00 },
+  { "nombre": "Marta", "apellidos": "Cruz Vargas", "gasto_total": 900.00 },
+  { "nombre": "Héctor", "apellidos": "Lara Santos", "gasto_total": 730.00 },
+  { "nombre": "Silvia", "apellidos": "Castillo Gómez", "gasto_total": 990.00 }
+]
