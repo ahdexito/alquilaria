@@ -1,0 +1,231 @@
+/* Definición de la paleta de colores anaranjados */
+:root {
+    --color-principal: #FF8C00;   /* Naranja vibrante (DarkOrange) */
+    --color-secundario: #FFA500;  /* Naranja más claro (Orange) */
+    --color-naranja-oscuro: #CC7000; /* Naranja más oscuro para botones/hover */
+    --color-fondo: #FFF8F0;       /* Blanco roto con un toque de naranja/crema */
+    --color-texto: #333333;       /* Gris oscuro para el texto */
+    --color-gris-claro: #F5F5F5;  /* Gris muy claro para líneas divisorias */
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+/* Barra lateral izquierda */
+.barra-lateral {
+    width: 220px;
+    background-color: var(--color-principal);
+    color: white;
+    padding: 20px 0;
+    box-sizing: border-box;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.barra-lateral nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.barra-lateral nav ul li {
+    margin-bottom: 5px;
+}
+
+.barra-lateral nav ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.barra-lateral nav ul li a:hover {
+    background-color: var(--color-naranja-oscuro);
+    transform: translateX(5px);
+}
+
+.barra-lateral nav ul li a.activo {
+    background-color: var(--color-naranja-oscuro);
+    font-weight: bold;
+    border-left: 5px solid white;
+    padding-left: 15px;
+}
+
+/* Contenido principal */
+.contenido-principal {
+    margin-left: 220px;
+    flex-grow: 1;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.contenido-principal header {
+    background-color: var(--color-naranja-oscuro);
+    color: white;
+    padding: 30px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-gris-claro);
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.contenido-principal h1 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.contenido-principal h2 {
+    color: var(--color-secundario);
+}
+
+/* Estilos compartidos para las secciones de contenido principal */
+.introduccion,
+.seccion-documentacion,
+.seccion-base-datos,
+.seccion-codigo {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    border-top: 1px solid var(--color-gris-claro);
+    color: var(--color-texto);
+    font-size: 0.9em;
+}
+
+/* Estilos comunes para elementos de diagrama/código */
+.item-diagrama,
+.item-codigo {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.item-diagrama h2,
+.item-codigo h2 {
+    color: var(--color-principal);
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.item-diagrama img,
+.item-codigo img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px auto;
+    border: 1px solid var(--color-gris-claro);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.item-diagrama p,
+.item-codigo p {
+    color: var(--color-texto);
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Contenedor del botón Javadoc */
+.contenedor-boton-javadoc {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-gris-claro);
+}
+
+.boton-javadoc {
+    display: inline-block;
+    background-color: var(--color-secundario);
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.boton-javadoc:hover {
+    background-color: var(--color-principal);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos específicos para la sección de Base de Datos - Script */
+.item-script {
+    margin-top: 50px;
+    background-color: #272822;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-x: auto;
+}
+
+.item-script h2 {
+    color: var(--color-secundario);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.item-script p {
+    color: #f8f8f2;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.item-script pre {
+    margin: 0;
+    padding: 0;
+}
+
+.item-script code {
+    display: block;
+    font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.item-script code .comment {
+    color: #75715E;
+}
+
+/* Aumentar el tamaño de la fuente y hacer más destacable el primer párrafo de cada sección principal */
+.introduccion > p:first-of-type,
+.seccion-documentacion > p:first-of-type,
+.seccion-base-datos > p:first-of-type,
+.seccion-codigo > p:first-of-type {
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 25px;
+    background-color: #f0c69b;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    line-height: 1.7;
+}

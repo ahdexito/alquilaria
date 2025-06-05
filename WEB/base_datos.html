@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alquilaria - Base de Datos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <aside class="barra-lateral">
+        <nav>
+            <ul>
+                <li><a href="index.html">INICIO</a></li>
+                <li><a href="documentacion.html">DOCUMENTACIÓN</a></li>
+                <li><a href="base_datos.html" class="activo">BASE DE DATOS</a></li>
+                <li><a href="codigo_java.html">CÓDIGO JAVA</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="contenido-principal">
+        <header>
+            <h1>Base de Datos de Alquilaria</h1>
+        </header>
+        <section class="seccion-base-datos">
+            <p>A continuación, se detalla la estructura de la base de datos de Alquilaria, mostrando cómo se organizan y relacionan los datos de la aplicación.</p>
+
+            <div class="item-diagrama">
+                <h2>Diagrama Entidad-Relación (DER)</h2>
+                <img src="alquilaria/base-datos/ENTIDAD-RELACION/diagrama-entidad-relacion.png" alt="Diagrama Entidad-Relación de Alquilaria">
+                <p>Este diagrama conceptual representa las entidades principales de la aplicación (como 'Propietario', 'Inquilino', 'Vivienda', 'Contrato') y las relaciones entre ellas. Muestra la lógica de los datos sin entrar en detalles de implementación de la base de datos específica.</p>
+            </div>
+
+            <div class="item-diagrama">
+                <h2>Diagrama de Diseño Lógico</h2>
+                <img src="alquilaria/base-datos/DISEÑO LÓGICO/diagrama-diseño-logico.png" alt="Diagrama de Diseño Lógico de Alquilaria">
+                <p>Aquí se visualiza la estructura de la base de datos a nivel de tabla, incluyendo las tablas, sus columnas (atributos), tipos de datos, claves primarias y foráneas. Es un paso intermedio entre el DER y el script de creación.</p>
+            </div>
+
+            <div class="item-script">
+                <h2>Script de Creación de la Base de Datos</h2>
+                <p>Este script SQL permite la creación de la base de datos y sus tablas, tal como se implementó en Alquilaria. Incluye la definición de todas las tablas, columnas, restricciones y relaciones.</p>
+                <pre><code class="language-sql">
+-- Script de Creación de la Base de Datos Alquilaria
+
+DROP DATABASE IF EXISTS alquilaria;
+
+CREATE DATABASE alquilaria;
+USE alquilaria;
+
+
+-- ---------------------------------------
+-- TIPOS DE DATOS PREDEFINIDOS
+-- ---------------------------------------
+-- NOMBRE:          VARCHAR(20)
+-- APELLIDOS:       VARCHAR(50)
+-- DNI:             VARCHAR(10)
+-- CORREO:          VARCHAR(100)
+-- TELEFONO:        VARCHAR(15)
+-- DIRECCION:       VARCHAR(150)
+-- DESCRIPCION:     VARCHAR(300)
+-- ---------------------------------------
+
+
+CREATE TABLE propietario (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    dni VARCHAR(10) NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15),
+    
+    CONSTRAINT uk_dni_propietario
+        UNIQUE KEY(dni)
+    );
+
+
+CREATE TABLE tipo_vivienda (
+    numero INT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+    );
+
+
+CREATE TABLE vivienda (
+    cod VARCHAR(10) PRIMARY KEY,
+    id_propietario INT UNSIGNED,
+    direccion VARCHAR(150) NOT NULL,
+    precio FLOAT UNSIGNED DEFAULT 0,
+    superficie FLOAT UNSIGNED DEFAULT 0,
+    descripcion VARCHAR(300),
+    mascotas BOOL DEFAULT 1,
+    tipo INT,
+    
+    CONSTRAINT fk_id_propietario_vivienda 
+        FOREIGN KEY(id_propietario) REFERENCES propietario(id)
+    ON DELETE CASCADE,
+    CONSTRAINT fk_tipo_vivienda
+        FOREIGN KEY(tipo) REFERENCES tipo_vivienda(numero)
+    ON DELETE CASCADE
+    );
+
+
+CREATE TABLE inquilino (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    dni VARCHAR(10) NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15),
+    mascotas BOOL DEFAULT 0,
+    
+    CONSTRAINT uk_dni_inquilino
+        UNIQUE KEY(dni)
+    );
+    
+    
+CREATE TABLE contrato (
+    id_inquilino INT UNSIGNED,
+    cod_vivienda VARCHAR(10),
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    precio FLOAT UNSIGNED DEFAULT 0,
+    estado ENUM('PENDIENTE', 'ACTIVO', 'VENCIDO') DEFAULT 'PENDIENTE',
+    
+    PRIMARY KEY(id_inquilino, cod_vivienda, fecha_inicio),
+    CONSTRAINT fk_id_inquilino_contrato
+        FOREIGN KEY(id_inquilino) REFERENCES inquilino(id)
+    ON DELETE CASCADE,
+    CONSTRAINT fk_cod_vivienda_contrato 
+        FOREIGN KEY(cod_vivienda) REFERENCES vivienda(cod)
+    ON DELETE CASCADE
+    );
+                </code></pre>
+            </div>
+        </section>
+        <footer>
+            <p>&copy; 2025 Alquilaria. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+</body>
+</html>
