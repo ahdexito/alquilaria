@@ -229,3 +229,59 @@ footer {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     line-height: 1.7;
 }
+
+.imagen-script-grande {
+    max-width: 90%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estilos específicos para la sección de Conclusiones */
+.seccion-conclusiones {
+    /* Hereda estilos de .introduccion, .seccion-documentacion, etc. */
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Para centrar la imagen y el texto */
+}
+
+/* Primer párrafo de la sección de conclusiones, aplicando el estilo destacado */
+.seccion-conclusiones > p:first-of-type {
+    font-size: 1.4em;
+    font-weight: 500;
+    margin-bottom: 25px;
+    background-color: #f0a860; /* El color naranja suave que ya usas */
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    line-height: 1.7;
+    max-width: 800px; /* Limita el ancho del párrafo para legibilidad */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Contenedor para la imagen única de conclusiones para control de ancho */
+.item-imagen-unica {
+    margin-top: 30px; /* Espacio encima de la imagen */
+    margin-bottom: 40px; /* Espacio debajo de la imagen */
+    text-align: center;
+    /* Define un ancho máximo para el contenedor si la imagen es muy grande
+       y quieres que no se "desborde" en pantallas pequeñas, pero que pueda
+       ser más ancha que los otros diagramas. */
+    max-width: 90%; /* Ajusta este porcentaje. 90% del ancho del 'seccion-conclusiones' */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.item-imagen-unica img {
+    max-width: 100%; /* La imagen ocupará el 100% del ancho de su contenedor (.item-imagen-unica) */
+    height: auto; /* Mantiene la proporción */
+    display: block; /* Para eliminar el espacio inferior extra */
+    margin: 0 auto; /* Centrar la imagen dentro de su contenedor */
+    border: 1px solid var(--color-gris-claro);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}

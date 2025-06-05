@@ -14,46 +14,53 @@
                 <li><a href="documentacion.html">DOCUMENTACIÓN</a></li>
                 <li><a href="base_datos.html">BASE DE DATOS</a></li>
                 <li><a href="codigo_java.html" class="activo">CÓDIGO JAVA</a></li>
+                <li><a href="conclusiones.html">CONCLUSIONES</a></li>
             </ul>
         </nav>
     </aside>
     <main class="contenido-principal">
         <header>
             <h1>CÓDIGO FUENTE EN JAVA</h1>
+            <h3>Desarrollo de la aplicación que interactúa con la base de datos</h3>
         </header>
         <section class="seccion-codigo">
             <p>Aquí se presentan ejemplos clave del código Java que da vida a la aplicación Alquilaria, mostrando la organización, la lógica de negocio y la interacción con la base de datos.</p>
 
             <div class="item-codigo">
-                <h2>Visión General del Proyecto (NetBeans)</h2>
-                <img src="capturas/todas-las-clases.png" alt="Captura de NetBeans mostrando total de clases">
+                <h2>Estructura General del Proyecto (NetBeans)</h2>
                 <p>Esta captura de pantalla de NetBeans proporciona una vista rápida de la estructura del proyecto Alquilaria y la cantidad total de clases que lo componen, reflejando su modularidad y organización.</p>
+                <br>
+                <img src="capturas/todas-las-clases.png" alt="Captura de NetBeans mostrando total de clases">
             </div>
 
             <div class="item-codigo">
-                <h2>Clase de Definición de Objeto: `Contrato`</h2>
+                <h2>Clase <i>Contrato</i></h2>
+                <p>La clase <b>Contrato</b> es el objeto principal que define la estructura de un contrato de alquiler en la aplicación. Contiene atributos como ID de contrato, fechas, renta mensual, y su estado, encapsulando la lógica de negocio de cada contrato.</p>
+                <br>
                 <img src="capturas/clase-contrato.png" alt="Código de la clase Contrato.java">
-                <p>La clase `Contrato` es el objeto principal que define la estructura de un contrato de alquiler en la aplicación. Contiene atributos como ID de contrato, fechas, renta mensual, y su estado, encapsulando la lógica de negocio de cada contrato.</p>
             </div>
 
             <div class="item-codigo">
-                <h2>Interfaz de Usuario: `InterfazContrato`</h2>
-                <p>La clase `InterfazContrato` (o `ContratoView`, etc.) es la responsable de la representación visual de la gestión de contratos. A continuación, se muestran diferentes aspectos de su funcionalidad y diseño, como la entrada de datos, la visualización de contratos y las opciones de edición.</p>
+                <h2>Clase <i>InterfazContrato</i></h2>
+                <p>La clase <b>InterfazContrato</b> es la responsable de la representación visual de la gestión de contratos. A continuación, se muestran diferentes aspectos de su funcionalidad y diseño, como la entrada de datos, la visualización de contratos y las opciones de edición.</p>
+                <br>
                 <img src="capturas/interfaz/clase-interfaz-1.png" alt="Interfaz de Contrato - Vista 1">
                 <img src="capturas/interfaz/clase-interfaz-2.png" alt="Interfaz de Contrato - Vista 2">
                 <img src="capturas/interfaz/clase-interfaz-3.png" alt="Interfaz de Contrato - Vista 3">
             </div>
 
             <div class="item-codigo">
-                <h2>Operaciones CRUD: `ContratoCRUD`</h2>
+                <h2>Clase <i>ContratoCRUD</i></h2>
+                <p>La clase <b>ContratoCRUD</b> maneja las operaciones de Creación, Lectura, Actualización y Borrado (CRUD) para los objetos 'Contrato' en la base de datos. Se encarga de la interacción directa con la capa de persistencia, asegurando la integridad de los datos.</p>
+                <br>
                 <img src="capturas/clase-CRUD.png" alt="Código de la clase ContratoCRUD.java">
-                <p>La clase `ContratoCRUD` maneja las operaciones de Creación, Lectura, Actualización y Borrado (CRUD) para los objetos `Contrato` en la base de datos. Se encarga de la interacción directa con la capa de persistencia, asegurando la integridad de los datos.</p>
             </div>
 
             <div class="item-codigo">
-                <h2>Controlador Principal: `Menu`</h2>
+                <h2>Clase <i>Menú</i></h2>
+                <p>La clase <b>Menú</b> actúa como el controlador central de la aplicación. Orquesta las llamadas a las diferentes interfaces de usuario y a las clases de lógica de negocio (como 'ContratoCRUD'), gestionando el flujo de la aplicación y la interacción con el usuario.</p>
+                <br>
                 <img src="capturas/clase-menu.png" alt="Código de la clase Menu.java">
-                <p>La clase `Menu` actúa como el controlador central de la aplicación. Orquesta las llamadas a las diferentes interfaces de usuario y a las clases de lógica de negocio (como `ContratoCRUD`), gestionando el flujo de la aplicación y la interacción con el usuario.</p>
             </div>
         </section>
         <footer>
